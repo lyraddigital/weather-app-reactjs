@@ -1,28 +1,32 @@
 import { format } from "date-fns";
 
+import style from './Stats.module.scss';
+
 export const Stats = ({ details }) => {
   const formattedSunrise = format(details.sunriseTime, 'HH:mm');
   const formattedSunset = format(details.sunsetTime, 'HH:mm');
 
+  console.log(details);
+
   return (
-    <div className="current-stats">
+    <div className={ style.currentStats }>
       <div>
-        <div className="current-stats__value">{ details.highTemp }&deg;</div>
-        <div className="current-stats__label">High</div>
-        <div className="current-stats__value">{ details.lowTemp }&deg;</div>
-        <div className="current-stats__label">Low</div>
+        <div className={ style.value }>{ details.highTemp }&deg;</div>
+        <div className={ style.label }>High</div>
+        <div className={ style.value }>{ details.lowTemp }&deg;</div>
+        <div className={ style.label }>Low</div>
       </div>
       <div>
-        <div className="current-stats__value">{ details.windSpeed }mph</div>
-        <div className="current-stats__label">Wind</div>
-        <div className="current-stats__value">{ details.rainPercentage }%</div>
-        <div className="current-stats__label">Rain</div>
+        <div className={ style.value }>{ details.windSpeed }mph</div>
+        <div className={ style.label }>Wind</div>
+        <div className={ style.value }>{ details.rainPercentage }%</div>
+        <div className={ style.label }>Rain</div>
       </div>
       <div>
-        <div className="current-stats__value">{ formattedSunrise }</div>
-        <div className="current-stats__label">Sunrise</div>
-        <div className="current-stats__value">{ formattedSunset }</div>
-        <div className="current-stats__label">Sunset</div>
+        <div className={ style.value }>{ formattedSunrise }</div>
+        <div className={ style.label }>Sunrise</div>
+        <div className={ style.value }>{ formattedSunset }</div>
+        <div className={ style.label }>Sunset</div>
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import { format } from 'date-fns';
 
+import style from './ForecastDay.module.scss';
+
 export const ForecastDay = ({ day }) => {
     if (!day) {
         return null;
@@ -11,34 +13,34 @@ export const ForecastDay = ({ day }) => {
     const weatherAlt = day.weather === 0 ? 'Sunny': 'Mostly Sunny';
 
     return (
-        <div className="next-5-days__row">
-            <div className="next-5-days__date">
+        <div className={ style.row }>
+            <div className={ style.date }>
                 { dayName }
-                <div className="next-5-days__label">{ shortDate }</div>
+                <div className={ style.label }>{ shortDate }</div>
             </div>
 
-            <div className="next-5-days__low">
+            <div className={ style.low }>
                 { day.lowTemp }&deg;
-                <div className="next-5-days__label">Low</div>
+                <div className={ style.label }>Low</div>
             </div>
 
-            <div className="next-5-days__high">
+            <div className={ style.high }>
                 { day.highTemp }&deg;
-                <div className="next-5-days__label">High</div>
+                <div className={ style.label }>High</div>
             </div>
 
-            <div className="next-5-days__icon">
+            <div className={ style.icon }>
                 <img src={ weatherImg } alt={ weatherAlt } />
             </div>
 
-            <div className="next-5-days__rain">
+            <div className={ style.rain }>
                 { day.rainPercentage }%
-                <div className="next-5-days__label">Rain</div>
+                <div className={ style.label }>Rain</div>
             </div>
 
-            <div className="next-5-days__wind">
+            <div className={ style.wind }>
                 { day.windSpeed }mph
-                <div className="next-5-days__label">Wind</div>
+                <div className={ style.label }>Wind</div>
             </div>
         </div>
     );

@@ -1,0 +1,56 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0.3em;
+  padding: 0.8em 0;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 1.19em;
+  text-align: center;
+
+  .label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.83em;
+  }
+
+  .date,
+  .high,
+  .low,
+  .icon,
+  .rain,
+  .wind {
+    width: 33.33333%;
+    font-size: 0.95em;
+  }
+
+  .date,
+  .high,
+  .low {
+    margin-bottom: 0.6em;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .row {
+    .date,
+    .high,
+    .low,
+    .icon,
+    .rain,
+    .wind {
+      width: 16.666666%;
+      margin-bottom: initial;
+    }
+
+    .date {
+      order: -2;
+    }
+
+    .icon {
+      order: -1;
+    }
+  }
+}

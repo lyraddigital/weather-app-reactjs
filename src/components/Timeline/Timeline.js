@@ -1,5 +1,7 @@
 import { TimePeriod } from "./TimePeriod";
 
+import style from './Timeline.module.scss';
+
 export const Timeline = () => {
   const periods = [
     {
@@ -44,9 +46,9 @@ export const Timeline = () => {
   ));
 
   return (
-    <div className="weather-by-hour">
-      <h2 className="weather-by-hour__heading">Today's weather</h2>
-      <div className="weather-by-hour__container">
+    <div className={ style.weatherByHour }>
+      <h2 className={ style.heading }>Today's weather</h2>
+      <div className={ style.container }>
         { periodsEl }
       </div>
     </div>

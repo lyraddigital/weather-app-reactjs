@@ -1,0 +1,37 @@
+.currentTemperature {
+    display: flex;
+    margin-top: 0.25em;
+    width: 100%;
+
+    .iconContainer {
+        flex-grow: 1.25;
+        text-align: center;
+
+        .icon {
+            width: 10.5em;
+        }
+    }
+
+    .contentContainer {
+        flex-grow: 1;
+        text-align: center;
+
+        .value {
+            font-size: 5.25em;
+            font-weight: 300;
+        }
+
+        .summary {
+            margin-top: -0.5em;
+            margin-left: -0.6em;
+            text-align: center;
+            font-size: 1.125em;
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .currentTemperature {
+      width: 50%;
+    }
+}

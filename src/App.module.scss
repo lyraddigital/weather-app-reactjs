@@ -1,0 +1,12 @@
+.mainContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 920px) {
+  .mainContainer {
+    width: 880px;
+    margin: 8px auto;
+    font-size: 1.1em;
+  }
+}
