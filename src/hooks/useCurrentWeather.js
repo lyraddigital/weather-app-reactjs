@@ -5,7 +5,7 @@ export const useCurrentWeather = (location) => {
     const [weather, setWeather] = useState();
 
     useEffect(() => {
-        axios.get('https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid=d8754f9be76fb02a0dab2bf53f160646&units=metric').then(
+        axios.get('https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid={apiKey}&units=metric').then(
             response => {
                 setWeather(response.data)
                 console.log(response); 
