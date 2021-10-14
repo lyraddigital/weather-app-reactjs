@@ -6,8 +6,6 @@ export const Stats = ({ details }) => {
   const formattedSunrise = format(details.sunriseTime, 'HH:mm');
   const formattedSunset = format(details.sunsetTime, 'HH:mm');
 
-  console.log(details);
-
   return (
     <div className={ style.currentStats }>
       <div>

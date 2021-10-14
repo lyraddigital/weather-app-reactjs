@@ -1,28 +1,20 @@
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useContext } from "react";
 
-export const useCurrentWeather = (location) => {
-    const [weather, setWeather] = useState();
+import { WeatherContext } from "../core/WeatherContext";
 
-    useEffect(() => {
-        axios.get('https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid={apiKey}&units=metric').then(
-            response => {
-                setWeather(response.data)
-                console.log(response); 
-            }
-        );        
-    }, [location])
+export const useCurrentWeather = () => {
+    const weatherData = useContext(WeatherContext);
 
     return {
-        currentTemp: Math.round(weather?.main?.temp) || 0,
-        weatherType: weather?.weather?.length > 0 ? weather.weather[0].main === 'Clouds' ? 1: 0 : 0,
+        currentTemp: Math.round(weatherData?.current?.temp) || 0,
+        weatherType: weatherData?.current?.weather?.length > 0 ? weatherData.current.weather[0].main === 'Clouds' ? 1: 0 : 0,
         statistics: { 
-            highTemp: Math.round(weather?.main?.temp_max) || 0,
-            lowTemp: Math.round(weather?.main?.temp_min) || 0, 
-            windSpeed: Math.round(weather?.wind?.speed) || 0,
-            rainPercentage: Math.round(weather?.main?.humidity),
-            sunriseTime: weather?.sys?.sunrise ? new Date(weather.sys.sunrise * 1000): new Date(), 
-            sunsetTime: weather?.sys?.sunset ? new Date(weather.sys.sunset * 1000): new Date()
+            highTemp: Math.round(weatherData?.daily?.length > 0 ? weatherData.daily[0]?.temp?.max : 0),
+            lowTemp: Math.round(weatherData?.daily?.length > 0 ? weatherData.daily[0]?.temp?.min : 0), 
+            windSpeed: Math.round(weatherData?.current?.wind_speed) || 0,
+            rainPercentage: Math.round(weatherData?.current?.humidity),
+            sunriseTime: weatherData?.current?.sunrise ? new Date(weatherData.current.sunrise * 1000): new Date(), 
+            sunsetTime: weatherData?.current?.sunset ? new Date(weatherData.current.sunset * 1000): new Date()
         }
-    };
+    }
 }

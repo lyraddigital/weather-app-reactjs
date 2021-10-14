@@ -3,6 +3,8 @@ import { ForecastDay } from "./ForecastDay";
 import style from './Forecast.module.scss';
 
 export const Forecast = () => {
+  const forecast = null;
+
   const days = [
     {
       date: new Date(2021, 9, 12),
