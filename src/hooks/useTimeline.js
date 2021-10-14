@@ -1,9 +1,9 @@
-import { format, getHours } from "date-fns";
+import { format } from "date-fns";
 import { useContext } from "react";
 
 import { WeatherContext } from "../core/WeatherContext";
 
-const availableTimes = [0, 3, 6, 9, 12, 15, 18, 21];
+const availableTimesFn = (_, i) => i % 3 === 0;
 
 export const useTimeline = () => {
     const { hourly } = useContext(WeatherContext);
@@ -12,7 +12,7 @@ export const useTimeline = () => {
         return { periods: [] };
     }
 
-    const hours = hourly.filter(h => availableTimes.includes(getHours(h.dt * 1000))).slice(0, 6);
+    const hours = hourly.filter(availableTimesFn).slice(1, 7);
 
     return {
         periods: hours.map(h => ({

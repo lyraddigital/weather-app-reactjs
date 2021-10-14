@@ -2,7 +2,7 @@ import { Header } from './components/Header/Header';
 import { CurrentWeather } from './components/CurrentWeather/CurrentWeather';
 import { Timeline } from './components/Timeline/Timeline';
 import { Forecast } from './components/Forecast/Forecast';
-
+import { LocationSelector } from './components/LocationSelector/LocationSelector';
 import { WeatherProvider } from './core/WeatherProvider';
 
 import style from './App.module.scss';
@@ -15,6 +15,7 @@ function App() {
         <CurrentWeather location='London' />      
         <Timeline />
         <Forecast />
+        <LocationSelector />
       </main>
     </WeatherProvider>
   );
