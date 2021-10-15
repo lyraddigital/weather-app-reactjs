@@ -10,7 +10,7 @@ export const WeatherProvider = ({ children }) => {
     const [weatherData, setWeatherData] = useState();
     const [loading, setLoading] = useState(true);
     const [coords, setCoords] = useState({ lat: -33.8679, lon: 151.2073 });
-    51.5074
+
     useEffect(() => {
         const { lat, lon } = coords;
 
