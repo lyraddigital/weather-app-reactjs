@@ -1,23 +1,22 @@
-import { Header } from './components/Header/Header';
-import { CurrentWeather } from './components/CurrentWeather/CurrentWeather';
-import { Timeline } from './components/Timeline/Timeline';
-import { Forecast } from './components/Forecast/Forecast';
-import { LocationSelector } from './components/LocationSelector/LocationSelector';
-import { WeatherProvider } from './core/WeatherProvider';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { LocationProvider } from './components/LocationProvider';
+import { LocationPage, WeatherPage } from './pages';
 
 import style from './App.module.scss';
 
 function App() {
   return (
-    <WeatherProvider>
+    <LocationProvider>
       <main className={ style.mainContainer }>
-        <Header location={{ city: 'London', country: 'UK' }} date = { new Date(2021, 9, 12) } />
-        <CurrentWeather location='London' />      
-        <Timeline />
-        <Forecast />
-        <LocationSelector />
+        <Router>
+          <Switch>
+            <Route path="/set-location" exact component={LocationPage} />
+            <Route path="" component={WeatherPage} exact />
+          </Switch>
+        </Router> 
       </main>
-    </WeatherProvider>
+    </LocationProvider>
   );
 }
 

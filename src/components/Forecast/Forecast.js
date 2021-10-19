@@ -4,9 +4,9 @@ import { ForecastDay } from "./ForecastDay";
 import style from './Forecast.module.scss';
 
 export const Forecast = () => {
-  const { days } = useForecast();
+  const { forecast } = useForecast();
 
-  const daysEl = days.map((d, i) => (
+  const daysEl = forecast.map((d, i) => (
     <ForecastDay key={i} day={d} />
   ));
 

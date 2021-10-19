@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-import { WEATHER_API_URL } from './Contants';
-import { Configuration } from "./Configuration";
-import { WeatherContext } from "./WeatherContext";
-import { LocationContext } from "./LocationContext";
+import { WEATHER_API_URL } from '../../core/Contants';
+import { Configuration } from "../../core/Configuration";
+import { WeatherContext } from "../../core/WeatherContext";
+import { useLocation } from "../../hooks/useLocation";
 
 export const WeatherProvider = ({ children }) => {
     const [weatherData, setWeatherData] = useState();
     const [loading, setLoading] = useState(true);
-    const [coords, setCoords] = useState({ lat: -33.8679, lon: 151.2073 });
+    const { lat, lon } = useLocation();
 
     useEffect(() => {
-        const { lat, lon } = coords;
+        setLoading(true);
 
         axios.get(`${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`).then(
             response => {
@@ -20,15 +20,13 @@ export const WeatherProvider = ({ children }) => {
                 setLoading(false);
             }
         );
-    }, [coords, setLoading, setWeatherData]);
+    }, [lat, lon, setLoading, setWeatherData]);
 
     const contentsEl = loading ? <div>Loading...</div> : children;
 
     return (
         <WeatherContext.Provider value={weatherData}>
-            <LocationContext.Provider value={ { updateLocation: setCoords } }>
-                { contentsEl }
-            </LocationContext.Provider>
+            { contentsEl }
         </WeatherContext.Provider>
-    )
+    );
 }
