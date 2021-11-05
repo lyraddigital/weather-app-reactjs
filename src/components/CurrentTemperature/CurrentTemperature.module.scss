@@ -1,6 +1,6 @@
 .currentTemperature {
     display: flex;
-    margin-top: 0.25em;
+    margin-top: 0.4rem;
     width: 100%;
 
     .iconContainer {
@@ -8,7 +8,7 @@
         text-align: center;
 
         .icon {
-            width: 10.5em;
+            width: 16.8rem;
         }
     }
 
@@ -17,15 +17,15 @@
         text-align: center;
 
         .value {
-            font-size: 5.25em;
+            font-size: 8.4rem;
             font-weight: 300;
         }
 
         .summary {
-            margin-top: -0.5em;
-            margin-left: -0.6em;
+            margin-top: -1.44rem;
+            margin-left: -1.728rem;
             text-align: center;
-            font-size: 1.125em;
+            font-size: 1.8rem;
         }
     }
 }

@@ -1,13 +1,19 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
-  margin: 12px;
+  padding: 12px;
   font-size: 100%;
   font-family: 'Open Sans', sans-serif;
   color: white;
-  height: 100%;
+  min-height: 100vh;
   background: linear-gradient(to bottom, rgb(43,50,178) 0%, rgb(20,136,204) 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -15,6 +21,6 @@ body {
 
 @media screen and (min-width: 700px) {
   body {
-    margin: 20px;
+    padding: 20px;
   }
 }

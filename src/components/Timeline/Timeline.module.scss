@@ -4,13 +4,13 @@
 
   .heading {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1em;
+    font-size: 1.6rem;
     font-weight: normal;
   }
 
   .container {
     display: flex;
-    column-gap: 0.6rem;
+    column-gap: 0.96rem;
   }
 }
 
@@ -23,7 +23,7 @@
 @media screen and (min-width: 768px) {
   .weatherByHour {
     .heading {
-      font-size: 1.125em;
+      font-size: 1.8rem;
     }
   }
 }

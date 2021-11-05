@@ -1,10 +1,10 @@
 .forecast {
   width: 100%;
-  margin-top: 1em;
+  margin-top: 1.6rem;
 
   .heading {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1em;
+    font-size: 1.6rem;
     font-weight: normal;
   }
 
@@ -17,7 +17,7 @@
 @media screen and (min-width: 768px) {
   .forecast {
     .heading {
-      font-size: 1.125em;
+      font-size: 1.8rem;
     }
   }
 }

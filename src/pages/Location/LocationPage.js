@@ -1,36 +1,69 @@
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useState } from "react";
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 
-import { LOCATION_API_URL } from 'core/Contants';
-import { Configuration } from "core/Configuration";
 import { useLocationUpdater } from "hooks/useLocationUpdater";
 import { Redirect } from "react-router";
 
+
+import style from './LocationPage.module.scss';
+
 export const LocationPage = () => {
+    const [cityName, setCityName] = useState('');
     const [locationSelected, setLocationSelected] = useState(false);
     const updateLocation = useLocationUpdater(); 
 
-    useEffect(() => {
-        axios.get(`${LOCATION_API_URL}?q=New%20York&appid=${Configuration.apiKey}`).then(
-            response => {
-                if (response?.data?.length > 0) {
-                    updateLocation({
-                        city: response.data[0].name,
-                        country: response.data[0].country,
-                        lat: response.data[0].lat,
-                        lon: response.data[0].lon
-                    });
-                    setLocationSelected(true);
-                }
-            }
-        );
-    }, [updateLocation]);
+    const selectCity = async (address) => {
+        setCityName(address);  
+
+        const response = await geocodeByAddress(address);
+        
+        if (response && response.length > 0) {
+            const addressDetails = response[0];
+            const coords = addressDetails.geometry.location;
+            const lat = coords.lat();
+            const lon = coords.lng();
+            const city = addressDetails.address_components.find(ac => ac.types.includes('locality'))?.long_name;
+            const country = addressDetails.address_components.find(ac => ac.types.includes('country'))?.long_name;
+
+            updateLocation({ lat, lon, city, country });
+            setLocationSelected(true);
+        }    
+    }
 
     if (locationSelected) {
         return <Redirect to="/" />;
     }
 
     return (
-        <div>Location Page</div>
+        <section id={ style.locationSection }>   
+            <h1>Choose Region</h1>
+            <p>Please start typing your city name in the textbox below.</p>         
+            <PlacesAutocomplete
+                value={cityName}
+                onChange={setCityName}
+                onSelect={selectCity}
+                searchOptions={{
+                    types: ['(cities)']
+                }}>
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div className={ style.autoCompleteContainer }>
+                        <input type="text" {...getInputProps({
+                            placeholder: 'Search Places ...',
+                            className: style.autoComplete,
+                        })} />                            
+                        <div>
+                            { loading ? <div>...loading</div> : null }
+                        </div>
+                        <ul className={ style.autoCompleteList }>
+                            { suggestions.map((s) => {
+                                return (
+                                    <li { ...getSuggestionItemProps(s, { className: 'suggestion-item' }) } key={ s.id }>{ s.description }</li>
+                                )
+                            }) }
+                        </ul>
+                    </div>
+                )}
+            </PlacesAutocomplete>
+        </section>
     );
 }

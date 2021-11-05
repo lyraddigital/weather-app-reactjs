@@ -1,18 +1,18 @@
 .item {
-  padding: 0.8em 0;
+  padding: 1.44rem 0;
   flex: 1 0 0;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.15);
-  font-size: 1.125em;
+  font-size: 1.8rem;
   text-align: center;
 }
 
 .hour {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.9rem;
 }
 
 @media screen and (min-width: 880px) {
   .item {
-    width: 6.05em;
+    width: 13.3875rem;
   }
 }
