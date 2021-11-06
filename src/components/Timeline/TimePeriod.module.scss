@@ -1,5 +1,5 @@
 .item {
-  padding: 1.44rem 0;
+  padding: 1.4rem 0;
   flex: 1 0 0;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.15);
@@ -8,11 +8,5 @@
 }
 
 .hour {
-  margin-bottom: 0.9rem;
-}
-
-@media screen and (min-width: 880px) {
-  .item {
-    width: 13.3875rem;
-  }
+  margin-bottom: 1rem;
 }

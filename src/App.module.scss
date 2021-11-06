@@ -1,7 +1,5 @@
 .mainContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
 }
 
 @media screen and (min-width: 920px) {

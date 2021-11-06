@@ -18,26 +18,21 @@ export const ForecastDay = ({ day }) => {
                 { dayName }
                 <div className={ style.label }>{ shortDate }</div>
             </div>
-
+            <div className={ style.icon }>
+                <img src={ weatherImg } alt={ weatherAlt } />
+            </div>
             <div className={ style.low }>
                 { day.lowTemp }&deg;
                 <div className={ style.label }>Low</div>
             </div>
-
             <div className={ style.high }>
                 { day.highTemp }&deg;
                 <div className={ style.label }>High</div>
             </div>
-
-            <div className={ style.icon }>
-                <img src={ weatherImg } alt={ weatherAlt } />
-            </div>
-
             <div className={ style.rain }>
                 { day.rainPercentage }%
                 <div className={ style.label }>Rain</div>
             </div>
-
             <div className={ style.wind }>
                 { day.windSpeed }mph
                 <div className={ style.label }>Wind</div>
