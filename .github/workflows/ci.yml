@@ -13,7 +13,7 @@ jobs:
       - name: Install Application Dependencies
         run: npm install
 
-      - name: Lint checks
+      - name: Performing Lint Checks
         run: npm run lint
 
       - name: Building Application Code
