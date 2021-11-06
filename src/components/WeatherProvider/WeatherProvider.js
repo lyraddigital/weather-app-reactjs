@@ -11,7 +11,7 @@ export const WeatherProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const { lat, lon } = useLocation();
 
-    useEffect(() => {
+    const getWeather = (lat, lon, setLoading, setWeatherData) => {
         setLoading(true);
 
         axios.get(`${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`).then(
@@ -20,6 +20,16 @@ export const WeatherProvider = ({ children }) => {
                 setLoading(false);
             }
         );
+    }
+
+    useEffect(() => {
+        getWeather(lat, lon, setLoading, setWeatherData);
+
+        const interval = setInterval(() => {
+            getWeather(lat, lon, setLoading, setWeatherData);
+        }, 60000);
+        
+        return () => { clearInterval(interval); }
     }, [lat, lon, setLoading, setWeatherData]);
 
     const contentsEl = loading ? <div>Loading...</div> : children;
