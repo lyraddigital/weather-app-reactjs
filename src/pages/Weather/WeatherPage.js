@@ -12,7 +12,7 @@ export const WeatherPage = () => {
 
     return (
         <WeatherProvider>
-            <Header />
+<Header />
             <CurrentWeather />      
             <Timeline />
             <Forecast />
