@@ -1,13 +1,13 @@
-import { useCurrentWeather } from "./useCurrentWeather";
+import { useCurrentWeather } from './useCurrentWeather';
 
 export const useForecast = () => {
-    const { forecast } = useCurrentWeather();
+  const { forecast } = useCurrentWeather();
 
-    if (!forecast) {
-        return { forecast: [] };
-    }
+  if (!forecast) {
+    return { forecast: [] };
+  }
 
-    return {
-        forecast: forecast.slice(1, 6)
-    };
-}
+  return {
+    forecast: forecast.slice(1, 6),
+  };
+};

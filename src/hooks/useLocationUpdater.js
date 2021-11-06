@@ -1,8 +1,8 @@
-import { useContext } from "react"
+import { useContext } from 'react';
 
-import { LocationContext } from "core"
+import { LocationContext } from 'core';
 
 export const useLocationUpdater = () => {
-    const { updateLocation } = useContext(LocationContext);
-    return updateLocation;
-}
+  const { updateLocation } = useContext(LocationContext);
+  return updateLocation;
+};

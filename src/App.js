@@ -8,13 +8,13 @@ import style from './App.module.scss';
 function App() {
   return (
     <LocationProvider>
-      <main className={ style.mainContainer }>
+      <main className={style.mainContainer}>
         <Router>
           <Switch>
             <Route path="/set-location" exact component={LocationPage} />
             <Route path="" component={WeatherPage} exact />
           </Switch>
-        </Router> 
+        </Router>
       </main>
     </LocationProvider>
   );

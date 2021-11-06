@@ -1,6 +1,6 @@
-import { useCurrentWeather } from "./useCurrentWeather"
+import { useCurrentWeather } from './useCurrentWeather';
 
 export const useWeatherLocalTime = () => {
-    const { statistics } = useCurrentWeather();
-    return statistics.localTime;
-}
+  const { statistics } = useCurrentWeather();
+  return statistics.localTime;
+};
