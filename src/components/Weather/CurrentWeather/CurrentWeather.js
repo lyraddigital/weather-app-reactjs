@@ -1,6 +1,5 @@
-import { CurrentTemperature } from '../CurrentTemperature/CurrentTemperature';
-import { Stats } from '../Stats/Stats';
-import { useCurrentWeather } from '../../hooks/useCurrentWeather';
+import { useCurrentWeather } from 'hooks';
+import { CurrentTemperature, Stats } from 'components/Weather';
 
 import style from './CurrentWeather.module.scss';
 

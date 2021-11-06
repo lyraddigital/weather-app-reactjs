@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-import { WEATHER_API_URL } from '../../core/Contants';
-import { Configuration } from "../../core/Configuration";
-import { WeatherContext } from "../../core/WeatherContext";
-import { useLocation } from "../../hooks/useLocation";
+import { Configuration, WEATHER_API_URL, WeatherContext } from 'core';
+import { useLocation } from "hooks";
 
 export const WeatherProvider = ({ children }) => {
     const [weatherData, setWeatherData] = useState();
@@ -27,7 +25,7 @@ export const WeatherProvider = ({ children }) => {
 
         const interval = setInterval(() => {
             getWeather(lat, lon, setLoading, setWeatherData);
-        }, 60000);
+        }, Configuration.weatherRefreshRateInMilliseconds);
         
         return () => { clearInterval(interval); }
     }, [lat, lon, setLoading, setWeatherData]);

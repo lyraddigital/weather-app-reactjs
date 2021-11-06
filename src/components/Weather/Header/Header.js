@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 
-import { useLocation } from "hooks/useLocation";
-import { useWeatherLocalTime } from "hooks/useWeatherLocalTime";
+import { useLocation, useWeatherLocalTime } from "hooks";
 
 import style from './Header.module.scss';
 

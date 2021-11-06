@@ -1,5 +1,6 @@
 import { TimePeriod } from "./TimePeriod";
-import { useTimeline } from "../../hooks/useTimeline";
+
+import { useTimeline } from "hooks";
 
 import style from './Timeline.module.scss';
 

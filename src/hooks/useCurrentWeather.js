@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { format } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 
-import { WeatherContext } from "../core/WeatherContext";
+import { WeatherContext } from "core";
 
 export const useCurrentWeather = () => {
     const weatherData = useContext(WeatherContext);

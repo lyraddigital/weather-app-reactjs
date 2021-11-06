@@ -1,9 +1,8 @@
 import { useState } from "react";
+import { Redirect } from "react-router";
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 
-import { useLocationUpdater } from "hooks/useLocationUpdater";
-import { Redirect } from "react-router";
-
+import { useLocationUpdater } from "hooks";
 
 import style from './LocationPage.module.scss';
 

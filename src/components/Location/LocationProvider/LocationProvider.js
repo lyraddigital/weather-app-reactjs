@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { LocationContext } from "../../core/LocationContext";
+import { LocationContext } from 'core';
 
 const getLocationFromLocalStorage = () => {
     return JSON.parse(localStorage.getItem('ld-weather-app-location'));

@@ -1,4 +1,5 @@
-import { useForecast } from "../../hooks/useForecast";
+import { useForecast } from "hooks";
+
 import { ForecastDay } from "./ForecastDay";
 
 import style from './Forecast.module.scss';
