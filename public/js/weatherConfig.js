@@ -1,0 +1,6 @@
+var WeatherApp = WeatherApp || {};
+WeatherApp.weatherConfig = {
+  WEATHER_API_KEY: '%WEATHER_API_KEY%',
+  WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS:
+    '%WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS%',
+};
