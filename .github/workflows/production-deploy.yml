@@ -55,7 +55,10 @@ jobs:
           path: infrastructure-code
 
       - name: Update application environment keys
-        uses: datamonsters/replace-action
+        uses: ./.github/actions/replace
+        with:
+          files: 'index.html'
+          replacements: '%REACT_APP_GOOGLE_PLACES_API_KEY%=${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}'
 
       - name: Install Infrastructure Dependencies
         run: cd infrastructure-code && npm install
