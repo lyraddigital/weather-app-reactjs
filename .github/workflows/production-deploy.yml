@@ -55,12 +55,10 @@ jobs:
           path: infrastructure-code
 
       - name: Update application environment keys
-        uses: jacobtomlinson/gha-find-replace@v2
+        uses: datamonsters/replace-action
         with:
-          find: '%REACT_APP_GOOGLE_PLACES_API_KEY%'
-          replace: '${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}'
-          include: 'application-code/index.html'
-          regex: false
+          files: 'application-code/index.html,application-code/js/weatherConfig.js'
+          replacements: '%REACT_APP_GOOGLE_PLACES_API_KEY%=${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }},%REACT_APP_WEATHER_API_KEY%=${{ secrets.REACT_APP_WEATHER_API_KEY }},%REACT_APP_WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS%=${{ secrets.REACT_APP_WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS }}'
 
       - name: Install Infrastructure Dependencies
         run: cd infrastructure-code && npm install
