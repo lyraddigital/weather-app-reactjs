@@ -45,12 +45,14 @@ jobs:
       - name: Download application code
         uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: production-deploy.yml
           name: application-code
           path: application-code
 
       - name: Download infrastructure code
         uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: production-deploy.yml
           name: infrastructure-code
           path: infrastructure-code
 
