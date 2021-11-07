@@ -4,8 +4,11 @@ import * as cdk from '@aws-cdk/core';
 import { WebsiteStack } from '../lib/website-stack';
 
 const app = new cdk.App();
-const env = { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION };
+const env = {
+  account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: process.env.CDK_DEFAULT_REGION,
+};
 
-new WebsiteStack(app, 'SpotifyCloneWebsiteStack-Development', { env });
-new WebsiteStack(app, 'SpotifyCloneWebsiteStack-Staging', { env });
-new WebsiteStack(app, 'SpotifyCloneWebsiteStack-Production', { env });
+new WebsiteStack(app, 'ReactWeatherStack-Development', { env });
+new WebsiteStack(app, 'ReactWeatherStack-Staging', { env });
+new WebsiteStack(app, 'ReactWeatherStack-Production', { env });
