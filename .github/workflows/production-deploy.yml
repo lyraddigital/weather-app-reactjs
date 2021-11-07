@@ -58,7 +58,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: '%REACT_APP_GOOGLE_PLACES_API_KEY%'
-          replace: 'anything'
+          replace: '${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}'
           include: 'application-code/index.html'
           regex: false
 
