@@ -7,39 +7,35 @@ import { Loader } from 'components/Loader';
 
 export const WeatherProvider = ({ children }) => {
   const [weatherData, setWeatherData] = useState();
-  const [loading, setLoading] = useState(true);
   const { lat, lon } = useLocation();
 
-  const getWeather = (lat, lon, setLoading, setWeatherData) => {
-    setLoading(true);
-
+  const getWeather = (lat, lon, setWeatherData) => {
     axios
       .get(
         `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`,
       )
       .then((response) => {
         setWeatherData(response.data);
-        setLoading(false);
       });
   };
 
   useEffect(() => {
-    getWeather(lat, lon, setLoading, setWeatherData);
+    getWeather(lat, lon, setWeatherData);
 
     const interval = setInterval(() => {
-      getWeather(lat, lon, setLoading, setWeatherData);
+      getWeather(lat, lon, setWeatherData);
     }, Configuration.weatherRefreshRateInMilliseconds);
 
     return () => {
       clearInterval(interval);
     };
-  }, [lat, lon, setLoading, setWeatherData]);
+  }, [lat, lon, setWeatherData]);
 
   const contents = weatherData ? children : null;
 
   return (
     <WeatherContext.Provider value={weatherData}>
-      <Loader isLoading={loading} />
+      <Loader isLoading={!weatherData} />
       {contents}
     </WeatherContext.Provider>
   );
