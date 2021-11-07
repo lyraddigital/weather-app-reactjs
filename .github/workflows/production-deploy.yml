@@ -55,7 +55,7 @@ jobs:
           path: infrastructure-code
 
       - name: Update application environment keys
-        run: sed -i 's/%REACT_APP_GOOGLE_PLACES_API_KEY%/${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}/g' index.html
+        run: sed -i 's/%REACT_APP_GOOGLE_PLACES_API_KEY%/${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}/g' application-code/index.html
 
       - name: Install Infrastructure Dependencies
         run: cd infrastructure-code && npm install
