@@ -54,6 +54,12 @@ jobs:
           name: infrastructure-code
           path: infrastructure-code
 
+      - name: Update application environment keys
+        uses: datamonsters/replace-action
+        with:
+          files: ''
+          replacements: ''
+
       - name: Install Infrastructure Dependencies
         run: cd infrastructure-code && npm install
 
