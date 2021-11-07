@@ -54,7 +54,7 @@ jobs:
           name: infrastructure-code
           path: infrastructure-code
 
-      - name: Update application environment keys
+      - name: Environment changes
         uses: datamonsters/replace-action
         with:
           files: ''
