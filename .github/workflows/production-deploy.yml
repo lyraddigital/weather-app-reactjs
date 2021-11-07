@@ -59,7 +59,7 @@ jobs:
         with:
           find: '%REACT_APP_GOOGLE_PLACES_API_KEY%'
           replace: 'anything'
-          include: 'public/index.html'
+          include: 'application-code/public/index.html'
           regex: false
 
       - name: Install Infrastructure Dependencies
