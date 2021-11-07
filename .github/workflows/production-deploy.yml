@@ -54,8 +54,16 @@ jobs:
           name: infrastructure-code
           path: infrastructure-code
 
+      - name: Update application environment keys
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: '%REACT_APP_GOOGLE_PLACES_API_KEY%'
+          replace: 'anything'
+          include: 'public/index.html'
+          regex: false
+
       - name: Install Infrastructure Dependencies
-        run: ls -l infrastructure-code && cd infrastructure-code && npm install
+        run: infrastructure-code && cd infrastructure-code && npm install
 
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
