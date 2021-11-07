@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { Configuration, WEATHER_API_URL, WeatherContext } from 'core';
 import { useLocation } from 'hooks';
+import { Loader } from 'components/Loader';
 
 export const WeatherProvider = ({ children }) => {
   const [weatherData, setWeatherData] = useState();
@@ -34,11 +35,12 @@ export const WeatherProvider = ({ children }) => {
     };
   }, [lat, lon, setLoading, setWeatherData]);
 
-  const contentsEl = loading ? <div>Loading...</div> : children;
+  const contents = weatherData ? children : null;
 
   return (
     <WeatherContext.Provider value={weatherData}>
-      {contentsEl}
+      <Loader isLoading={loading} />
+      {contents}
     </WeatherContext.Provider>
   );
 };
