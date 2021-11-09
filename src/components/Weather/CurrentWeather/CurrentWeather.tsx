@@ -3,7 +3,7 @@ import { CurrentTemperature, Stats } from 'components/Weather';
 
 import style from './CurrentWeather.module.scss';
 
-export const CurrentWeather = () => {
+export const CurrentWeather = (): JSX.Element => {
   const { currentTemp, weatherType, statistics } = useCurrentWeather();
 
   return (

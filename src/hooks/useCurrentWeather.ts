@@ -3,9 +3,10 @@ import { format } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
 import { WeatherContext } from 'core';
+import { CurrentWeatherResponse } from 'models';
 
-export const useCurrentWeather = () => {
-  const weatherData = useContext(WeatherContext);
+export const useCurrentWeather = (): CurrentWeatherResponse => {
+  const weatherData = useContext<any>(WeatherContext);
 
   return {
     currentTemp: Math.round(weatherData?.current?.temp) || 0,
@@ -40,12 +41,12 @@ export const useCurrentWeather = () => {
         ? utcToZonedTime(weatherData.current.dt * 1000, weatherData.timezone)
         : new Date(),
     },
-    timeline: weatherData.hourly.map((h) => ({
+    timeline: weatherData.hourly.map((h: any) => ({
       weather: 1,
       temp: Math.round(h?.temp || 0),
       time: format(utcToZonedTime(h.dt * 1000, weatherData.timezone), 'ha'),
     })),
-    forecast: weatherData.daily.map((d) => ({
+    forecast: weatherData.daily.map((d: any) => ({
       date: d?.dt
         ? utcToZonedTime(d.dt * 1000, weatherData.timezone)
         : new Date(),

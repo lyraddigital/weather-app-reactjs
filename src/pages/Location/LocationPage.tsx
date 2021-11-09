@@ -13,26 +13,31 @@ export const LocationPage = () => {
   const [locationSelected, setLocationSelected] = useState(false);
   const updateLocation = useLocationUpdater();
 
-  const selectCity = async (address) => {
+  const selectCity = async (address: any) => {
     setCityName(address);
 
-    const response = await geocodeByAddress(address);
+    if (updateLocation) {
+      const response = await geocodeByAddress(address);
 
-    if (response && response.length > 0) {
-      const addressDetails = response[0];
-      const coords = addressDetails.geometry.location;
-      const lat = coords.lat();
-      const lon = coords.lng();
-      const city = addressDetails.address_components.find((ac) =>
-        ac.types.includes('locality'),
-      )?.long_name;
-      const country = addressDetails.address_components.find((ac) =>
-        ac.types.includes('country'),
-      )?.long_name;
+      if (response && response.length > 0) {
+        const addressDetails = response[0];
+        const coords = addressDetails.geometry.location;
+        const lat = coords.lat();
+        const lon = coords.lng();
+        const city =
+          addressDetails.address_components.find((ac: any) =>
+            ac.types.includes('locality'),
+          )?.long_name || '';
+        const country =
+          addressDetails.address_components.find((ac: any) =>
+            ac.types.includes('country'),
+          )?.long_name || '';
 
-      updateLocation({ lat, lon, city, country });
-      setLocationSelected(true);
+        updateLocation({ lat, lon, city, country });
+      }
     }
+
+    setLocationSelected(true);
   };
 
   if (locationSelected) {
@@ -51,7 +56,12 @@ export const LocationPage = () => {
           types: ['(cities)'],
         }}
       >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        {({
+          getInputProps,
+          suggestions,
+          getSuggestionItemProps,
+          loading,
+        }: any) => (
           <div className={style.autoCompleteContainer}>
             <input
               type="text"
@@ -62,7 +72,7 @@ export const LocationPage = () => {
             />
             <div>{loading ? <div>...loading</div> : null}</div>
             <ul className={style.autoCompleteList}>
-              {suggestions.map((s) => {
+              {suggestions.map((s: any) => {
                 return (
                   <li
                     {...getSuggestionItemProps(s, {

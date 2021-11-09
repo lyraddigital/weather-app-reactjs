@@ -4,8 +4,8 @@ import { useLocation, useWeatherLocalTime } from 'hooks';
 
 import style from './Header.module.scss';
 
-export const Header = () => {
-  const { city, country } = useLocation();
+export const Header = (): JSX.Element => {
+  const location = useLocation();
   const localTime = useWeatherLocalTime();
   const formattedDate = format(localTime, 'eeee do LLLL');
   const formattedTime = format(localTime, 'h:m a');
@@ -13,7 +13,7 @@ export const Header = () => {
   return (
     <div className={style.locationAndDate}>
       <h1 className={style.location}>
-        {city}, {country}
+        {location?.city}, {location?.country}
       </h1>
       <div>{formattedDate}</div>
       <div>Last updated at {formattedTime}</div>

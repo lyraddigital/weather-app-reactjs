@@ -1,13 +1,16 @@
 import { TimePeriod } from './TimePeriod';
 
+import { WeatherTimelinePeriod } from 'models';
 import { useTimeline } from 'hooks';
 
 import style from './Timeline.module.scss';
 
-export const Timeline = () => {
-  const { periods } = useTimeline();
+export const Timeline = (): JSX.Element => {
+  const periods = useTimeline();
 
-  const periodsEl = periods.map((p, i) => <TimePeriod key={i} period={p} />);
+  const periodsEl = periods.map((p: WeatherTimelinePeriod, i: number) => (
+    <TimePeriod key={i} period={p} />
+  ));
 
   return (
     <div className={style.weatherByHour}>

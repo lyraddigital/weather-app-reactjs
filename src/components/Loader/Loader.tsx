@@ -2,7 +2,11 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 import style from './Loader.module.scss';
 
-export const Loader = ({ isLoading }) => {
+interface LoaderProps {
+  isLoading: boolean;
+}
+
+export const Loader = ({ isLoading }: LoaderProps): JSX.Element | null => {
   document.body.style.overflow = isLoading ? 'hidden' : 'auto';
 
   return isLoading ? (

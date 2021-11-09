@@ -1,13 +1,16 @@
+import { WeatherForecastDay } from 'models';
 import { useForecast } from 'hooks';
 
 import { ForecastDay } from './ForecastDay';
 
 import style from './Forecast.module.scss';
 
-export const Forecast = () => {
-  const { forecast } = useForecast();
+export const Forecast = (): JSX.Element => {
+  const forecast = useForecast();
 
-  const daysEl = forecast.map((d, i) => <ForecastDay key={i} day={d} />);
+  const daysEl = forecast.map((d: WeatherForecastDay, i: number) => (
+    <ForecastDay key={i} day={d} />
+  ));
 
   return (
     <div className={style.forecast}>

@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Configuration, WEATHER_API_URL, WeatherContext } from 'core';
 import { useLocation } from 'hooks';
+
 import { Loader } from 'components/Loader';
 
-export const WeatherProvider = ({ children }) => {
-  const [weatherData, setWeatherData] = useState();
-  const { lat, lon } = useLocation();
+export const WeatherProvider = ({
+  children,
+}: PropsWithChildren<unknown>): JSX.Element => {
+  const [weatherData, setWeatherData] = useState<any>();
+  const location = useLocation();
 
-  const getWeather = (lat, lon, setWeatherData) => {
+  const getWeather = (lat: number, lon: number, setWeatherData: any) => {
     axios
       .get(
         `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`,
@@ -20,16 +23,19 @@ export const WeatherProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getWeather(lat, lon, setWeatherData);
-
-    const interval = setInterval(() => {
+    if (location) {
+      const { lat, lon } = location;
       getWeather(lat, lon, setWeatherData);
-    }, Configuration.weatherRefreshRateInMilliseconds);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [lat, lon, setWeatherData]);
+      const interval = setInterval(() => {
+        getWeather(lat, lon, setWeatherData);
+      }, Configuration.weatherRefreshRateInMilliseconds);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [location, setWeatherData]);
 
   const contents = weatherData ? children : null;
 

@@ -1,6 +1,14 @@
 import style from './CurrentTemperature.module.scss';
 
-export const CurrentTemperature = ({ temp, weatherType }) => {
+interface CurrentTemperatureProps {
+  temp: number;
+  weatherType: number;
+}
+
+export const CurrentTemperature = (
+  props: CurrentTemperatureProps,
+): JSX.Element => {
+  const { temp, weatherType } = props;
   const imgSrc = `icons/${
     weatherType === 0 ? 'sunny.svg' : 'mostly-sunny.svg'
   }`;

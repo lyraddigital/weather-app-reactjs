@@ -1,6 +1,12 @@
+import { WeatherTimelinePeriod } from 'models';
+
 import style from './TimePeriod.module.scss';
 
-export const TimePeriod = ({ period }) => {
+interface TimePeriodProps {
+  period: WeatherTimelinePeriod;
+}
+
+export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
   const imgSrc = `icons/${
     period.weather === 0 ? 'sunny.svg' : 'mostly-sunny.svg'
   }`;

@@ -1,8 +1,14 @@
 import { format } from 'date-fns';
 
+import { WeatherForecastDay } from 'models';
+
 import style from './ForecastDay.module.scss';
 
-export const ForecastDay = ({ day }) => {
+interface ForecastDayProps {
+  day: WeatherForecastDay;
+}
+
+export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
   if (!day) {
     return null;
   }

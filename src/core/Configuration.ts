@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+declare var WeatherApp: any;
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const apiKey = isDevelopment
