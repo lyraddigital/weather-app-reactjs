@@ -1,26 +1,23 @@
 import { PropsWithChildren, useState } from 'react';
 
 import { WeatherLocation } from 'models';
-import { LocationContext } from 'core';
-
-const getLocationFromLocalStorage: () => WeatherLocation = () => {
-  return JSON.parse(
-    window.localStorage.getItem('ld-weather-app-location') || '',
-  );
-};
-
-const setLocationToLocalStorage = (location: WeatherLocation): void => {
-  localStorage.setItem('ld-weather-app-location', JSON.stringify(location));
-};
+import {
+  Configuration,
+  getFromLocalStorage,
+  LocationContext,
+  setToLocalStorage,
+} from 'core';
 
 export const LocationProvider = ({
   children,
 }: PropsWithChildren<unknown>): JSX.Element => {
   const [location, setLocation] = useState<WeatherLocation>(
-    getLocationFromLocalStorage(),
+    getFromLocalStorage<WeatherLocation>(
+      Configuration.weatherLocationStorageKey,
+    ),
   );
   const updateLocation = (location: WeatherLocation): void => {
-    setLocationToLocalStorage(location);
+    setToLocalStorage(Configuration.weatherLocationStorageKey, location);
     setLocation(location);
   };
 

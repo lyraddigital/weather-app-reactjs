@@ -9,7 +9,7 @@ import {
   WeatherProvider,
 } from 'components/Weather';
 
-export const WeatherPage = () => {
+export const WeatherPage = (): JSX.Element => {
   const location = useLocation();
 
   if (!location) {

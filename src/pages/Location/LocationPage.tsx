@@ -9,11 +9,11 @@ import { useLocationUpdater } from 'hooks';
 import style from './LocationPage.module.scss';
 
 export const LocationPage = () => {
-  const [cityName, setCityName] = useState('');
+  const [cityName, setCityName] = useState<unknown>('');
   const [locationSelected, setLocationSelected] = useState(false);
   const updateLocation = useLocationUpdater();
 
-  const selectCity = async (address: any) => {
+  const selectCity = async (address: string) => {
     setCityName(address);
 
     if (updateLocation) {
@@ -25,11 +25,11 @@ export const LocationPage = () => {
         const lat = coords.lat();
         const lon = coords.lng();
         const city =
-          addressDetails.address_components.find((ac: any) =>
+          addressDetails.address_components.find((ac: unknown) =>
             ac.types.includes('locality'),
           )?.long_name || '';
         const country =
-          addressDetails.address_components.find((ac: any) =>
+          addressDetails.address_components.find((ac: unknown) =>
             ac.types.includes('country'),
           )?.long_name || '';
 

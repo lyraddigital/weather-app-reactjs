@@ -1,5 +1,4 @@
-import { format } from 'date-fns';
-
+import { formatDay, formatShortDate } from 'core';
 import { WeatherForecastDay } from 'models';
 
 import style from './ForecastDay.module.scss';
@@ -13,8 +12,8 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
     return null;
   }
 
-  const dayName = format(day.date, 'EEE');
-  const shortDate = format(day.date, 'dd/M');
+  const dayName = formatDay(day.date);
+  const shortDate = formatShortDate(day.date);
   const weatherImg = `icons/${
     day.weather === 0 ? 'sunny.svg' : 'mostly-sunny.svg'
   }`;

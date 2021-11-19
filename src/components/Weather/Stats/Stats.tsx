@@ -1,5 +1,4 @@
-import { format } from 'date-fns';
-
+import { formatTime } from 'core';
 import { WeatherStatistics } from 'models';
 
 import style from './Stats.module.scss';
@@ -9,8 +8,8 @@ interface StatsProps {
 }
 
 export const Stats = ({ details }: StatsProps): JSX.Element => {
-  const formattedSunrise = format(details.sunriseTime, 'HH:mm');
-  const formattedSunset = format(details.sunsetTime, 'HH:mm');
+  const formattedSunrise = formatTime(details.sunriseTime);
+  const formattedSunset = formatTime(details.sunsetTime);
 
   return (
     <div className={style.currentStats}>

@@ -1,6 +1,7 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import axios from 'axios';
 
+import { WeatherApiResponse } from 'models';
 import { Configuration, WEATHER_API_URL, WeatherContext } from 'core';
 import { useLocation } from 'hooks';
 
@@ -9,12 +10,16 @@ import { Loader } from 'components/Loader';
 export const WeatherProvider = ({
   children,
 }: PropsWithChildren<unknown>): JSX.Element => {
-  const [weatherData, setWeatherData] = useState<any>();
+  const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
   const location = useLocation();
 
-  const getWeather = (lat: number, lon: number, setWeatherData: any) => {
+  const getWeather = (
+    lat: number,
+    lon: number,
+    setWeatherData: React.Dispatch<WeatherApiResponse>,
+  ) => {
     axios
-      .get(
+      .get<WeatherApiResponse>(
         `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`,
       )
       .then((response) => {

@@ -1,5 +1,4 @@
-import { format } from 'date-fns';
-
+import { formatFriendlyDate, formatFriendlyTime } from 'core';
 import { useLocation, useWeatherLocalTime } from 'hooks';
 
 import style from './Header.module.scss';
@@ -7,8 +6,8 @@ import style from './Header.module.scss';
 export const Header = (): JSX.Element => {
   const location = useLocation();
   const localTime = useWeatherLocalTime();
-  const formattedDate = format(localTime, 'eeee do LLLL');
-  const formattedTime = format(localTime, 'h:m a');
+  const formattedDate = formatFriendlyDate(localTime);
+  const formattedTime = formatFriendlyTime(localTime);
 
   return (
     <div className={style.locationAndDate}>
