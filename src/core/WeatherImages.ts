@@ -1,5 +1,13 @@
-import sunny from 'assets/sunny.svg';
-import mostlySunny from 'assets/mostly-sunny.svg';
+import atmosphere from 'assets/atmosphere.svg';
+import clear from 'assets/clear.svg';
+import clearNight from 'assets/clear-night.svg';
+import cloudy from 'assets/cloudy.svg';
+import cloudyNight from 'assets/cloudy-night.svg';
+import drizzle from 'assets/drizzle.svg';
+import rain from 'assets/rain.svg';
+import shower from 'assets/shower.svg';
+import snow from 'assets/snow.svg';
+import thunderStorm from 'assets/thunder-storm.svg';
 
 const enum WeatherType {
     Thunderstorm,
@@ -44,25 +52,25 @@ const weatherIdTypeMatrix: { [weatherId: number]: WeatherType } = {
 };
 
 const weatherImages: { [imagesKey: string]: string } = {
-    [(`${WeatherType.Thunderstorm.toString()}-true`)]: sunny,
-    [(`${WeatherType.Thunderstorm.toString()}-false`)]: sunny,
-    [(`${WeatherType.Drizzle.toString()}-true`)]: sunny,
-    [(`${WeatherType.Drizzle.toString()}-false`)]: sunny,
-    [(`${WeatherType.Shower.toString()}-true`)]: sunny,
-    [(`${WeatherType.Shower.toString()}-false`)]: sunny,
-    [(`${WeatherType.Rain.toString()}-true`)]: sunny,
-    [(`${WeatherType.Rain.toString()}-false`)]: sunny,
-    [(`${WeatherType.Snow.toString()}-true`)]: sunny,
-    [(`${WeatherType.Snow.toString()}-false`)]: sunny,
-    [(`${WeatherType.Atmospheric.toString()}-true`)]: sunny,
-    [(`${WeatherType.Atmospheric.toString()}-false`)]: sunny,
-    [(`${WeatherType.Clouds.toString()}-true`)]: mostlySunny,
-    [(`${WeatherType.Clouds.toString()}-false`)]: mostlySunny,
-    [(`${WeatherType.Clear.toString()}-true`)]: sunny,
-    [(`${WeatherType.Clear.toString()}-false`)]: sunny
+    [(`${WeatherType.Thunderstorm.toString()}-true`)]: thunderStorm,
+    [(`${WeatherType.Thunderstorm.toString()}-false`)]: thunderStorm,
+    [(`${WeatherType.Drizzle.toString()}-true`)]: drizzle,
+    [(`${WeatherType.Drizzle.toString()}-false`)]: drizzle,
+    [(`${WeatherType.Shower.toString()}-true`)]: shower,
+    [(`${WeatherType.Shower.toString()}-false`)]: shower,
+    [(`${WeatherType.Rain.toString()}-true`)]: rain,
+    [(`${WeatherType.Rain.toString()}-false`)]: rain,
+    [(`${WeatherType.Snow.toString()}-true`)]: snow,
+    [(`${WeatherType.Snow.toString()}-false`)]: snow,
+    [(`${WeatherType.Atmospheric.toString()}-true`)]: atmosphere,
+    [(`${WeatherType.Atmospheric.toString()}-false`)]: atmosphere,
+    [(`${WeatherType.Clouds.toString()}-false`)]: cloudy,
+    [(`${WeatherType.Clouds.toString()}-true`)]: cloudyNight,
+    [(`${WeatherType.Clear.toString()}-false`)]: clear,
+    [(`${WeatherType.Clear.toString()}-true`)]: clearNight
 };
 
-export const getWeatherImage = (weatherId: number, isNightTime: boolean = false): string | undefined => {
+export const getWeatherIcon = (weatherId: number, isNightTime: boolean = false): string | undefined => {
     const weatherType = weatherIdTypeMatrix[weatherId] ?? WeatherType.Clear;
     const imagesKey = `${weatherType.toString()}-${isNightTime.toString()}`;
 
