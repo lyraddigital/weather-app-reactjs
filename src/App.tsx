@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { LocationProvider } from './components/Location';
+import { LocationProvider } from './hoc';
 import { LocationPage, WeatherPage } from './pages';
 
 import style from './App.module.scss';

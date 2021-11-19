@@ -2,7 +2,8 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { WeatherApiResponse } from 'models';
-import { Configuration, WEATHER_API_URL, WeatherContext } from 'core';
+import { WeatherContext } from 'context';
+import { Configuration, WEATHER_API_URL } from 'core';
 import { useLocation } from 'hooks';
 
 import { Loader } from 'components/Loader';

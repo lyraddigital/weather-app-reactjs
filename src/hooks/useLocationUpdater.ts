@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { LocationContext } from 'core';
+import { LocationContext } from 'context';
 
 export const useLocationUpdater = () => {
   const locationStore = useContext(LocationContext);

@@ -1,12 +1,8 @@
 import { PropsWithChildren, useState } from 'react';
 
 import { WeatherLocation } from 'models';
-import {
-  Configuration,
-  getFromLocalStorage,
-  LocationContext,
-  setToLocalStorage,
-} from 'core';
+import { LocationContext } from 'context';
+import { Configuration, getFromLocalStorage, setToLocalStorage } from 'core';
 
 export const LocationProvider = ({
   children,
