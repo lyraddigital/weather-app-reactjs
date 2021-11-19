@@ -10,12 +10,13 @@ import {
 
 export const LocationProvider = ({
   children,
-}: PropsWithChildren<unknown>): JSX.Element => {
+}: PropsWithChildren<any>): JSX.Element => {
   const [location, setLocation] = useState<WeatherLocation>(
     getFromLocalStorage<WeatherLocation>(
       Configuration.weatherLocationStorageKey,
     ),
   );
+
   const updateLocation = (location: WeatherLocation): void => {
     setToLocalStorage(Configuration.weatherLocationStorageKey, location);
     setLocation(location);
