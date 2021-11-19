@@ -9,7 +9,7 @@ import { Loader } from 'components/Loader';
 
 export const WeatherProvider = ({
   children,
-}: PropsWithChildren<unknown>): JSX.Element => {
+}: PropsWithChildren<any>): JSX.Element => {
   const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
   const location = useLocation();
 

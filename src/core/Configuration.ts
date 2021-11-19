@@ -1,4 +1,4 @@
-declare const WeatherApp: {
+declare var WeatherApp: {
   weatherConfig: {
     WEATHER_API_KEY: string;
     WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS: string;
