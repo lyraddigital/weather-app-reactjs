@@ -4,7 +4,7 @@ import { WeatherTimelinePeriod } from './WeatherTimelinePeriod';
 
 export interface CurrentWeatherResponse {
   currentTemp: number;
-  weatherType: number;
+  weatherId: number;
   statistics: WeatherStatistics;
   timeline: Array<WeatherTimelinePeriod>;
   forecast: Array<WeatherForecastDay>;

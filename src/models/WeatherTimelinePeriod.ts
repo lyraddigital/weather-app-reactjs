@@ -1,5 +1,5 @@
 export interface WeatherTimelinePeriod {
   weather: number;
   temp: number;
-  time: Date;
+  time: string;
 }
