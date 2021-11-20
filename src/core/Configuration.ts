@@ -5,6 +5,7 @@ declare var WeatherApp: {
     WEATHER_LOCATION_STORAGE_KEY: string;
   };
 };
+
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const apiKey = isDevelopment

@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
 export const formatTime = (date: Date): string => {
-  return format(date, 'HH:mm');
+  return format(date, 'H:mm');
 };
 
 export const formatDay = (date: Date): string => {
@@ -20,8 +20,14 @@ export const formatShortDate = (date: Date): string => {
   return format(date, 'dd/M');
 };
 
-export const getFromLocalStorage = <T>(storageKey: string): T => {
-  return JSON.parse(window.localStorage.getItem(storageKey) || '');
+export const getFromLocalStorage = <T>(storageKey: string): T | undefined => {
+  const item = localStorage.getItem(storageKey);
+
+  if (!item) {
+    return undefined;
+  }
+
+  return JSON.parse(item);
 };
 
 export const setToLocalStorage = <T>(storageKey: string, value: T): void => {
