@@ -1,4 +1,6 @@
+import { WeatherType } from 'core';
 import { WeatherTimelinePeriod } from 'models';
+import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
 
 import style from './TimePeriod.module.scss';
 
@@ -7,9 +9,6 @@ interface TimePeriodProps {
 }
 
 export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
-  const imgSrc = `icons/${
-    period.weather === 0 ? 'sunny.svg' : 'mostly-sunny.svg'
-  }`;
   const imgAlt = `icons/${
     period.weather === 0 ? 'sunny.svg' : 'mostly-sunny.svg'
   }`;
@@ -17,7 +16,7 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
   return (
     <div className={style.item}>
       <div className={style.hour}>{period.time}</div>
-      <img src={imgSrc} alt={imgAlt} />
+      <WeatherIcon weatherType={WeatherType.Clear} iconAlt={imgAlt} />
       <div>{period.temp}&deg;</div>
     </div>
   );

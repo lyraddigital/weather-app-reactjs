@@ -1,4 +1,4 @@
-export const enum WeatherType {
+export enum WeatherType {
     Thunderstorm,
     Drizzle,
     Shower,
@@ -7,7 +7,7 @@ export const enum WeatherType {
     Atmospheric,
     Clouds,
     Clear
-};
+}
 
 const weatherIdTypeMatrix: { [weatherId: number]: WeatherType } = {
     200: WeatherType.Thunderstorm, 201: WeatherType.Thunderstorm,

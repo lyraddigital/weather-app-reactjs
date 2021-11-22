@@ -1,4 +1,5 @@
 import { getWeatherType } from 'core';
+import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
 import style from './CurrentTemperature.module.scss';
 
 interface CurrentTemperatureProps {
@@ -16,7 +17,7 @@ export const CurrentTemperature = (
   return (
     <div className={style.currentTemperature}>
       <div className={style.iconContainer}>
-        <img src={imgSrc} className={style.icon} alt={weatherSummary} />
+        <WeatherIcon weatherType={imgSrc} className={style.icon} iconAlt={weatherSummary} />
       </div>
       <div className={style.contentContainer}>
         <div className={style.value}>{temp}&deg;</div>

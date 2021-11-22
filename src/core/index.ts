@@ -9,4 +9,4 @@ export {
   getFromLocalStorage,
   setToLocalStorage,
 } from './Utils';
-export { getWeatherType } from './WeatherImages';
+export { getWeatherType, WeatherType } from './WeatherImages';
