@@ -1,4 +1,4 @@
-import { getWeatherIcon } from 'core';
+import { getWeatherType } from 'core';
 import style from './CurrentTemperature.module.scss';
 
 interface CurrentTemperatureProps {
@@ -10,7 +10,7 @@ export const CurrentTemperature = (
   props: CurrentTemperatureProps,
 ): JSX.Element => {
   const { temp, weatherId } = props;
-  const imgSrc = getWeatherIcon(weatherId);
+  const imgSrc = getWeatherType(weatherId);
   const weatherSummary = weatherId === 0 ? 'Sunny' : 'Mostly Sunny';
 
   return (

@@ -1,15 +1,4 @@
-import atmosphere from 'assets/atmosphere.svg';
-import clear from 'assets/clear.svg';
-import clearNight from 'assets/clear-night.svg';
-import cloudy from 'assets/cloudy.svg';
-import cloudyNight from 'assets/cloudy-night.svg';
-import drizzle from 'assets/drizzle.svg';
-import rain from 'assets/rain.svg';
-import shower from 'assets/shower.svg';
-import snow from 'assets/snow.svg';
-import thunderStorm from 'assets/thunder-storm.svg';
-
-const enum WeatherType {
+export const enum WeatherType {
     Thunderstorm,
     Drizzle,
     Shower,
@@ -51,28 +40,6 @@ const weatherIdTypeMatrix: { [weatherId: number]: WeatherType } = {
     804: WeatherType.Clouds
 };
 
-const weatherImages: { [imagesKey: string]: string } = {
-    [(`${WeatherType.Thunderstorm.toString()}-true`)]: thunderStorm,
-    [(`${WeatherType.Thunderstorm.toString()}-false`)]: thunderStorm,
-    [(`${WeatherType.Drizzle.toString()}-true`)]: drizzle,
-    [(`${WeatherType.Drizzle.toString()}-false`)]: drizzle,
-    [(`${WeatherType.Shower.toString()}-true`)]: shower,
-    [(`${WeatherType.Shower.toString()}-false`)]: shower,
-    [(`${WeatherType.Rain.toString()}-true`)]: rain,
-    [(`${WeatherType.Rain.toString()}-false`)]: rain,
-    [(`${WeatherType.Snow.toString()}-true`)]: snow,
-    [(`${WeatherType.Snow.toString()}-false`)]: snow,
-    [(`${WeatherType.Atmospheric.toString()}-true`)]: atmosphere,
-    [(`${WeatherType.Atmospheric.toString()}-false`)]: atmosphere,
-    [(`${WeatherType.Clouds.toString()}-false`)]: cloudy,
-    [(`${WeatherType.Clouds.toString()}-true`)]: cloudyNight,
-    [(`${WeatherType.Clear.toString()}-false`)]: clear,
-    [(`${WeatherType.Clear.toString()}-true`)]: clearNight
-};
-
-export const getWeatherIcon = (weatherId: number, isNightTime: boolean = false): string | undefined => {
-    const weatherType = weatherIdTypeMatrix[weatherId] ?? WeatherType.Clear;
-    const imagesKey = `${weatherType.toString()}-${isNightTime.toString()}`;
-
-    return weatherImages[imagesKey] || undefined;
+export const getWeatherType = (weatherId: number): WeatherType | undefined => {
+    return weatherIdTypeMatrix[weatherId];
 };
