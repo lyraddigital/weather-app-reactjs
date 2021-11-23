@@ -20,6 +20,10 @@ interface WeatherIconProps {
 }
 
 export const WeatherIcon = ({ className, weatherType, iconAlt }: WeatherIconProps) => {
+    if (weatherType === undefined || weatherType === null) {
+        return null;
+    }
+
     let image = undefined;
 
     switch (weatherType) {
