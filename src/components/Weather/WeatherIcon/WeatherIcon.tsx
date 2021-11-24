@@ -1,4 +1,4 @@
-import { WeatherType } from 'core/WeatherImages';
+import { getWeatherType, WeatherType } from 'core';
 
 import atmosphereLogo from '../../../assets/atmosphere.svg';
 // import clearNightLogo from '../../../assets/clear-night.svg';
@@ -15,11 +15,13 @@ import './WeatherIcon.module.scss';
 
 interface WeatherIconProps {
     className?: string;
-    weatherType?: WeatherType;
+    weatherId: number;
     iconAlt: string;
 }
 
-export const WeatherIcon = ({ className, weatherType, iconAlt }: WeatherIconProps) => {
+export const WeatherIcon = ({ className, weatherId, iconAlt }: WeatherIconProps) => {
+    const weatherType = getWeatherType(weatherId);
+    
     if (weatherType === undefined || weatherType === null) {
         return null;
     }

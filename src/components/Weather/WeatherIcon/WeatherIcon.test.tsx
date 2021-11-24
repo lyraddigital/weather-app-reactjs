@@ -1,16 +1,16 @@
 import { render } from '@testing-library/react';
 
-import { WeatherType } from 'core';
 import { WeatherIcon } from './WeatherIcon';
 
 describe('WeatherIcon', () => {
-    it('Returns null if no weatherType value is specified', async () => {
+    it('Returns null if weatherId is not a valid value', async () => {
         // Arrange            
         const alt = 'Will not see this';
+        const weatherId = -1;
 
         // Action
         const wrapper = render(
-            <WeatherIcon iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -22,11 +22,11 @@ describe('WeatherIcon', () => {
     it('Image is shown weatherType is set correctly', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Clear;
+        const weatherId = 500;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -38,11 +38,11 @@ describe('WeatherIcon', () => {
     it('Image class is empty when className is not set', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Clear;
+        const weatherId = 500;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -54,12 +54,12 @@ describe('WeatherIcon', () => {
     it('Image class is not empty when className is set', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Clear;
+        const weatherId = 500;
         const className = 'testClass';
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt } className={ className }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt } className={ className }></WeatherIcon>
         );
 
         // Assert
@@ -71,11 +71,11 @@ describe('WeatherIcon', () => {
     it('Alt attribute is set correctly on img tag', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Clear;
+        const weatherId = 500;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -85,14 +85,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.alt).toBe(alt);
     });
 
-    it('Image src is correct when weatherType is Atmospheric', async () => {
+    it('Image src is correct when weatherId an Atmospheric one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Atmospheric;
+        const weatherId = 701;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -101,14 +101,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/atmosphere.svg');
     });
 
-    it('Image src is correct when weatherType is Clear', async () => {
+    it('Image src is correct when weatherId is a Clear one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Clear;
+        const weatherId = 800;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -117,14 +117,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/clear.svg');
     });
 
-    it('Image src is correct when weatherType is Clouds', async () => {
+    it('Image src is correct when weatherId is a Clouds one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Clouds;
+        const weatherId = 801;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -133,14 +133,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/cloudy.svg');
     });
 
-    it('Image src is correct when weatherType is Drizzle', async () => {
+    it('Image src is correct when weatherId is a Drizzle one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Drizzle;
+        const weatherId = 301;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -149,14 +149,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/drizzle.svg');
     });
 
-    it('Image src is correct when weatherType is Rain', async () => {
+    it('Image src is correct when weatherId is Rain one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Rain;
+        const weatherId = 502;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -165,14 +165,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/rain.svg');
     });
 
-    it('Image src is correct when weatherType is Shower', async () => {
+    it('Image src is correct when weatherId is a Shower one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Shower;
+        const weatherId = 520;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -181,14 +181,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/shower.svg');
     });
 
-    it('Image src is correct when weatherType is Snow', async () => {
+    it('Image src is correct when weatherId is a Snow one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Snow;
+        const weatherId = 602;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert
@@ -197,14 +197,14 @@ describe('WeatherIcon', () => {
         expect(imgElement.src).toBe('http://localhost/snow.svg');
     });
 
-    it('Image src is correct when weatherType is Thunderstorm', async () => {
+    it('Image src is correct when weatherId is Thunderstorm one', async () => {
         // Arrange            
         const alt = 'Some alt value';
-        const weatherType = WeatherType.Thunderstorm;
+        const weatherId = 201;
 
         // Action
         const wrapper = render(
-            <WeatherIcon weatherType={weatherType} iconAlt={ alt }></WeatherIcon>
+            <WeatherIcon weatherId={weatherId} iconAlt={ alt }></WeatherIcon>
         );
 
         // Assert

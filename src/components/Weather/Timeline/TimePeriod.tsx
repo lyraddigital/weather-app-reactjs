@@ -17,7 +17,7 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
     <div className={style.item}>
       <div className={style.hour}>{period.time}</div>
       <WeatherIcon
-        weatherType={period.weatherType}
+        weatherId={500}
         className={style.timePeriodIcon}
         iconAlt={imgAlt}
       />

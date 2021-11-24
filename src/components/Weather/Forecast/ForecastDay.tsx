@@ -25,7 +25,7 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
         <div className={style.label}>{shortDate}</div>
       </div>
       <div className={style.icon}>
-        <WeatherIcon weatherType={WeatherType.Clear} iconAlt={weatherAlt} />
+        <WeatherIcon weatherId={500} iconAlt={weatherAlt} />
       </div>
       <div className={style.low}>
         {day.lowTemp}&deg;
