@@ -10,13 +10,17 @@ interface TimePeriodProps {
 
 export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
   const imgAlt = `icons/${
-    period.weather === 0 ? 'sunny.svg' : 'mostly-sunny.svg'
+    period.weatherType === WeatherType.Clear ? 'sunny.svg' : 'mostly-sunny.svg'
   }`;
 
   return (
     <div className={style.item}>
       <div className={style.hour}>{period.time}</div>
-      <WeatherIcon weatherType={WeatherType.Clear} iconAlt={imgAlt} />
+      <WeatherIcon
+        weatherType={period.weatherType}
+        className={style.timePeriodIcon}
+        iconAlt={imgAlt}
+      />
       <div>{period.temp}&deg;</div>
     </div>
   );

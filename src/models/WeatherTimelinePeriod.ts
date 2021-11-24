@@ -1,5 +1,7 @@
+import { WeatherType } from 'core';
+
 export interface WeatherTimelinePeriod {
-  weather: number;
+  weatherType: WeatherType;
   temp: number;
   time: string;
 }

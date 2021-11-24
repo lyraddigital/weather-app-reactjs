@@ -4,15 +4,18 @@ import { utcToZonedTime } from 'date-fns-tz';
 
 import { CurrentWeatherResponse, WeatherApiResponse } from 'models';
 import { WeatherContext } from 'context';
+import { WeatherType } from 'core';
 
 export const useCurrentWeather = (): CurrentWeatherResponse => {
-  const weatherData = useContext<WeatherApiResponse | undefined>(WeatherContext);
+  const weatherData = useContext<WeatherApiResponse | undefined>(
+    WeatherContext,
+  );
 
   return {
     currentTemp: Math.round(weatherData?.current?.temp || 0),
     weatherId: weatherData?.current?.weather
-        ? weatherData.current.weather[0].id
-        : 0,
+      ? weatherData.current.weather[0].id
+      : 0,
     statistics: {
       highTemp: Math.round(
         weatherData?.daily ? weatherData.daily[0]?.temp?.max : 0,
@@ -38,20 +41,33 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         ? utcToZonedTime(weatherData.current.dt * 1000, weatherData.timezone)
         : new Date(),
     },
-    timeline: (weatherData?.hourly || []).map((h: { temp: number, dt: number; }) => ({
-      weather: 1,
-      temp: Math.round(h?.temp || 0),
-      time: format(utcToZonedTime(h.dt * 1000, weatherData?.timezone || ''), 'ha'),
-    })),
-    forecast: (weatherData?.daily || []).map((d: { dt: number, humidity: number, wind_speed: number, weather: Array<{ main: string }>, temp: { max: number; min: number }}) => ({
-      date: d?.dt
-        ? utcToZonedTime(d.dt * 1000, weatherData?.timezone || '')
-        : new Date(),
-      weather: d?.weather[0]?.main === 'Sunny' ? 0 : 1,
-      lowTemp: Math.round(d?.temp?.min || 0),
-      highTemp: Math.round(d?.temp?.max || 0),
-      rainPercentage: Math.round(d?.humidity || 0),
-      windSpeed: Math.round(d?.wind_speed || 0),
-    })),
+    timeline: (weatherData?.hourly || []).map(
+      (h: { temp: number; dt: number }) => ({
+        weatherType: WeatherType.Rain,
+        temp: Math.round(h?.temp || 0),
+        time: format(
+          utcToZonedTime(h.dt * 1000, weatherData?.timezone || ''),
+          'ha',
+        ),
+      }),
+    ),
+    forecast: (weatherData?.daily || []).map(
+      (d: {
+        dt: number;
+        humidity: number;
+        wind_speed: number;
+        weather: Array<{ main: string }>;
+        temp: { max: number; min: number };
+      }) => ({
+        date: d?.dt
+          ? utcToZonedTime(d.dt * 1000, weatherData?.timezone || '')
+          : new Date(),
+        weather: d?.weather[0]?.main === 'Sunny' ? 0 : 1,
+        lowTemp: Math.round(d?.temp?.min || 0),
+        highTemp: Math.round(d?.temp?.max || 0),
+        rainPercentage: Math.round(d?.humidity || 0),
+        windSpeed: Math.round(d?.wind_speed || 0),
+      }),
+    ),
   };
 };
