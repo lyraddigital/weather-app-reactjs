@@ -1,6 +1,6 @@
 export interface WeatherForecastDay {
   date: Date;
-  weather: number;
+  weatherId: number;
   lowTemp: number;
   highTemp: number;
   rainPercentage: number;

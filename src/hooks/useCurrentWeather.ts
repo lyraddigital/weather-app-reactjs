@@ -4,7 +4,6 @@ import { utcToZonedTime } from 'date-fns-tz';
 
 import { CurrentWeatherResponse, WeatherApiResponse } from 'models';
 import { WeatherContext } from 'context';
-import { WeatherType } from 'core';
 
 export const useCurrentWeather = (): CurrentWeatherResponse => {
   const weatherData = useContext<WeatherApiResponse | undefined>(
@@ -42,8 +41,8 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         : new Date(),
     },
     timeline: (weatherData?.hourly || []).map(
-      (h: { temp: number; dt: number }) => ({
-        weatherType: WeatherType.Rain,
+      (h: { temp: number; dt: number, weather: Array<{id: number}> }) => ({
+        weatherId: h.weather[0].id,
         temp: Math.round(h?.temp || 0),
         time: format(
           utcToZonedTime(h.dt * 1000, weatherData?.timezone || ''),
@@ -56,13 +55,13 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         dt: number;
         humidity: number;
         wind_speed: number;
-        weather: Array<{ main: string }>;
+        weather: Array<{ id: number, main: string }>;
         temp: { max: number; min: number };
       }) => ({
         date: d?.dt
           ? utcToZonedTime(d.dt * 1000, weatherData?.timezone || '')
           : new Date(),
-        weather: d?.weather[0]?.main === 'Sunny' ? 0 : 1,
+        weatherId: d?.weather[0]?.id || 0,
         lowTemp: Math.round(d?.temp?.min || 0),
         highTemp: Math.round(d?.temp?.max || 0),
         rainPercentage: Math.round(d?.humidity || 0),

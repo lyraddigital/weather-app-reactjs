@@ -1,4 +1,4 @@
-import { formatDay, formatShortDate, WeatherType } from 'core';
+import { formatDay, formatShortDate } from 'core';
 import { WeatherForecastDay } from 'models';
 
 import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
@@ -16,7 +16,7 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
 
   const dayName = formatDay(day.date);
   const shortDate = formatShortDate(day.date);
-  const weatherAlt = day.weather === 0 ? 'Sunny' : 'Mostly Sunny';
+  const weatherAlt = day.weatherId === 0 ? 'Sunny' : 'Mostly Sunny';
 
   return (
     <div className={style.row}>
@@ -25,7 +25,7 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
         <div className={style.label}>{shortDate}</div>
       </div>
       <div className={style.icon}>
-        <WeatherIcon weatherId={500} iconAlt={weatherAlt} />
+        <WeatherIcon weatherId={day.weatherId} iconAlt={weatherAlt} />
       </div>
       <div className={style.low}>
         {day.lowTemp}&deg;
