@@ -14,7 +14,7 @@ export const WeatherProvider = ({
   const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
   const location = useLocation();
 
-  const getWeather = (
+  const getWeatherFromApi = (
     lat: number,
     lon: number,
     setWeatherData: React.Dispatch<WeatherApiResponse>,
@@ -31,10 +31,10 @@ export const WeatherProvider = ({
   useEffect(() => {
     if (location) {
       const { lat, lon } = location;
-      getWeather(lat, lon, setWeatherData);
+      getWeatherFromApi(lat, lon, setWeatherData);
 
       const interval = setInterval(() => {
-        getWeather(lat, lon, setWeatherData);
+        getWeatherFromApi(lat, lon, setWeatherData);
       }, Configuration.weatherRefreshRateInMilliseconds);
 
       return () => {
