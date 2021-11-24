@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 export const formatTime = (date: Date): string => {
   return format(date, 'H:mm');
@@ -19,6 +20,12 @@ export const formatFriendlyTime = (date: Date): string => {
 export const formatShortDate = (date: Date): string => {
   return format(date, 'dd/M');
 };
+
+export const convertEpochSecondsToDate = (epochSeconds?: number, timezone?: string): Date => {
+  return epochSeconds ? 
+    utcToZonedTime(epochSeconds * 1000, timezone || ''): 
+    new Date();
+}
 
 export const getFromLocalStorage = <T>(storageKey: string): T | undefined => {
   const item = localStorage.getItem(storageKey);

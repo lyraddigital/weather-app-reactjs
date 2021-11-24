@@ -8,5 +8,6 @@ export {
   formatTime,
   getFromLocalStorage,
   setToLocalStorage,
+  convertEpochSecondsToDate
 } from './Utils';
 export { getWeatherType, WeatherType } from './WeatherImages';
