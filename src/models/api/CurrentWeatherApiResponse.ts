@@ -1,4 +1,4 @@
-import { CurrentWeatherIdApiResponse } from "./CurrentWeatherIdApiResponse";
+import { WeatherDetailsApiResponse } from "./WeatherDetailsApiResponse";
 
 export interface CurrentWeatherApiResponse {
     dt: number;
@@ -7,5 +7,5 @@ export interface CurrentWeatherApiResponse {
     humidity: number;
     sunrise: number;
     sunset: number;
-    weather?: Array<CurrentWeatherIdApiResponse>;
+    weather?: Array<WeatherDetailsApiResponse>;
 }

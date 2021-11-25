@@ -1,9 +1,10 @@
 import { CurrentWeatherApiResponse } from "./CurrentWeatherApiResponse";
 import { DailyForecastApiResponse } from "./DailyForecastApiResponse";
+import { TimelinePeriodApiResponse } from "./TimelinePeriodApiResponse";
 
 export interface WeatherApiResponse {
     current?: CurrentWeatherApiResponse,
     daily?: Array<DailyForecastApiResponse>;
-    hourly?: Array<{ temp: number; dt: number; weather: Array<{id: number}> }>;
+    hourly?: Array<TimelinePeriodApiResponse>;
     timezone: string;
 }
