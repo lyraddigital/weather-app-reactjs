@@ -6,6 +6,7 @@ import {
   formatShortDate,
   getFromLocalStorage,
   setToLocalStorage,
+  roundNumberOrZero
 } from './Utils';
 
 describe('Utils', () => {
@@ -541,5 +542,62 @@ describe('Utils', () => {
 
     // Assert
     expect(storedObjectString).toBe('{"name":"Daryl","age":39}');
+  });
+
+  describe('roundNumberOrZero', () => {
+    it('returns 0 if the value is undefined', () => {
+      // Arrange
+      const value = undefined;
+
+      // Action
+      const roundedValue = roundNumberOrZero(value);
+
+      // Assert
+      expect(roundedValue).toBe(0);
+    });
+
+    it('returns number if the value is an integer', () => {
+      // Arrange
+      const value = 3;
+
+      // Action
+      const roundedValue = roundNumberOrZero(value);
+
+      // Assert
+      expect(roundedValue).toBe(value);
+    });
+
+    it('returns 2 if the value is 2.4', () => {
+      // Arrange
+      const value = 2.4;
+
+      // Action
+      const roundedValue = roundNumberOrZero(value);
+
+      // Assert
+      expect(roundedValue).toBe(2);
+    });
+
+    it('returns 3 if the value is 2.6', () => {
+      // Arrange
+      const value = 2.6;
+
+      // Action
+      const roundedValue = roundNumberOrZero(value);
+
+      // Assert
+      expect(roundedValue).toBe(3);
+    });
+
+    it('returns 3 if the value is 2.5', () => {
+      // Arrange
+      const value = 2.5;
+
+      // Action
+      const roundedValue = roundNumberOrZero(value);
+
+      // Assert
+      expect(roundedValue).toBe(3);
+    });
   });
 });

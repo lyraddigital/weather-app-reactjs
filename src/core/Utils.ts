@@ -27,6 +27,10 @@ export const convertEpochSecondsToDate = (epochSeconds?: number, timezone?: stri
     new Date();
 }
 
+export const roundNumberOrZero = (value?: number): number => {
+  return Math.round(value || 0);
+}
+
 export const getFromLocalStorage = <T>(storageKey: string): T | undefined => {
   const item = localStorage.getItem(storageKey);
 
