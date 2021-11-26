@@ -3,7 +3,12 @@ import { format } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
 import { convertEpochSecondsToDate, roundNumberOrZero } from 'core';
-import { CurrentWeatherResponse, DailyForecastApiResponse, WeatherApiResponse } from 'models';
+import {
+  CurrentWeatherResponse,
+  DailyForecastApiResponse,
+  TimelinePeriodApiResponse,
+  WeatherApiResponse,
+} from 'models';
 import { WeatherContext } from 'context';
 
 export const useCurrentWeather = (): CurrentWeatherResponse => {
@@ -26,29 +31,30 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
       ),
       windSpeed: roundNumberOrZero(weatherData?.current?.wind_speed),
       rainPercentage: roundNumberOrZero(weatherData?.current?.humidity),
-      sunriseTime: convertEpochSecondsToDate(weatherData?.current?.sunrise, timezone),
-      sunsetTime: convertEpochSecondsToDate(weatherData?.current?.sunset, timezone),
+      sunriseTime: convertEpochSecondsToDate(
+        weatherData?.current?.sunrise,
+        timezone,
+      ),
+      sunsetTime: convertEpochSecondsToDate(
+        weatherData?.current?.sunset,
+        timezone,
+      ),
       localTime: convertEpochSecondsToDate(weatherData?.current?.dt, timezone),
     },
     timeline: (weatherData?.hourly || []).map(
-      (h: { temp: number; dt: number, weather: Array<{id: number}> }) => ({
+      (h: TimelinePeriodApiResponse) => ({
         weatherId: h.weather[0].id,
         temp: roundNumberOrZero(h?.temp),
-        time: format(
-          utcToZonedTime(h.dt * 1000, timezone || ''),
-          'ha',
-        ),
+        time: format(utcToZonedTime(h.dt * 1000, timezone || ''), 'ha'),
       }),
     ),
-    forecast: (weatherData?.daily || []).map(
-      (d: DailyForecastApiResponse) => ({
-        date: convertEpochSecondsToDate(d?.dt, timezone),
-        weatherId: d?.weather[0]?.id || 0,
-        lowTemp: roundNumberOrZero(d?.temp?.min),
-        highTemp: roundNumberOrZero(d?.temp?.max),
-        rainPercentage: roundNumberOrZero(d?.humidity),
-        windSpeed: roundNumberOrZero(d?.wind_speed),
-      }),
-    ),
+    forecast: (weatherData?.daily || []).map((d: DailyForecastApiResponse) => ({
+      date: convertEpochSecondsToDate(d?.dt, timezone),
+      weatherId: d?.weather[0]?.id || 0,
+      lowTemp: roundNumberOrZero(d?.temp?.min),
+      highTemp: roundNumberOrZero(d?.temp?.max),
+      rainPercentage: roundNumberOrZero(d?.humidity),
+      windSpeed: roundNumberOrZero(d?.wind_speed),
+    })),
   };
 };
