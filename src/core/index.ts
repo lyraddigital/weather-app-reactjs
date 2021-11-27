@@ -13,4 +13,4 @@ export {
   roundNumberOrZero,
   zeroIfUndefined,
 } from './Utils';
-export { getWeatherType, WeatherType } from './WeatherImages';
+export { getWeatherType, getWeatherDescription, WeatherType } from './WeatherDetails';
