@@ -1,3 +1,4 @@
+import { formatShortHour } from 'core';
 import { WeatherTimelinePeriod } from 'models';
 
 import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
@@ -9,9 +10,11 @@ interface TimePeriodProps {
 }
 
 export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
+  const formattedTime = formatShortHour(period.time);
+
   return (
     <div className={style.item}>
-      <div className={style.hour}>{period.time}</div>
+      <div className={style.hour}>{formattedTime}</div>
       <WeatherIcon
         weatherId={period.weatherId}
         className={style.timePeriodIcon}

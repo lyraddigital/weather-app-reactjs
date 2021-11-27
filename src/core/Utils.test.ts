@@ -4,9 +4,11 @@ import {
   formatTime,
   formatFriendlyTime,
   formatShortDate,
+  formatShortHour,
   getFromLocalStorage,
   setToLocalStorage,
-  roundNumberOrZero
+  roundNumberOrZero,
+  zeroIfUndefined,
 } from './Utils';
 
 describe('Utils', () => {
@@ -477,6 +479,41 @@ describe('Utils', () => {
     });
   });
 
+  describe('formatShortHour', () => {
+    it('Returns the date in the format of ha', () => {
+      // Arrange
+      const aDate = new Date(2021, 10, 20, 7);
+
+      // Action
+      const formattedShortDate = formatShortHour(aDate);
+
+      // Assert
+      expect(formattedShortDate).toBe('7AM');
+    });
+
+    it('Returns the time in AM when number is less than 12', () => {
+      // Arrange
+      const aDate = new Date(2021, 10, 20, 11);
+
+      // Action
+      const formattedShortDate = formatShortHour(aDate);
+
+      // Assert
+      expect(formattedShortDate).toBe('11AM');
+    });
+
+    it('Returns the time in AM when number is more than 12', () => {
+      // Arrange
+      const aDate = new Date(2021, 10, 20, 23);
+
+      // Action
+      const formattedShortDate = formatShortHour(aDate);
+
+      // Assert
+      expect(formattedShortDate).toBe('11PM');
+    });
+  });
+
   describe('getFromLocalStorage', () => {
     it('Will return undefined if a number is not stored with a particular key in localStorage', () => {
       // Arrange
@@ -542,6 +579,30 @@ describe('Utils', () => {
 
     // Assert
     expect(storedObjectString).toBe('{"name":"Daryl","age":39}');
+  });
+
+  describe('zeroIfUndefined', () => {
+    it('returns 0 if the value is undefined', () => {
+      // Arrange
+      const value = undefined;
+
+      // Action
+      const newValue = zeroIfUndefined(value);
+
+      // Assert
+      expect(newValue).toBe(0);
+    });
+
+    it('returns the value if the value is not undefined', () => {
+      // Arrange
+      const value = 3;
+
+      // Action
+      const newValue = zeroIfUndefined(value);
+
+      // Assert
+      expect(newValue).toBe(value);
+    });
   });
 
   describe('roundNumberOrZero', () => {

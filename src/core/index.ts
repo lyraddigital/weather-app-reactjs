@@ -5,10 +5,12 @@ export {
   formatFriendlyDate,
   formatFriendlyTime,
   formatShortDate,
+  formatShortHour,
   formatTime,
   getFromLocalStorage,
   setToLocalStorage,
   convertEpochSecondsToDate,
-  roundNumberOrZero
+  roundNumberOrZero,
+  zeroIfUndefined,
 } from './Utils';
 export { getWeatherType, WeatherType } from './WeatherImages';

@@ -21,15 +21,26 @@ export const formatShortDate = (date: Date): string => {
   return format(date, 'dd/M');
 };
 
-export const convertEpochSecondsToDate = (epochSeconds?: number, timezone?: string): Date => {
-  return epochSeconds ? 
-    utcToZonedTime(epochSeconds * 1000, timezone || ''): 
-    new Date();
-}
+export const formatShortHour = (date: Date): string => {
+  return format(date, 'ha');
+};
+
+export const convertEpochSecondsToDate = (
+  epochSeconds?: number,
+  timezone?: string,
+): Date => {
+  return epochSeconds
+    ? utcToZonedTime(epochSeconds * 1000, timezone || '')
+    : new Date();
+};
 
 export const roundNumberOrZero = (value?: number): number => {
-  return Math.round(value || 0);
-}
+  return Math.round(zeroIfUndefined(value));
+};
+
+export const zeroIfUndefined = (value?: number): number => {
+  return value || 0;
+};
 
 export const getFromLocalStorage = <T>(storageKey: string): T | undefined => {
   const item = localStorage.getItem(storageKey);

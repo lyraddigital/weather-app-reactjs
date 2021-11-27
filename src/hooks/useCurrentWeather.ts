@@ -1,6 +1,4 @@
 import { useContext } from 'react';
-import { format } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
 
 import { convertEpochSecondsToDate, roundNumberOrZero } from 'core';
 import {
@@ -16,36 +14,33 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
     WeatherContext,
   );
   const timezone = weatherData?.timezone;
+  const currentDetails = weatherData?.current;
+  const weatherId =
+    currentDetails?.weather && currentDetails.weather.length > 0
+      ? currentDetails.weather[0].id
+      : 0;
+  const dailyTemperatures =
+    weatherData?.daily && weatherData.daily.length > 0
+      ? weatherData.daily[0]?.temp
+      : undefined;
 
   return {
     currentTemp: roundNumberOrZero(weatherData?.current?.temp),
-    weatherId: weatherData?.current?.weather
-      ? weatherData.current.weather[0].id
-      : 0,
+    weatherId,
     statistics: {
-      highTemp: Math.round(
-        weatherData?.daily ? weatherData.daily[0]?.temp?.max : 0,
-      ),
-      lowTemp: Math.round(
-        weatherData?.daily ? weatherData.daily[0].temp.min : 0,
-      ),
+      highTemp: roundNumberOrZero(dailyTemperatures?.max),
+      lowTemp: roundNumberOrZero(dailyTemperatures?.min),
       windSpeed: roundNumberOrZero(weatherData?.current?.wind_speed),
       rainPercentage: roundNumberOrZero(weatherData?.current?.humidity),
-      sunriseTime: convertEpochSecondsToDate(
-        weatherData?.current?.sunrise,
-        timezone,
-      ),
-      sunsetTime: convertEpochSecondsToDate(
-        weatherData?.current?.sunset,
-        timezone,
-      ),
+      sunriseTime: convertEpochSecondsToDate(currentDetails?.sunrise, timezone),
+      sunsetTime: convertEpochSecondsToDate(currentDetails?.sunset, timezone),
       localTime: convertEpochSecondsToDate(weatherData?.current?.dt, timezone),
     },
     timeline: (weatherData?.hourly || []).map(
       (h: TimelinePeriodApiResponse) => ({
-        weatherId: h.weather[0].id,
+        weatherId: h.weather[0]?.id || 0,
         temp: roundNumberOrZero(h?.temp),
-        time: format(utcToZonedTime(h.dt * 1000, timezone || ''), 'ha'),
+        time: convertEpochSecondsToDate(h?.dt, timezone), // format(, 'ha')
       }),
     ),
     forecast: (weatherData?.daily || []).map((d: DailyForecastApiResponse) => ({
