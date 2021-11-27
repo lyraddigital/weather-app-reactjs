@@ -7,25 +7,36 @@ import { Configuration, WEATHER_API_URL } from 'core';
 import { useLocation } from 'hooks';
 
 import { Loader } from 'components/Loader';
+import { Redirect } from 'react-router';
 
 export const WeatherProvider = ({
   children,
 }: PropsWithChildren<any>): JSX.Element => {
   const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasWeatherRequestFailed, setHasWeatherRequestFailed] =
+    useState<boolean>(false);
   const location = useLocation();
 
-  const getWeatherFromApi = (
+  const getWeatherFromApi = async (
     lat: number,
     lon: number,
     setWeatherData: React.Dispatch<WeatherApiResponse>,
   ) => {
-    axios
-      .get<WeatherApiResponse>(
+    setHasWeatherRequestFailed(false);
+    setIsLoading(true);
+
+    try {
+      const response = await axios.get<WeatherApiResponse>(
         `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`,
-      )
-      .then((response) => {
-        setWeatherData(response.data);
-      });
+      );
+
+      setWeatherData(response.data);
+    } catch (e) {
+      setHasWeatherRequestFailed(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -38,17 +49,22 @@ export const WeatherProvider = ({
       }, Configuration.weatherRefreshRateInMilliseconds);
 
       return () => {
+        console.log('Interval cleared');
         clearInterval(interval);
       };
     }
   }, [location, setWeatherData]);
 
-  const contents = weatherData ? children : null;
+  if (hasWeatherRequestFailed) {
+    return <Redirect to="load-error" />;
+  }
+
+  const childContent = !isLoading ? children : null;
 
   return (
     <WeatherContext.Provider value={weatherData}>
-      <Loader isLoading={!weatherData} />
-      {contents}
+      <Loader isLoading={isLoading} />
+      {childContent}
     </WeatherContext.Provider>
   );
 };

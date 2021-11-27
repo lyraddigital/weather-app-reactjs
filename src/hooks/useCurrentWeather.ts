@@ -40,7 +40,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
       (h: TimelinePeriodApiResponse) => ({
         weatherId: h.weather[0]?.id || 0,
         temp: roundNumberOrZero(h?.temp),
-        time: convertEpochSecondsToDate(h?.dt, timezone), // format(, 'ha')
+        time: convertEpochSecondsToDate(h?.dt, timezone),
       }),
     ),
     forecast: (weatherData?.daily || []).map((d: DailyForecastApiResponse) => ({
