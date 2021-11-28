@@ -1,6 +1,6 @@
-import { getWeatherType, WeatherType } from './WeatherImages';
+import { getWeatherType, WeatherType } from './WeatherDetails';
 
-describe('WeatherImages', () => {
+describe('WeatherDetails', () => {
   describe('gettype', () => {
     it('WeatherID is 200, returns thunder storm type', () => {
       // Arrange

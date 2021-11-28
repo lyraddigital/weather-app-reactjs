@@ -1,4 +1,7 @@
+import { getWeatherDescription } from 'core';
+
 import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
+
 import style from './CurrentTemperature.module.scss';
 
 interface CurrentTemperatureProps {
@@ -10,7 +13,7 @@ export const CurrentTemperature = (
   props: CurrentTemperatureProps,
 ): JSX.Element => {
   const { temp, weatherId } = props;
-  const weatherSummary = weatherId === 0 ? 'Sunny' : 'Mostly Sunny';
+  const weatherSummary = getWeatherDescription(weatherId) || '';
 
   return (
     <div className={style.currentTemperature}>
