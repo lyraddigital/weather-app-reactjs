@@ -18,7 +18,6 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
       <WeatherIcon
         weatherId={period.weatherId}
         className={style.timePeriodIcon}
-        iconAlt={''}
       />
       <div>{period.temp}&deg;</div>
     </div>

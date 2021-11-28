@@ -13,12 +13,12 @@ export const CurrentTemperature = (
   props: CurrentTemperatureProps,
 ): JSX.Element => {
   const { temp, weatherId } = props;
-  const weatherSummary = getWeatherDescription(weatherId) || '';
+  const weatherSummary = getWeatherDescription(weatherId);
 
   return (
     <div className={style.currentTemperature}>
       <div className={style.iconContainer}>
-        <WeatherIcon weatherId={weatherId} className={style.icon} iconAlt={weatherSummary} />
+        <WeatherIcon weatherId={weatherId} className={style.icon} />
       </div>
       <div className={style.contentContainer}>
         <div className={style.value}>{temp}&deg;</div>

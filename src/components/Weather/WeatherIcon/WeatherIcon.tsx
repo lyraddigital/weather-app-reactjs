@@ -1,4 +1,4 @@
-import { getWeatherType, WeatherType } from 'core';
+import { getWeatherDescription, getWeatherType, WeatherType } from 'core';
 
 import atmosphereLogo from '../../../assets/atmosphere.svg';
 // import clearNightLogo from '../../../assets/clear-night.svg';
@@ -14,48 +14,48 @@ import thunderStormLogo from '../../../assets/thunder-storm.svg';
 import './WeatherIcon.module.scss';
 
 interface WeatherIconProps {
-    className?: string;
-    weatherId: number;
-    iconAlt: string;
+  className?: string;
+  weatherId: number;
 }
 
-export const WeatherIcon = ({ className, weatherId, iconAlt }: WeatherIconProps) => {
-    const weatherType = getWeatherType(weatherId);
-    
-    if (weatherType === undefined || weatherType === null) {
-        return null;
-    }
+export const WeatherIcon = ({ className, weatherId }: WeatherIconProps) => {
+  const weatherType = getWeatherType(weatherId);
+  const altText = getWeatherDescription(weatherId);
 
-    let image = undefined;
+  if (weatherType === undefined || weatherType === null) {
+    return null;
+  }
 
-    switch (weatherType) {
-        case WeatherType.Atmospheric:
-            image = atmosphereLogo;
-            break;
-        case WeatherType.Clear:
-            image = clearLogo;
-            break;
-        case WeatherType.Clouds:
-            image = cloudyLogo;
-            break;
-        case WeatherType.Drizzle:
-            image = drizzleLogo;
-            break;
-        case WeatherType.Rain:
-            image = rainLogo;
-            break;
-        case WeatherType.Shower:
-            image = showerLogo;
-            break;
-        case WeatherType.Snow:
-            image = snowLogo;
-            break;
-        case WeatherType.Thunderstorm:
-            image = thunderStormLogo;
-            break;
-        default:
-            break;
-    }
+  let image = undefined;
 
-    return <img src={image} className={className} alt={iconAlt} />
-}
+  switch (weatherType) {
+    case WeatherType.Atmospheric:
+      image = atmosphereLogo;
+      break;
+    case WeatherType.Clear:
+      image = clearLogo;
+      break;
+    case WeatherType.Clouds:
+      image = cloudyLogo;
+      break;
+    case WeatherType.Drizzle:
+      image = drizzleLogo;
+      break;
+    case WeatherType.Rain:
+      image = rainLogo;
+      break;
+    case WeatherType.Shower:
+      image = showerLogo;
+      break;
+    case WeatherType.Snow:
+      image = snowLogo;
+      break;
+    case WeatherType.Thunderstorm:
+      image = thunderStormLogo;
+      break;
+    default:
+      break;
+  }
+
+  return <img src={image} className={className} alt={altText} />;
+};
