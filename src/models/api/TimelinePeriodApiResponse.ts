@@ -1,7 +1,7 @@
-import { WeatherDetailsApiResponse } from "./WeatherDetailsApiResponse";
+import { WeatherDetailsApiResponse } from './WeatherDetailsApiResponse';
 
 export interface TimelinePeriodApiResponse {
-    temp: number; 
-    dt: number; 
-    weather: Array<WeatherDetailsApiResponse>;
+  temp?: number;
+  dt?: number;
+  weather?: Array<WeatherDetailsApiResponse>;
 }
