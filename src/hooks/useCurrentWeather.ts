@@ -13,7 +13,8 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
   const weatherData = useContext<WeatherApiResponse | undefined>(
     WeatherContext,
   );
-  const timezone = weatherData?.timezone;
+
+  const timezone = weatherData?.timezone || ''; // Local time will be used if not set
   const currentDetails = weatherData?.current;
   const weatherId =
     currentDetails?.weather && currentDetails.weather.length > 0
@@ -25,12 +26,12 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
       : undefined;
 
   return {
-    currentTemp: roundNumberOrZero(weatherData?.current?.temp),
+    currentTemp: roundNumberOrZero(currentDetails?.temp),
     weatherId,
     statistics: {
       highTemp: roundNumberOrZero(dailyTemperatures?.max),
       lowTemp: roundNumberOrZero(dailyTemperatures?.min),
-      windSpeed: roundNumberOrZero(weatherData?.current?.wind_speed),
+      windSpeed: roundNumberOrZero(currentDetails?.wind_speed),
       rainPercentage: roundNumberOrZero(weatherData?.current?.humidity),
       sunriseTime: convertEpochSecondsToDate(currentDetails?.sunrise, timezone),
       sunsetTime: convertEpochSecondsToDate(currentDetails?.sunset, timezone),

@@ -3,7 +3,7 @@ import { getUnixTime } from 'date-fns';
 
 import { useForecast } from 'hooks';
 import { WeatherContext } from 'context';
-import { convertEpochSecondsToDate } from 'core';
+import { convertEpochSecondsToDate, formatFriendlyDate } from 'core';
 import {
   DailyForecastApiResponse,
   WeatherApiResponse,
@@ -15,7 +15,9 @@ const TempForecastChild = () => {
 
   const forecastDayEls = forecast.map((f: WeatherForecastDay, i: number) => (
     <div key={i}>
-      <div data-testid={`forecast-day-dt-${i}`}>{f.date.toString()}</div>
+      <div data-testid={`forecast-day-dt-${i}`}>
+        {formatFriendlyDate(f.date)}
+      </div>
       <div data-testid={`forecast-day-high-temp-${i}`}>{f.highTemp}</div>
       <div data-testid={`forecast-day-low-temp-${i}`}>{f.lowTemp}</div>
       <div data-testid={`forecast-day-rain-percentage-${i}`}>
@@ -76,10 +78,12 @@ describe('useForecast', () => {
     );
 
     expect(forecastDayDtEl.textContent).toBe(
-      convertEpochSecondsToDate(
-        apiResponse.daily![1].dt,
-        apiResponse.timezone,
-      ).toString(),
+      formatFriendlyDate(
+        convertEpochSecondsToDate(
+          apiResponse?.daily![1].dt,
+          apiResponse.timezone,
+        ),
+      ),
     );
     expect(forecastDayHighTempEl.textContent).toBe(
       apiResponse.daily![1].temp.max.toString(),

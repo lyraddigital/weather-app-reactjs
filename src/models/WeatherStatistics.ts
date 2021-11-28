@@ -1,7 +1,7 @@
 export interface WeatherStatistics {
-  sunriseTime: Date;
-  sunsetTime: Date;
-  localTime: Date;
+  sunriseTime?: Date;
+  sunsetTime?: Date;
+  localTime?: Date;
   highTemp: number;
   lowTemp: number;
   windSpeed: number;

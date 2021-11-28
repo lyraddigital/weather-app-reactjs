@@ -7,6 +7,7 @@ import {
   formatShortHour,
   getFromLocalStorage,
   setToLocalStorage,
+  convertEpochSecondsToDate,
   roundNumberOrZero,
   zeroIfUndefined,
 } from './Utils';
@@ -33,6 +34,14 @@ describe('Utils', () => {
 
       // Assert
       expect(formattedTime).toBe('9:33');
+    });
+
+    it('Returns an empty string if the time is undefined', () => {
+      // Arrange / Action
+      const formattedTime = formatTime(undefined);
+
+      // Assert
+      expect(formattedTime).toBe('');
     });
   });
 
@@ -112,6 +121,14 @@ describe('Utils', () => {
 
       // Assert
       expect(formattedDay).toBe('Sun');
+    });
+
+    it('Returns an empty string if the date is undefined', () => {
+      // Arrange / Action
+      const formattedDay = formatDay(undefined);
+
+      // Assert
+      expect(formattedDay).toBe('');
     });
   });
 
@@ -418,6 +435,14 @@ describe('Utils', () => {
         expect(friendlyDate).toBe('Sunday 10th January');
       });
     });
+
+    it('Returns an empty string if the date is undefined', () => {
+      // Arrange / Action
+      const friendlyDate = formatFriendlyDate(undefined);
+
+      // Assert
+      expect(friendlyDate).toBe('');
+    });
   });
 
   describe('formatFriendlyTime', () => {
@@ -453,6 +478,14 @@ describe('Utils', () => {
       // Assert
       expect(formattedFriendlyTime).toBe('9:30 AM');
     });
+
+    it('Returns an empty string if the date is undefined', () => {
+      // Arrange / Action
+      const formattedFriendlyTime = formatFriendlyTime(undefined);
+
+      // Assert
+      expect(formattedFriendlyTime).toBe('');
+    });
   });
 
   describe('formatShortDate', () => {
@@ -477,6 +510,14 @@ describe('Utils', () => {
       // Assert
       expect(formattedShortDate).toBe('07/11');
     });
+
+    it('Returns an empty string if the date is undefined', () => {
+      // Arrange / Action
+      const formattedShortDate = formatShortDate(undefined);
+
+      // Assert
+      expect(formattedShortDate).toBe('');
+    });
   });
 
   describe('formatShortHour', () => {
@@ -485,10 +526,10 @@ describe('Utils', () => {
       const aDate = new Date(2021, 10, 20, 7);
 
       // Action
-      const formattedShortDate = formatShortHour(aDate);
+      const formattedShortHour = formatShortHour(aDate);
 
       // Assert
-      expect(formattedShortDate).toBe('7AM');
+      expect(formattedShortHour).toBe('7AM');
     });
 
     it('Returns the time in AM when number is less than 12', () => {
@@ -496,10 +537,10 @@ describe('Utils', () => {
       const aDate = new Date(2021, 10, 20, 11);
 
       // Action
-      const formattedShortDate = formatShortHour(aDate);
+      const formattedShortHour = formatShortHour(aDate);
 
       // Assert
-      expect(formattedShortDate).toBe('11AM');
+      expect(formattedShortHour).toBe('11AM');
     });
 
     it('Returns the time in AM when number is more than 12', () => {
@@ -507,10 +548,18 @@ describe('Utils', () => {
       const aDate = new Date(2021, 10, 20, 23);
 
       // Action
-      const formattedShortDate = formatShortHour(aDate);
+      const formattedShortHour = formatShortHour(aDate);
 
       // Assert
-      expect(formattedShortDate).toBe('11PM');
+      expect(formattedShortHour).toBe('11PM');
+    });
+
+    it('Returns an empty string if the date is undefined', () => {
+      // Arrange / Action
+      const formattedShortHour = formatShortHour(undefined);
+
+      // Assert
+      expect(formattedShortHour).toBe('');
     });
   });
 
@@ -579,6 +628,45 @@ describe('Utils', () => {
 
     // Assert
     expect(storedObjectString).toBe('{"name":"Daryl","age":39}');
+  });
+
+  describe('convertEpochSecondsToDate', () => {
+    it('Converts epoch seconds (Unix timestamp / UTC time) to local Australia/Sydney time successfully', () => {
+      // Arrange
+      const epochSeconds = 1638057600;
+      const timezone = 'Australia/Sydney';
+
+      // Action
+      const localTime = convertEpochSecondsToDate(epochSeconds, timezone);
+
+      // Assert
+      const expectedLocalTime = new Date('2021-11-28T00:00:00.000Z');
+      expect(localTime).toStrictEqual(expectedLocalTime);
+    });
+
+    it('Converts epoch seconds (Unix timestamp / UTC time) to local New York time successfully', () => {
+      // Arrange
+      const epochSeconds = 1638057600;
+      const timezone = 'America/New_York';
+
+      // Action
+      const localTime = convertEpochSecondsToDate(epochSeconds, timezone);
+
+      // Assert
+      const expectedLocalTime = new Date('2021-11-27T08:00:00.000Z');
+      expect(localTime).toStrictEqual(expectedLocalTime);
+    });
+
+    it('Returns undefined if the epoch seconds passed in is undefined', () => {
+      // Arrange
+      const timezone = 'America/New_York';
+
+      // Action
+      const localTime = convertEpochSecondsToDate(undefined, timezone);
+
+      // Assert
+      expect(localTime).toBe(undefined);
+    });
   });
 
   describe('zeroIfUndefined', () => {

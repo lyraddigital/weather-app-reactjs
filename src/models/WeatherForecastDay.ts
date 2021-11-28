@@ -1,5 +1,5 @@
 export interface WeatherForecastDay {
-  date: Date;
+  date: Date | undefined;
   weatherId: number;
   lowTemp: number;
   highTemp: number;
