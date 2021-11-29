@@ -3,7 +3,6 @@ import { getUnixTime } from 'date-fns';
 
 import { useTimeline } from 'hooks';
 import { WeatherContext } from 'context';
-import { convertEpochSecondsToDate } from 'core';
 import {
   TimelinePeriodApiResponse,
   WeatherApiResponse,
@@ -17,7 +16,9 @@ const TempTimelineChild = () => {
     (p: WeatherTimelinePeriod, i: number) => (
       <div key={i}>
         <div data-testid={`timeline-period-temp-${i}`}>{p.temp}</div>
-        <div data-testid={`timeline-period-time-${i}`}>{p.time.toString()}</div>
+        <div data-testid={`timeline-period-time-${i}`}>
+          {p.time?.toString()}
+        </div>
         <div data-testid={`timeline-period-weatherId-${i}`}>{p.weatherId}</div>
       </div>
     ),
@@ -66,16 +67,13 @@ describe('useTimeline', () => {
     );
 
     expect(timelineHourTempEl.textContent).toBe(
-      apiResponse.hourly![3].temp.toString(),
+      apiResponse.hourly![3]!.temp!.toString(),
     );
     expect(timelineHourDtEl.textContent).toBe(
-      convertEpochSecondsToDate(
-        apiResponse.hourly![3].dt,
-        apiResponse.timezone,
-      ).toString(),
+      'Sat Nov 27 2021 11:00:00 GMT+1100 (Australian Eastern Daylight Time)',
     );
     expect(timelineHourWheatherIdEl.textContent).toBe(
-      apiResponse.hourly![3].weather[0].id.toString(),
+      apiResponse.hourly![3]!.weather![0].id.toString(),
     );
   });
 
@@ -158,22 +156,22 @@ describe('useTimeline', () => {
     );
 
     expect(timelinePeriodTempElOne.textContent).toBe(
-      apiResponse.hourly![3].temp.toString(),
+      apiResponse.hourly![3]!.temp!.toString(),
     );
     expect(timelinePeriodTempElTwo.textContent).toBe(
-      apiResponse.hourly![6].temp.toString(),
+      apiResponse.hourly![6]!.temp!.toString(),
     );
     expect(timelinePeriodTempElThree.textContent).toBe(
-      apiResponse.hourly![9].temp.toString(),
+      apiResponse.hourly![9]!.temp!.toString(),
     );
     expect(timelinePeriodTempElFour.textContent).toBe(
-      apiResponse.hourly![12].temp.toString(),
+      apiResponse.hourly![12]!.temp!.toString(),
     );
     expect(timelinePeriodTempElFive.textContent).toBe(
-      apiResponse.hourly![15].temp.toString(),
+      apiResponse.hourly![15]!.temp!.toString(),
     );
     expect(timelinePeriodTempElSix.textContent).toBe(
-      apiResponse.hourly![18].temp.toString(),
+      apiResponse.hourly![18]!.temp!.toString(),
     );
     expect(timelinePeriodTempSevenEls.length).toBe(0);
   });

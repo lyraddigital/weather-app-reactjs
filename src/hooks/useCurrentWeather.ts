@@ -14,7 +14,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
     WeatherContext,
   );
 
-  const timezone = weatherData?.timezone || ''; // Local time will be used if not set
+  const timezone = weatherData?.timezone || ''; // UTC time will be used if not set
   const currentDetails = weatherData?.current;
   const weatherId =
     currentDetails?.weather && currentDetails.weather.length > 0

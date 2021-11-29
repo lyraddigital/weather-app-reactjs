@@ -1,3 +1,4 @@
+import { utcToZonedTime } from 'date-fns-tz';
 import {
   formatDay,
   formatFriendlyDate,
@@ -666,6 +667,20 @@ describe('Utils', () => {
 
       // Assert
       expect(localTime).toBe(undefined);
+    });
+
+    it('Returns the UTC date if an empty string is passed for the timezone', () => {
+      // Arrange
+      const epochSeconds = 1638057600;
+      const timezone = '';
+      const utcTimezone = 'UTC';
+      const expectedTime = utcToZonedTime(epochSeconds * 1000, utcTimezone);
+
+      // Action
+      const localTime = convertEpochSecondsToDate(epochSeconds, timezone);
+
+      // Assert
+      expect(localTime).toStrictEqual(expectedTime);
     });
   });
 

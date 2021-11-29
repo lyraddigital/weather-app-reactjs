@@ -1,14 +1,13 @@
 import { render } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
-import { convertEpochSecondsToDate, formatFriendlyDate } from 'core';
 import { WeatherContext } from 'context';
 import { useWeatherLocalTime } from 'hooks';
 import { WeatherApiResponse } from 'models';
 
 const TempLocalTimeChild = () => {
   const localTime = useWeatherLocalTime();
-  return <div data-testid="local-time">{formatFriendlyDate(localTime)}</div>;
+  return <div data-testid="local-time">{localTime?.toString()}</div>;
 };
 
 describe('useWeatherLocalTime', () => {
@@ -31,12 +30,7 @@ describe('useWeatherLocalTime', () => {
     // Assert
     const localTimeEl = await wrapper.getByTestId('local-time');
     expect(localTimeEl.textContent).toBe(
-      formatFriendlyDate(
-        convertEpochSecondsToDate(
-          apiResponse.current!.dt,
-          apiResponse.timezone,
-        ),
-      ),
+      'Sat Nov 27 2021 11:00:00 GMT+1100 (Australian Eastern Daylight Time)',
     );
   });
 
