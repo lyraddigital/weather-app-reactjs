@@ -14,12 +14,14 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
 
   return (
     <div className={style.item}>
-      <div className={style.hour}>{formattedTime}</div>
+      <div className={style.hour} data-testid="formatted-time">
+        {formattedTime}
+      </div>
       <WeatherIcon
         weatherId={period.weatherId}
         className={style.timePeriodIcon}
       />
-      <div>{period.temp}&deg;</div>
+      <div data-testid="period">{period.temp}&deg;</div>
     </div>
   );
 };

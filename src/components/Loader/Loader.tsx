@@ -10,11 +10,11 @@ export const Loader = ({ isLoading }: LoaderProps): JSX.Element | null => {
   document.body.style.overflow = isLoading ? 'hidden' : 'auto';
 
   return isLoading ? (
-    <div id={style.loaderOverlay}>
+    <div id={style.loaderOverlay} data-testid="loader">
       <div id={style.loaderContent}>
-        <p>Loading Weather data</p>
+        <p data-testid="loader-message-1">Loading Weather data</p>
         <ClipLoader size={60} color="#FFF" />
-        <p>Please wait.</p>
+        <p data-testid="loader-message-2">Please wait.</p>
       </div>
     </div>
   ) : null;

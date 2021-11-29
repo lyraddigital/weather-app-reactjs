@@ -11,9 +11,7 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElements = (await wrapper.queryAllByAltText(
-      '',
-    )) as Array<HTMLImageElement>;
+    const imgElements = await wrapper.queryAllByTestId('weather-icon');
 
     expect(imgElements.length).toBe(0);
   });
@@ -26,11 +24,9 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Light rain',
-    )) as HTMLImageElement;
+    const imgElements = await wrapper.queryAllByTestId('weather-icon');
 
-    expect(imgElement).toBeTruthy();
+    expect(imgElements.length).toBe(1);
   });
 
   it('Image class is empty when className is not set', async () => {
@@ -41,8 +37,8 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Light rain',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
     expect(imgElement.className).toBe('');
@@ -59,8 +55,8 @@ describe('WeatherIcon', () => {
     );
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Light rain',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
     expect(imgElement.className).toBe(className);
@@ -74,15 +70,15 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Light rain',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
     expect(imgElement).toBeTruthy();
     expect(imgElement.alt).toBe('Light rain');
   });
 
-  it('Image src is correct when weatherId an Atmospheric one', async () => {
+  it('Image src and alt is correct when weatherId an Atmospheric one', async () => {
     // Arrange
     const weatherId = 701;
 
@@ -90,14 +86,15 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Misty',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Misty');
     expect(imgElement.src).toBe('http://localhost/atmosphere.svg');
   });
 
-  it('Image src is correct when weatherId is a Clear one', async () => {
+  it('Image src and alt is correct when weatherId is a Clear one', async () => {
     // Arrange
     const weatherId = 800;
 
@@ -105,10 +102,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Clear',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Clear');
     expect(imgElement.src).toBe('http://localhost/clear.svg');
   });
 
@@ -120,10 +118,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Few clouds',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Few clouds');
     expect(imgElement.src).toBe('http://localhost/cloudy.svg');
   });
 
@@ -135,10 +134,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Drizzle',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Drizzle');
     expect(imgElement.src).toBe('http://localhost/drizzle.svg');
   });
 
@@ -150,10 +150,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Heavy rain',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Heavy rain');
     expect(imgElement.src).toBe('http://localhost/rain.svg');
   });
 
@@ -165,10 +166,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Light rain',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Light rain');
     expect(imgElement.src).toBe('http://localhost/shower.svg');
   });
 
@@ -180,10 +182,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Heavy snow',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Heavy snow');
     expect(imgElement.src).toBe('http://localhost/snow.svg');
   });
 
@@ -195,10 +198,11 @@ describe('WeatherIcon', () => {
     const wrapper = render(<WeatherIcon weatherId={weatherId} />);
 
     // Assert
-    const imgElement = (await wrapper.findByAltText(
-      'Rain and thunderstorms',
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
     )) as HTMLImageElement;
 
+    expect(imgElement.alt).toBe('Rain and thunderstorms');
     expect(imgElement.src).toBe('http://localhost/thunder-storm.svg');
   });
 });
