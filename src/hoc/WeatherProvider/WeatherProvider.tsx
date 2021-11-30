@@ -19,8 +19,8 @@ export const WeatherProvider = ({
   const location = useLocation();
 
   const getWeatherFromApi = async (
-    lat: number,
-    lon: number,
+    lat: number | undefined,
+    lon: number | undefined,
     setWeatherData: React.Dispatch<WeatherApiResponse>,
   ) => {
     setHasWeatherRequestFailed(false);
