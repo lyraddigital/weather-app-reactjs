@@ -11,11 +11,11 @@ export const Header = (): JSX.Element => {
 
   return (
     <div className={style.locationAndDate}>
-      <h1 className={style.location}>
-        {location?.city}, {location?.country}
+      <h1 className={style.location} data-testid="weather-heading">
+        <span data-testid="weather-heading-city">{location?.city}</span>, <span data-testid="weather-heading-country">{location?.country}</span>
       </h1>
-      <div>{formattedDate}</div>
-      <div>Last updated at {formattedTime}</div>
+      <div data-testid="weather-updated-date">{formattedDate}</div>
+      <div data-testid="weather-updated-time-message">Last updated at <span data-testid="weather-updated-time">{formattedTime}</span></div>
     </div>
   );
 };
