@@ -5,8 +5,8 @@ import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
 import style from './CurrentTemperature.module.scss';
 
 interface CurrentTemperatureProps {
-  temp: number;
-  weatherId: number;
+  temp?: number;
+  weatherId?: number;
 }
 
 export const CurrentTemperature = (
@@ -21,8 +21,8 @@ export const CurrentTemperature = (
         <WeatherIcon weatherId={weatherId} className={style.icon} />
       </div>
       <div className={style.contentContainer}>
-        <div className={style.value}>{temp}&deg;</div>
-        <div className={style.summary}>{weatherSummary}</div>
+        <div data-testid="current-weather-temp" className={style.value}>{temp}&deg;</div>
+        <div data-testid="current-weather-summary" className={style.summary}>{weatherSummary}</div>
       </div>
     </div>
   );
