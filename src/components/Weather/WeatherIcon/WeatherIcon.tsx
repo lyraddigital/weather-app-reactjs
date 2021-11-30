@@ -13,7 +13,7 @@ import thunderStormLogo from '../../../assets/thunder-storm.svg';
 
 interface WeatherIconProps {
   className?: string;
-  weatherId: number;
+  weatherId?: number;
 }
 
 export const WeatherIcon = ({ className, weatherId }: WeatherIconProps) => {

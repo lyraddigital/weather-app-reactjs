@@ -164,10 +164,10 @@ const weatherIdMessageMatrix: { [weatherId: number]: string } = {
   804: WeatherIdMessages.Overcast,
 };
 
-export const getWeatherType = (weatherId: number): WeatherType | undefined => {
-  return weatherIdTypeMatrix[weatherId];
+export const getWeatherType = (weatherId?: number): WeatherType | undefined => {
+  return weatherId ? weatherIdTypeMatrix[weatherId] : undefined;
 };
 
-export const getWeatherDescription = (weatherId: number): string => {
-  return weatherIdMessageMatrix[weatherId] || '';
+export const getWeatherDescription = (weatherId?: number): string | undefined => {
+  return weatherId ? weatherIdMessageMatrix[weatherId]: undefined;
 };

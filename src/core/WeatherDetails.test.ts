@@ -6,6 +6,28 @@ import {
 
 describe('WeatherDetails', () => {
   describe('getWeatherType', () => {
+    it('WeatherID is undefined, returns undefined', () => {
+      // Arrange
+      const weatherID = undefined;
+
+      // Action
+      const weatherType = getWeatherType(weatherID);
+
+      // Assert
+      expect(weatherType).toBeUndefined();
+    });
+
+    it('WeatherID is not a valid id, returns undefined', () => {
+      // Arrange
+      const weatherID = -1;
+      
+      // Action
+      const weatherType = getWeatherType(weatherID);
+
+      // Assert
+      expect(weatherType).toBeUndefined();
+    });
+
     it('WeatherID is 200, returns thunder storm type', () => {
       // Arrange
       const weatherID = 200;
@@ -613,6 +635,28 @@ describe('WeatherDetails', () => {
   });
 
   describe('getWeatherDescription', () => {
+    it('WeatherID is undefined, returns undefined', () => {
+      // Arrange
+      const weatherID = undefined;
+
+      // Action
+      const weatherDescription = getWeatherDescription(weatherID);
+
+      // Assert
+      expect(weatherDescription).toBeUndefined();
+    });
+
+    it('WeatherID is not a valid id, returns undefined', () => {
+      // Arrange
+      const weatherID = -1;
+      
+      // Action
+      const weatherDescription = getWeatherDescription(weatherID);
+
+      // Assert
+      expect(weatherDescription).toBeUndefined();
+    });
+
     it('WeatherID is 200, returns correct message', () => {
       // Arrange
       const weatherID = 200;

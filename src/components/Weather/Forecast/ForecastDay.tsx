@@ -6,7 +6,7 @@ import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
 import style from './ForecastDay.module.scss';
 
 interface ForecastDayProps {
-  day: WeatherForecastDay;
+  day?: WeatherForecastDay;
 }
 
 export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
@@ -20,25 +20,26 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
   return (
     <div className={style.row}>
       <div className={style.date}>
-        {dayName}
-        <div className={style.label}>{shortDate}</div>
+        <div data-testid="forecast-day-name">{dayName}</div>
+        <div data-testid="forecast-day-date" className={style.label}>{shortDate}</div>
       </div>
       <div className={style.icon}>
         <WeatherIcon weatherId={day.weatherId} />
       </div>
       <div className={style.low}>
-        {day.lowTemp}&deg;
+        <div data-testid="forecast-day-lowTemp">{day.lowTemp}&deg;</div>
         <div className={style.label}>Low</div>
       </div>
       <div className={style.high}>
-        {day.highTemp}&deg;
+        <div data-testid="forecast-day-highTemp">{day.highTemp}&deg;</div>
         <div className={style.label}>High</div>
       </div>
       <div className={style.rain}>
-        {day.rainPercentage}%<div className={style.label}>Rain</div>
+        <div data-testid="forecast-rain-percentage">{day.rainPercentage}%</div>
+        <div className={style.label}>Rain</div>
       </div>
       <div className={style.wind}>
-        {day.windSpeed}mph
+        <div data-testid="forecast-day-windSpeed">{day.windSpeed}km/h</div>
         <div className={style.label}>Wind</div>
       </div>
     </div>

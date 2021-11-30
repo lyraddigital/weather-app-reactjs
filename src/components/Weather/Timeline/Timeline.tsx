@@ -15,7 +15,7 @@ export const Timeline = (): JSX.Element => {
   return (
     <div className={style.weatherByHour}>
       <h2 data-testid="timeline-heading" className={style.heading}>
-        Today's weather
+        Today&apos;s weather
       </h2>
       <div className={style.container}>{periodsEl}</div>
     </div>
