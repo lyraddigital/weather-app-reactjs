@@ -1,27 +1,27 @@
 #loaderOverlay {
-    display: grid;
-    place-items: center center;
-    position: absolute; 
-    background-color: rgba(10, 57, 100, 0.6);
-    color: #FFF;
+  display: grid;
+  place-items: center center;
+  position: absolute;
+  background-color: rgba(10, 57, 100, 0.6);
+  color: #fff;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  #loaderContent {
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    top: 0;
-    bottom: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    #loaderContent {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        > p {
-            margin: 1.8rem 0;
-        }
+    > p {
+      margin: 1.8rem 0;
     }
+  }
 }

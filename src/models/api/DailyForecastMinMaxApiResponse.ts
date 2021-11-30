@@ -1,4 +1,4 @@
 export interface DailyForecastMinMaxApiResponse {
-    max: number; 
-    min: number;
+  max: number;
+  min: number;
 }

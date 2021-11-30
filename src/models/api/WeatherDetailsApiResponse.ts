@@ -1,3 +1,3 @@
 export interface WeatherDetailsApiResponse {
-    id: number;
+  id: number;
 }

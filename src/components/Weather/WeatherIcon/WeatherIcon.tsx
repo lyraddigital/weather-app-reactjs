@@ -11,8 +11,6 @@ import showerLogo from '../../../assets/shower.svg';
 import snowLogo from '../../../assets/snow.svg';
 import thunderStormLogo from '../../../assets/thunder-storm.svg';
 
-import './WeatherIcon.module.scss';
-
 interface WeatherIconProps {
   className?: string;
   weatherId: number;

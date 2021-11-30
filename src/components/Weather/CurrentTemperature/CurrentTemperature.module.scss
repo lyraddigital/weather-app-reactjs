@@ -1,37 +1,37 @@
 .currentTemperature {
-    display: flex;
-    margin-top: 1.6rem;
-    width: 100%;
+  display: flex;
+  margin-top: 1.6rem;
+  width: 100%;
 
-    .iconContainer {
-        flex-grow: 1.25;
-        text-align: center;
+  .iconContainer {
+    flex-grow: 1.25;
+    text-align: center;
 
-        .icon {
-            width: 16.8rem;
-        }
+    .icon {
+      width: 16.8rem;
+    }
+  }
+
+  .contentContainer {
+    flex-grow: 1;
+    text-align: center;
+
+    .value {
+      font-size: 8.4rem;
+      font-weight: 300;
     }
 
-    .contentContainer {
-        flex-grow: 1;
-        text-align: center;
-
-        .value {
-            font-size: 8.4rem;
-            font-weight: 300;
-        }
-
-        .summary {
-            margin-top: -1.4rem;
-            margin-left: -1.8rem;
-            text-align: center;
-            font-size: 2.2rem;
-        }
+    .summary {
+      margin-top: -1.4rem;
+      margin-left: -1.8rem;
+      text-align: center;
+      font-size: 2.2rem;
     }
+  }
 }
 
 @media screen and (min-width: 700px) {
-    .currentTemperature {
-      width: 50%;
-    }
+  .currentTemperature {
+    width: 50%;
+  }
 }

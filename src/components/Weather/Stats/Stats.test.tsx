@@ -1,6 +1,6 @@
-import { render } from "@testing-library/react";
-import { WeatherStatistics } from "models";
-import { Stats } from "./Stats";
+import { render } from '@testing-library/react';
+import { WeatherStatistics } from 'models';
+import { Stats } from './Stats';
 
 describe('Stats', () => {
   it('Shows the correct information in the component when all data is set', async () => {
@@ -21,7 +21,9 @@ describe('Stats', () => {
     const highTempEl = await wrapper.findByTestId('statistics-high-temp');
     const lowTempEl = await wrapper.findByTestId('statistics-low-temp');
     const windSpeedEl = await wrapper.findByTestId('statistics-wind-speed');
-    const rainPercentageEl = await wrapper.findByTestId('statistics-rain-percentage');
+    const rainPercentageEl = await wrapper.findByTestId(
+      'statistics-rain-percentage',
+    );
     const sunriseTimeEl = await wrapper.findByTestId('statistics-sunrise-time');
     const sunsetTimeEl = await wrapper.findByTestId('statistics-sunset-time');
 
