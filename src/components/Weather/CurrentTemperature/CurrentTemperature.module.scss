@@ -4,8 +4,9 @@
   width: 100%;
 
   .iconContainer {
+    display: flex;
+    justify-content: center;
     flex-grow: 1.25;
-    text-align: center;
 
     .icon {
       width: 16.8rem;
@@ -13,6 +14,9 @@
   }
 
   .contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex-grow: 1;
     text-align: center;
 
@@ -33,5 +37,11 @@
 @media screen and (min-width: 700px) {
   .currentTemperature {
     width: 50%;
+
+    .contentContainer {
+      .summary {
+        margin-top: 0;
+      }
+    }
   }
 }
