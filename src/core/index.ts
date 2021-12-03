@@ -12,6 +12,7 @@ export {
   convertEpochSecondsToDate,
   roundNumberOrZero,
   zeroIfUndefined,
+  isCurrentTimeNight,
 } from './Utils';
 export {
   getWeatherType,

@@ -1,3 +1,4 @@
+import { isCurrentTimeNight } from 'core';
 import { utcToZonedTime } from 'date-fns-tz';
 import {
   formatDay,
@@ -705,6 +706,65 @@ describe('Utils', () => {
 
       // Assert
       expect(newValue).toBe(value);
+    });
+  });
+
+  describe('isCurrentTimeNight', () => {
+    it('Says it is night time if the hour is 6 or lower', () => {
+      // Arrange
+      const time = new Date(2021, 11, 3, 6, 0, 0);
+      const timeTwo = new Date(2021, 11, 3, 3, 0, 0);
+      const timeThree = new Date(2021, 11, 3, 0, 0, 0);
+
+      // Action
+      const isNightTime = isCurrentTimeNight(time);
+      const isNightTimeTwo = isCurrentTimeNight(timeTwo);
+      const isNightTimeThree = isCurrentTimeNight(timeThree);
+
+      // Assert
+      expect(isNightTime).toBe(true);
+      expect(isNightTimeTwo).toBe(true);
+      expect(isNightTimeThree).toBe(true);
+    });
+
+    it('Says it is night time if the hour is 19 or higher', () => {
+      // Arrange
+      const time = new Date(2021, 11, 3, 19, 0, 0);
+      const timeTwo = new Date(2021, 11, 3, 21, 0, 0);
+      const timeThree = new Date(2021, 11, 3, 23, 0, 0);
+
+      // Action
+      const isNightTime = isCurrentTimeNight(time);
+      const isNightTimeTwo = isCurrentTimeNight(timeTwo);
+      const isNightTimeThree = isCurrentTimeNight(timeThree);
+
+      // Assert
+      expect(isNightTime).toBe(true);
+      expect(isNightTimeTwo).toBe(true);
+      expect(isNightTimeThree).toBe(true);
+    });
+
+    it('Says it is day time if the hour is between 7 and 18 inclusive or higher', () => {
+      // Arrange
+      const time = new Date(2021, 11, 3, 7, 0, 0);
+      const timeTwo = new Date(2021, 11, 3, 10, 0, 0);
+      const timeThree = new Date(2021, 11, 3, 13, 0, 0);
+      const timeFour = new Date(2021, 11, 3, 16, 0, 0);
+      const timeFive = new Date(2021, 11, 3, 18, 0, 0);
+
+      // Action
+      const isNightTime = isCurrentTimeNight(time);
+      const isNightTimeTwo = isCurrentTimeNight(timeTwo);
+      const isNightTimeThree = isCurrentTimeNight(timeThree);
+      const isNightTimeFour = isCurrentTimeNight(timeFour);
+      const isNightTimeFive = isCurrentTimeNight(timeFive);
+
+      // Assert
+      expect(isNightTime).toBe(false);
+      expect(isNightTimeTwo).toBe(false);
+      expect(isNightTimeThree).toBe(false);
+      expect(isNightTimeFour).toBe(false);
+      expect(isNightTimeFive).toBe(false);
     });
   });
 

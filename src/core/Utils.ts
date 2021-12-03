@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, getHours } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
 export const formatTime = (date?: Date): string => {
@@ -40,6 +40,16 @@ export const roundNumberOrZero = (value?: number): number => {
 
 export const zeroIfUndefined = (value?: number): number => {
   return value || 0;
+};
+
+export const isCurrentTimeNight = (localTime?: Date): boolean => {
+  if (!localTime) {
+    return false;
+  }
+
+  const hour = getHours(localTime);
+
+  return hour < 7 || hour > 18;
 };
 
 export const getFromLocalStorage = <T>(storageKey: string): T | undefined => {

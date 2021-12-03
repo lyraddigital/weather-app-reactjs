@@ -205,4 +205,38 @@ describe('WeatherIcon', () => {
     expect(imgElement.alt).toBe('Rain and thunderstorms');
     expect(imgElement.src).toBe('http://localhost/thunder-storm.svg');
   });
+
+  it('Img src is correct if the weatherId is Clear, but it is night time', async () => {
+    // Arrange
+    const weatherId = 800;
+
+    // Action
+    const wrapper = render(
+      <WeatherIcon weatherId={weatherId} isNightTime={true} />,
+    );
+
+    // Assert
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
+    )) as HTMLImageElement;
+
+    expect(imgElement.src).toBe('http://localhost/clear-night.svg');
+  });
+
+  it('Img src is correct if the weatherId is a Cloudy one, but it is night time', async () => {
+    // Arrange
+    const weatherId = 801;
+
+    // Action
+    const wrapper = render(
+      <WeatherIcon weatherId={weatherId} isNightTime={true} />,
+    );
+
+    // Assert
+    const imgElement = (await wrapper.findByTestId(
+      'weather-icon',
+    )) as HTMLImageElement;
+
+    expect(imgElement.src).toBe('http://localhost/cloudy-night.svg');
+  });
 });
