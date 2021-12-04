@@ -1,3 +1,4 @@
+import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 import { LocationContext, WeatherContext } from 'context';
@@ -8,7 +9,7 @@ import { Header } from './Header';
 describe('Header', () => {
   it('No location or weather data, renders an empty header', async () => {
     // Arrange / Action
-    const wrapper = render(<Header />);
+    const wrapper = render(<Router><Header /></Router>);
 
     // Assert
     const headingEl = await wrapper.findByTestId('weather-heading');
@@ -45,11 +46,13 @@ describe('Header', () => {
 
     // Action
     const wrapper = render(
-      <LocationContext.Provider value={{ location, updateLocation: () => {} }}>
-        <WeatherContext.Provider value={weatherData}>
-          <Header />
-        </WeatherContext.Provider>
-      </LocationContext.Provider>,
+      <Router>
+        <LocationContext.Provider value={{ location, updateLocation: () => {} }}>
+          <WeatherContext.Provider value={weatherData}>
+            <Header />
+          </WeatherContext.Provider>
+        </LocationContext.Provider>,
+      </Router>
     );
 
     // Assert
