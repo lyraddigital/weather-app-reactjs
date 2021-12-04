@@ -27,6 +27,8 @@
   }
 
   .icon {
+    display: grid;
+    place-items: center center;
     width: 45px;
     height: 45px;
   }
