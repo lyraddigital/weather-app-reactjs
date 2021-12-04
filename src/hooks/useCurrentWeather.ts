@@ -1,6 +1,10 @@
 import { useContext } from 'react';
 
-import { convertEpochSecondsToDate, roundNumberOrZero } from 'core';
+import {
+  convertEpochSecondsToDate,
+  isCurrentTimeNight,
+  roundNumberOrZero,
+} from 'core';
 import {
   CurrentWeatherResponse,
   DailyForecastApiResponse,
@@ -24,6 +28,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
     weatherData?.daily && weatherData.daily.length > 0
       ? weatherData.daily[0]?.temp
       : undefined;
+  const localTime = convertEpochSecondsToDate(currentDetails?.dt, timezone);
 
   return {
     currentTemp: roundNumberOrZero(currentDetails?.temp),
@@ -35,7 +40,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
       rainPercentage: roundNumberOrZero(currentDetails?.humidity),
       sunriseTime: convertEpochSecondsToDate(currentDetails?.sunrise, timezone),
       sunsetTime: convertEpochSecondsToDate(currentDetails?.sunset, timezone),
-      localTime: convertEpochSecondsToDate(currentDetails?.dt, timezone),
+      localTime,
     },
     timeline: (weatherData?.hourly || []).map(
       (h?: TimelinePeriodApiResponse) => ({
@@ -56,5 +61,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         windSpeed: roundNumberOrZero(d?.wind_speed),
       }),
     ),
+    isLoading: weatherData?.isLoading ? true : false,
+    isDarkMode: isCurrentTimeNight(localTime),
   };
 };

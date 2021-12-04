@@ -1,4 +1,4 @@
-#loaderOverlay {
+.loaderOverlay {
   display: grid;
   place-items: center center;
   position: absolute;
@@ -9,7 +9,7 @@
   top: 0;
   bottom: 0;
 
-  #loaderContent {
+  .loaderContent {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,5 +23,9 @@
     > p {
       margin: 1.8rem 0;
     }
+  }
+
+  &.darkMode {
+    background-color: rgba(3, 14, 25, 0.6);
   }
 }

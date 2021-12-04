@@ -1,4 +1,7 @@
+import classNames from 'classnames';
+
 import { formatDay, formatShortDate } from 'core';
+import { useCurrentWeatherTheme } from 'hooks';
 import { WeatherForecastDay } from 'models';
 
 import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
@@ -14,11 +17,17 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
     return null;
   }
 
+  const { isDarkMode } = useCurrentWeatherTheme();
   const dayName = formatDay(day.date);
   const shortDate = formatShortDate(day.date);
 
+  let classes = classNames({
+    [style.row]: true,
+    [style.darkMode]: isDarkMode,
+  });
+
   return (
-    <div className={style.row}>
+    <div className={classes}>
       <div className={style.date}>
         <div data-testid="forecast-day-name">{dayName}</div>
         <div data-testid="forecast-day-date" className={style.label}>

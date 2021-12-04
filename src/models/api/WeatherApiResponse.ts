@@ -7,4 +7,5 @@ export interface WeatherApiResponse {
   daily?: Array<DailyForecastApiResponse | undefined>;
   hourly?: Array<TimelinePeriodApiResponse | undefined>;
   timezone?: string;
+  isLoading?: boolean;
 }
