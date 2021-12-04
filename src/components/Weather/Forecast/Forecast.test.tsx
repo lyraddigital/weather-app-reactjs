@@ -1,9 +1,9 @@
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 
-import { WeatherContext } from "context";
-import { WeatherApiResponse } from "models";
+import { WeatherContext } from 'context';
+import { WeatherApiResponse } from 'models';
 
-import { Forecast } from "./Forecast";
+import { Forecast } from './Forecast';
 
 describe('Forecast', () => {
   it('No weather data, shows no forecast data', async () => {
@@ -11,7 +11,7 @@ describe('Forecast', () => {
     const wrapper = render(
       <WeatherContext.Provider value={undefined}>
         <Forecast />
-      </WeatherContext.Provider>
+      </WeatherContext.Provider>,
     );
 
     // Assert
@@ -20,40 +20,40 @@ describe('Forecast', () => {
   });
 
   it('Weather data with forecast details, shows forecast entries on screen', async () => {
-    // Arrange 
+    // Arrange
     const weatherData: WeatherApiResponse = {
       daily: [
         // Skipped item
         {
-          dt: 1638320400
+          dt: 1638320400,
         },
         {
-          dt: 1638406800
+          dt: 1638406800,
         },
         {
-          dt: 1638493200
+          dt: 1638493200,
         },
         {
-          dt: 1638579600
+          dt: 1638579600,
         },
         {
-          dt: 1638666000
+          dt: 1638666000,
         },
         {
-          dt: 1638752400
+          dt: 1638752400,
         },
         {
-          dt: 1638838800
-        }
+          dt: 1638838800,
+        },
       ],
-      timezone: 'Australia/Sydney'
+      timezone: 'Australia/Sydney',
     };
 
     // Action
     const wrapper = render(
       <WeatherContext.Provider value={weatherData}>
         <Forecast />
-      </WeatherContext.Provider>
+      </WeatherContext.Provider>,
     );
 
     // Assert
@@ -75,7 +75,7 @@ describe('Forecast', () => {
     const wrapper = render(
       <WeatherContext.Provider value={undefined}>
         <Forecast />
-      </WeatherContext.Provider>
+      </WeatherContext.Provider>,
     );
 
     // Assert

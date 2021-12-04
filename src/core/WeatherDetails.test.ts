@@ -20,7 +20,7 @@ describe('WeatherDetails', () => {
     it('WeatherID is not a valid id, returns undefined', () => {
       // Arrange
       const weatherID = -1;
-      
+
       // Action
       const weatherType = getWeatherType(weatherID);
 
@@ -649,7 +649,7 @@ describe('WeatherDetails', () => {
     it('WeatherID is not a valid id, returns undefined', () => {
       // Arrange
       const weatherID = -1;
-      
+
       // Action
       const weatherDescription = getWeatherDescription(weatherID);
 

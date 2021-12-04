@@ -46,8 +46,8 @@ describe('useLocation', () => {
 
     expect(cityEl.textContent).toBe(location.city);
     expect(countryEl.textContent).toBe(location.country);
-    expect(latEl.textContent).toBe(location.lat.toString());
-    expect(lonEl.textContent).toBe(location.lon.toString());
+    expect(latEl.textContent).toBe(location.lat!.toString());
+    expect(lonEl.textContent).toBe(location.lon!.toString());
   });
 
   it('Returns an undefined when the LocationStore is not defined', async () => {

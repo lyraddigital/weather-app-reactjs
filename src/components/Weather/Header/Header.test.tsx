@@ -1,9 +1,9 @@
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 
-import { LocationContext, WeatherContext } from "context";
-import { WeatherApiResponse, WeatherLocation } from "models";
+import { LocationContext, WeatherContext } from 'context';
+import { WeatherApiResponse, WeatherLocation } from 'models';
 
-import { Header } from "./Header";
+import { Header } from './Header';
 
 describe('Header', () => {
   it('No location or weather data, renders an empty header', async () => {
@@ -13,9 +13,13 @@ describe('Header', () => {
     // Assert
     const headingEl = await wrapper.findByTestId('weather-heading');
     const headingCityEl = await wrapper.findByTestId('weather-heading-city');
-    const headingCountryEl = await wrapper.findByTestId('weather-heading-country');
+    const headingCountryEl = await wrapper.findByTestId(
+      'weather-heading-country',
+    );
     const updatedDateEl = await wrapper.findByTestId('weather-updated-date');
-    const upatedTimeMessageEl = await wrapper.findByTestId('weather-updated-time-message');
+    const upatedTimeMessageEl = await wrapper.findByTestId(
+      'weather-updated-time-message',
+    );
     const upatedTimeEl = await wrapper.findByTestId('weather-updated-time');
 
     expect(headingEl.textContent).toBe(', ');
@@ -30,31 +34,34 @@ describe('Header', () => {
     // Arrange
     const location: WeatherLocation = {
       city: 'Melbourne',
-      country: 'Australia'
+      country: 'Australia',
     };
     const weatherData: WeatherApiResponse = {
       current: {
-        dt: 1638190800
+        dt: 1638190800,
       },
-      timezone: 'Australia/Sydney'
+      timezone: 'Australia/Sydney',
     };
-    
+
     // Action
-    const wrapper = render((
+    const wrapper = render(
       <LocationContext.Provider value={{ location, updateLocation: () => {} }}>
-        <WeatherContext.Provider value={ weatherData }>
+        <WeatherContext.Provider value={weatherData}>
           <Header />
         </WeatherContext.Provider>
-      </LocationContext.Provider>
-
-    ));
+      </LocationContext.Provider>,
+    );
 
     // Assert
     const headingEl = await wrapper.findByTestId('weather-heading');
     const headingCityEl = await wrapper.findByTestId('weather-heading-city');
-    const headingCountryEl = await wrapper.findByTestId('weather-heading-country');
+    const headingCountryEl = await wrapper.findByTestId(
+      'weather-heading-country',
+    );
     const updatedDateEl = await wrapper.findByTestId('weather-updated-date');
-    const upatedTimeMessageEl = await wrapper.findByTestId('weather-updated-time-message');
+    const upatedTimeMessageEl = await wrapper.findByTestId(
+      'weather-updated-time-message',
+    );
     const upatedTimeEl = await wrapper.findByTestId('weather-updated-time');
 
     expect(headingEl.textContent).toBe('Melbourne, Australia');
@@ -64,4 +71,4 @@ describe('Header', () => {
     expect(upatedTimeMessageEl.textContent).toBe('Last updated at 12:00 AM');
     expect(upatedTimeEl.textContent).toBe('12:00 AM');
   });
-}); 
+});

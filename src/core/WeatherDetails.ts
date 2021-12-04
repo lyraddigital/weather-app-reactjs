@@ -168,6 +168,8 @@ export const getWeatherType = (weatherId?: number): WeatherType | undefined => {
   return weatherId ? weatherIdTypeMatrix[weatherId] : undefined;
 };
 
-export const getWeatherDescription = (weatherId?: number): string | undefined => {
-  return weatherId ? weatherIdMessageMatrix[weatherId]: undefined;
+export const getWeatherDescription = (
+  weatherId?: number,
+): string | undefined => {
+  return weatherId ? weatherIdMessageMatrix[weatherId] : undefined;
 };

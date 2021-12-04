@@ -21,7 +21,9 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
     <div className={style.row}>
       <div className={style.date}>
         <div data-testid="forecast-day-name">{dayName}</div>
-        <div data-testid="forecast-day-date" className={style.label}>{shortDate}</div>
+        <div data-testid="forecast-day-date" className={style.label}>
+          {shortDate}
+        </div>
       </div>
       <div className={style.icon}>
         <WeatherIcon weatherId={day.weatherId} />

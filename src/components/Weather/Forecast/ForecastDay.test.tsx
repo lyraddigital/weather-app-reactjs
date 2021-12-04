@@ -1,7 +1,7 @@
-import { render } from "@testing-library/react";
-import { WeatherForecastDay } from "models";
+import { render } from '@testing-library/react';
+import { WeatherForecastDay } from 'models';
 
-import { ForecastDay } from "./ForecastDay";
+import { ForecastDay } from './ForecastDay';
 
 describe('ForecastDay', () => {
   it('day property not set. Returns null', async () => {
@@ -14,14 +14,14 @@ describe('ForecastDay', () => {
   });
 
   it('day property is set, sets the correct data in the correct places', async () => {
-    // Arrange 
+    // Arrange
     const day: WeatherForecastDay = {
       date: new Date(2021, 11, 30),
       weatherId: 800,
       lowTemp: 11,
       highTemp: 22,
       rainPercentage: 2,
-      windSpeed: 22
+      windSpeed: 22,
     };
 
     // Action
@@ -30,10 +30,18 @@ describe('ForecastDay', () => {
     // Assert
     const forecastDayNameEl = await wrapper.findByTestId('forecast-day-name');
     const forecastDayDateEl = await wrapper.findByTestId('forecast-day-date');
-    const forecastDayLowTempEl = await wrapper.findByTestId('forecast-day-lowTemp');
-    const forecastDayHighTempEl = await wrapper.findByTestId('forecast-day-highTemp');
-    const forecastDayRainPercentageEl = await wrapper.findByTestId('forecast-rain-percentage');
-    const forecastDayWindSpeedEl = await wrapper.findByTestId('forecast-day-windSpeed');
+    const forecastDayLowTempEl = await wrapper.findByTestId(
+      'forecast-day-lowTemp',
+    );
+    const forecastDayHighTempEl = await wrapper.findByTestId(
+      'forecast-day-highTemp',
+    );
+    const forecastDayRainPercentageEl = await wrapper.findByTestId(
+      'forecast-rain-percentage',
+    );
+    const forecastDayWindSpeedEl = await wrapper.findByTestId(
+      'forecast-day-windSpeed',
+    );
 
     expect(forecastDayNameEl.textContent).toBe('Thu');
     expect(forecastDayDateEl.textContent).toBe('30/12');
