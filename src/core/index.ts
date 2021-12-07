@@ -19,3 +19,6 @@ export {
   getWeatherDescription,
   WeatherType,
 } from './WeatherDetails';
+export {
+  getLocationByAddress
+} from './GooglePlaces';

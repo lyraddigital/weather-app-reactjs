@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Redirect } from 'react-router';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
+import { getLocationByAddress } from 'core';
 import { useLocationUpdater } from 'hooks';
 import { DefaultLayout } from 'components/DefaultLayout/DefaultLayout';
 
@@ -18,23 +17,15 @@ export const LocationPage = () => {
     setCityName(address);
 
     if (updateLocation) {
-      const response = await geocodeByAddress(address);
+      const response = await getLocationByAddress(address);
 
-      if (response && response.length > 0) {
-        const addressDetails = response[0];
-        const coords = addressDetails.geometry.location;
-        const lat = coords.lat();
-        const lon = coords.lng();
-        const city =
-          addressDetails.address_components.find((ac: any) =>
-            ac.types.includes('locality'),
-          )?.long_name || '';
-        const country =
-          addressDetails.address_components.find((ac: any) =>
-            ac.types.includes('country'),
-          )?.long_name || '';
-
-        updateLocation({ lat, lon, city, country });
+      if (response && response.success) {
+        updateLocation({ 
+          lat: response.lat,
+          lon: response.lon, 
+          city: response.city, 
+          country: response.country 
+        });
       }
     }
 
