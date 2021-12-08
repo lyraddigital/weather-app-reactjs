@@ -1,4 +1,4 @@
-import { DefaultLayout } from 'components/DefaultLayout/DefaultLayout';
+import { DefaultLayout } from 'components/Layouts';
 
 import style from './LoadFailedPage.module.scss';
 

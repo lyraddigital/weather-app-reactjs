@@ -1,5 +1,5 @@
-import { DefaultLayout } from 'components/DefaultLayout/DefaultLayout';
-import { LocationSearch } from 'components/Location/LocationSearch';
+import { DefaultLayout } from 'components/Layouts';
+import { LocationSearch } from 'components/Location';
 
 import style from './LocationPage.module.scss';
 
