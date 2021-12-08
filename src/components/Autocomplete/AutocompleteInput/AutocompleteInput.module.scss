@@ -1,0 +1,13 @@
+.autoCompleteInput {
+  border: 1px solid transparent;
+  background: rgba(230, 230, 230, 0.85);
+  outline: none;
+  border-radius: 4rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-size: 1.8rem;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.85);
+  }
+}
