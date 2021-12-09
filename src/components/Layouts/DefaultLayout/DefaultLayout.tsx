@@ -7,9 +7,7 @@ export const DefaultLayout = ({
 }: PropsWithChildren<any>): JSX.Element => {
   return (
     <div className={style.layoutContainer}>
-      <div className={style.innerContainer}>
-        {children}
-      </div>
+      <div className={style.innerContainer}>{children}</div>
     </div>
   );
 };
