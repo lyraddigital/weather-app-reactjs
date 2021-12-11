@@ -4,8 +4,10 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 
 import { getLocationByAddress } from 'core';
 import { useLocationUpdater } from 'hooks';
-import { AutocompleteInput } from 'components/Autocomplete/AutocompleteInput/AutocompleteInput';
-import { AutocompleteResults } from 'components/Autocomplete/AutocompleteResults/AutocompleteResults';
+import {
+  AutocompleteInput,
+  AutocompleteResults,
+} from 'components/Autocomplete';
 
 import style from './LocationSearch.module.scss';
 
@@ -46,12 +48,7 @@ export const LocationSearch = (): JSX.Element => {
         types: ['(cities)'],
       }}
     >
-      {({
-        getInputProps,
-        suggestions,
-        getSuggestionItemProps,
-        loading,
-      }: any) => (
+      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className={style.autoCompleteContainer}>
           <AutocompleteInput inputProps={getInputProps} isLoading={loading} />
           <AutocompleteResults

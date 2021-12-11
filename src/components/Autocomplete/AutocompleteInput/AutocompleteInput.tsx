@@ -1,3 +1,5 @@
+import { ClipLoader } from 'react-spinners';
+
 import style from './AutocompleteInput.module.scss';
 
 interface AutocompleteInputProps {
@@ -18,7 +20,11 @@ export const AutocompleteInput = ({
           className: style.autoCompleteInput,
         })}
       />
-      <div>{isLoading ? <div>...loading</div> : null}</div>
+      {isLoading ? (
+        <div className={style.loadingIcon}>
+          <ClipLoader size={24} color="#017" />
+        </div>
+      ) : null}
     </>
   );
 };
