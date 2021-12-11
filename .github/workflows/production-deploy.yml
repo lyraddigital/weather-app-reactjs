@@ -63,6 +63,9 @@ jobs:
       - name: Replace Weather refresh frequency
         run: sed -i 's/%REACT_APP_WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS%/${{ secrets.REACT_APP_WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS }}/g' application-code/static/js/weatherConfig.js
 
+      - name: Replace Local Storage Key setting
+        run: sed -i 's/%REACT_APP_WEATHER_LOCATION_STORAGE_KEY%/${{ secrets.REACT_APP_WEATHER_LOCATION_STORAGE_KEY }}/g' application-code/static/js/weatherConfig.js
+
       - name: Replace Local APIs setting
         run: sed -i 's/%REACT_APP_API_USE_IN_MEMORY_APIS%/${{ secrets.REACT_APP_API_USE_IN_MEMORY_APIS }}/g' application-code/static/js/weatherConfig.js
 
