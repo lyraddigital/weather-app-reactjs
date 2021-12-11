@@ -1,12 +1,13 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import axios from 'axios';
 
 import { WeatherApiResponse } from 'models';
 import { WeatherContext } from 'context';
-import { Configuration, WEATHER_API_URL } from 'core';
+import { Configuration } from 'core';
 import { useLocation } from 'hooks';
 
 import { Redirect } from 'react-router';
+
+import { getWeatherApiData } from 'core/apis/Weather';
 
 export const WeatherProvider = ({
   children,
@@ -25,11 +26,9 @@ export const WeatherProvider = ({
     setWeatherData({ ...weatherData, isLoading: true });
 
     try {
-      const response = await axios.get<WeatherApiResponse>(
-        `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.apiKey}&units=metric`,
-      );
+      const weatherApiData = await getWeatherApiData(lat, lon);
 
-      setWeatherData({ ...response.data, isLoading: false });
+      setWeatherData({ ...weatherApiData, isLoading: false });
     } catch (e) {
       setHasWeatherRequestFailed(true);
       setWeatherData({ ...weatherData, isLoading: false });
