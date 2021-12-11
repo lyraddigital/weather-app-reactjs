@@ -3,7 +3,7 @@ declare var WeatherApp: {
     WEATHER_API_KEY: string;
     WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS: string;
     WEATHER_LOCATION_STORAGE_KEY: string;
-    USE_INMEMORY_APIS: boolean;
+    USE_INMEMORY_APIS: string;
   };
 };
 
@@ -33,8 +33,11 @@ const weatherLocationStorageKey = isDevelopment
   : '';
 
 const isUsingInMemoryApis = isDevelopment
-  ? Boolean(process.env.REACT_APP_API_USE_IN_MEMORY_APIS)
-  : Boolean(WeatherApp?.weatherConfig?.USE_INMEMORY_APIS);
+  ? process.env.REACT_APP_API_USE_IN_MEMORY_APIS == 'true'
+  : WeatherApp?.weatherConfig?.USE_INMEMORY_APIS == 'true';
+
+console.log(isUsingInMemoryApis);
+console.log(process.env.REACT_APP_API_USE_IN_MEMORY_APIS);
 
 export const Configuration = {
   apiKey,
