@@ -36,9 +36,6 @@ const isUsingInMemoryApis = isDevelopment
   ? process.env.REACT_APP_API_USE_IN_MEMORY_APIS == 'true'
   : WeatherApp?.weatherConfig?.USE_INMEMORY_APIS == 'true';
 
-console.log(isUsingInMemoryApis);
-console.log(process.env.REACT_APP_API_USE_IN_MEMORY_APIS);
-
 export const Configuration = {
   apiKey,
   weatherRefreshRateInMilliseconds,
