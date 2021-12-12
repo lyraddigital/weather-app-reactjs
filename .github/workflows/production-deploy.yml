@@ -69,6 +69,9 @@ jobs:
       - name: Replace Local APIs setting
         run: sed -i 's/%REACT_APP_API_USE_IN_MEMORY_APIS%/${{ secrets.REACT_APP_API_USE_IN_MEMORY_APIS }}/g' application-code/static/js/weatherConfig.js
 
+      - name: Install Infrastructure Dependencies
+        run: cd infrastructure-code && npm install
+
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
         with:
