@@ -9,7 +9,11 @@ import { Header } from './Header';
 describe('Header', () => {
   it('No location or weather data, renders an empty header', async () => {
     // Arrange / Action
-    const wrapper = render(<Router><Header /></Router>);
+    const wrapper = render(
+      <Router>
+        <Header />
+      </Router>,
+    );
 
     // Assert
     const headingEl = await wrapper.findByTestId('weather-heading');
@@ -17,18 +21,10 @@ describe('Header', () => {
     const headingCountryEl = await wrapper.findByTestId(
       'weather-heading-country',
     );
-    const updatedDateEl = await wrapper.findByTestId('weather-updated-date');
-    const upatedTimeMessageEl = await wrapper.findByTestId(
-      'weather-updated-time-message',
-    );
-    const upatedTimeEl = await wrapper.findByTestId('weather-updated-time');
 
     expect(headingEl.textContent).toBe(', ');
     expect(headingCityEl.textContent).toBe('');
     expect(headingCountryEl.textContent).toBe('');
-    expect(updatedDateEl.textContent).toBe('');
-    expect(upatedTimeMessageEl.textContent).toBe('Last updated at ');
-    expect(upatedTimeEl.textContent).toBe('');
   });
 
   it('Location and weather data set, renders the header correctly', async () => {
@@ -47,12 +43,15 @@ describe('Header', () => {
     // Action
     const wrapper = render(
       <Router>
-        <LocationContext.Provider value={{ location, updateLocation: () => {} }}>
+        <LocationContext.Provider
+          value={{ location, updateLocation: () => {} }}
+        >
           <WeatherContext.Provider value={weatherData}>
             <Header />
           </WeatherContext.Provider>
-        </LocationContext.Provider>,
-      </Router>
+        </LocationContext.Provider>
+        ,
+      </Router>,
     );
 
     // Assert

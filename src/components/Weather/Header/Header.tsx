@@ -11,6 +11,16 @@ export const Header = (): JSX.Element => {
   const formattedDate = formatFriendlyDate(localTime);
   const formattedTime = formatFriendlyTime(localTime);
 
+  const lastUpdatedEl = formattedDate ? (
+    <>
+      <div data-testid="weather-updated-date">{formattedDate}</div>
+      <div data-testid="weather-updated-time-message">
+        Last updated at{' '}
+        <span data-testid="weather-updated-time">{formattedTime}</span>
+      </div>
+    </>
+  ) : null;
+
   return (
     <div className={style.header}>
       <div>
@@ -18,16 +28,11 @@ export const Header = (): JSX.Element => {
           <span data-testid="weather-heading-city">{location?.city}</span>,{' '}
           <span data-testid="weather-heading-country">{location?.country}</span>
         </h1>
-        <div data-testid="weather-updated-date">{formattedDate}</div>
-        <div data-testid="weather-updated-time-message">
-          Last updated at{' '}
-          <span data-testid="weather-updated-time">{formattedTime}</span>
-        </div>
+        {lastUpdatedEl}
       </div>
       <div className={style.changeLocation}>
         <Link to="/set-location">Change location</Link>
       </div>
     </div>
-    
   );
 };

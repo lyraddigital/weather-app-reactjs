@@ -11,9 +11,9 @@ export const AutocompleteResults = ({
 }: AutocompleteResultsProps): JSX.Element => {
   return (
     <ul className={style.autoCompleteList}>
-      {suggestions.map((s: any) => {
+      {suggestions.map((s: any, i: number) => {
         return (
-          <li {...getSuggestionItemProps(s)} key={s.id}>
+          <li {...getSuggestionItemProps(s)} key={i}>
             {s.description}
           </li>
         );

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { WeatherProvider } from 'hoc';
 import { useLocation } from 'hooks';
 import { WeatherThemedLayout } from 'components/Layouts';
-import { CurrentWeather, Forecast, Header, Timeline } from 'components/Weather';
+import { Header, WeatherContent } from 'components/Weather';
 
 export const WeatherPage = (): JSX.Element => {
   const location = useLocation();
@@ -16,9 +16,7 @@ export const WeatherPage = (): JSX.Element => {
     <WeatherProvider>
       <WeatherThemedLayout>
         <Header />
-        <CurrentWeather />
-        <Timeline />
-        <Forecast />
+        <WeatherContent />
       </WeatherThemedLayout>
     </WeatherProvider>
   );

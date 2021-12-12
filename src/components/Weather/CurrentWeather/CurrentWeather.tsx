@@ -1,6 +1,8 @@
 import { isCurrentTimeNight } from 'core';
 import { useCurrentWeather } from 'hooks';
-import { CurrentTemperature, Stats } from 'components/Weather';
+
+import { CurrentTemperature } from '../CurrentTemperature/CurrentTemperature';
+import { Stats } from '../Stats/Stats';
 
 import style from './CurrentWeather.module.scss';
 
