@@ -34,9 +34,57 @@ jobs:
           name: infrastructure-code
           path: infrastructure
 
-  production-deploy:
+  staging-deploy:
     runs-on: ubuntu-latest
     needs: build
+
+    environment:
+      name: Staging
+
+    steps:
+      - name: Download application code
+        uses: actions/download-artifact@v2
+        with:
+          name: application-code
+          path: application-code
+
+      - name: Download infrastructure code
+        uses: actions/download-artifact@v2
+        with:
+          name: infrastructure-code
+          path: infrastructure-code
+
+      - name: Replace Google Places API Key
+        run: sed -i 's/%REACT_APP_GOOGLE_PLACES_API_KEY%/${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}/g' application-code/index.html
+
+      - name: Replace Weather API Key
+        run: sed -i 's/%REACT_APP_WEATHER_API_KEY%/${{ secrets.REACT_APP_WEATHER_API_KEY }}/g' application-code/static/js/weatherConfig.js
+
+      - name: Replace Weather refresh frequency
+        run: sed -i 's/%REACT_APP_WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS%/${{ secrets.REACT_APP_WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS }}/g' application-code/static/js/weatherConfig.js
+
+      - name: Replace Local Storage Key setting
+        run: sed -i 's/%REACT_APP_WEATHER_LOCATION_STORAGE_KEY%/${{ secrets.REACT_APP_WEATHER_LOCATION_STORAGE_KEY }}/g' application-code/static/js/weatherConfig.js
+
+      - name: Replace Local APIs setting
+        run: sed -i 's/%REACT_APP_API_USE_IN_MEMORY_APIS%/${{ secrets.REACT_APP_API_USE_IN_MEMORY_APIS }}/g' application-code/static/js/weatherConfig.js
+
+      - name: Creating / Updating Infrastructure
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: 'deploy'
+          cdk_stack: ${{ secrets.SITE_STACK_NAME }}
+          cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} --require-approval never'
+          working_dir: 'infrastructure-code'
+          actions_comment: false
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.CDK_DEFAULT_REGION }}
+
+  production-deploy:
+    runs-on: ubuntu-latest
+    needs: staging-deploy
 
     environment:
       name: Production
