@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { Redirect } from 'react-router';
-import PlacesAutocomplete from 'react-places-autocomplete';
 
 import { getLocationByAddress } from 'core';
 import { useLocationUpdater } from 'hooks';
-import {
-  AutocompleteInput,
-  AutocompleteResults,
-} from 'components/Autocomplete';
 
-import style from './LocationSearch.module.scss';
+import { CitiesAutocomplete } from 'components/Autocomplete';
 
 export const LocationSearch = (): JSX.Element => {
   const [cityName, setCityName] = useState<string>('');
@@ -40,23 +35,10 @@ export const LocationSearch = (): JSX.Element => {
   }
 
   return (
-    <PlacesAutocomplete
-      value={cityName}
-      onChange={setCityName}
-      onSelect={selectCity}
-      searchOptions={{
-        types: ['(cities)'],
-      }}
-    >
-      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div className={style.autoCompleteContainer}>
-          <AutocompleteInput inputProps={getInputProps} isLoading={loading} />
-          <AutocompleteResults
-            suggestions={suggestions}
-            getSuggestionItemProps={getSuggestionItemProps}
-          />
-        </div>
-      )}
-    </PlacesAutocomplete>
+    <CitiesAutocomplete
+      cityName={cityName}
+      setCityName={setCityName}
+      selectCity={selectCity}
+    />
   );
 };

@@ -17,7 +17,7 @@ export const Forecast = (): JSX.Element => {
       <h2 data-testid="forecast-heading" className={style.heading}>
         Next 5 days
       </h2>
-      <div className={style.container}>{daysEl}</div>
+      <div>{daysEl}</div>
     </div>
   );
 };

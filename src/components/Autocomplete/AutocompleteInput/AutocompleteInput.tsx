@@ -14,7 +14,6 @@ export const AutocompleteInput = ({
   return (
     <>
       <input
-        type="text"
         {...inputProps({
           placeholder: 'Search Places ...',
           className: style.autoCompleteInput,

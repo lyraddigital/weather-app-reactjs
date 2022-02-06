@@ -1,2 +1,1 @@
-export { AutocompleteInput } from './AutocompleteInput/AutocompleteInput';
-export { AutocompleteResults } from './AutocompleteResults/AutocompleteResults';
+export { CitiesAutocomplete } from './CitiesAutocomplete/CitiesAutocomplete';
