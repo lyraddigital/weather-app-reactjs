@@ -23,9 +23,13 @@ const getWeatherApiDataFromFiles = (
   lat?: number,
   lon?: number,
 ): Promise<WeatherApiResponse> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const latLonKey = `${lat}-${lon}`;
-    console.log(latLonKey);
-    resolve(cityWeather[latLonKey]);
+
+    if (cityWeather[latLonKey]) {
+      resolve(cityWeather[latLonKey]);
+    } else {
+      reject();
+    }
   });
 };

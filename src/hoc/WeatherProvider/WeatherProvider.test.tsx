@@ -1,54 +1,131 @@
 import { useContext } from 'react';
-import { render } from '@testing-library/react';
+import { render, RenderResult, waitFor } from '@testing-library/react';
+import { MemoryRouter as Router, Route, Switch } from 'react-router';
 
-import { WeatherContext } from 'context';
+import { WeatherLocation } from 'models';
+import { LocationContext, WeatherContext } from 'context';
+
 import { WeatherProvider } from './WeatherProvider';
 
 const TestProviderChildComponent = () => {
   const weatherApiResponse = useContext(WeatherContext);
 
-  return <div></div>;
+  return (
+    <>
+      <div data-testid="current-temp">{weatherApiResponse?.current?.temp}</div>
+      <div data-testid="timezone">{weatherApiResponse?.timezone}</div>
+    </>
+  );
+};
+
+const renderWithLocation = async (
+  weatherProvider: JSX.Element,
+  location: WeatherLocation,
+): Promise<RenderResult> => {
+  const updateLocation = (_: WeatherLocation): void => {
+    // Do nothing
+  };
+
+  return waitFor(() =>
+    render(
+      <LocationContext.Provider value={{ location, updateLocation }}>
+        <Router initialEntries={['/', 'load-error']}>
+          <Switch>
+            <Route path="/load-error">
+              <div data-testid="no-weather-data">No data found.</div>
+            </Route>
+            <Route path="">{weatherProvider}</Route>
+          </Switch>
+        </Router>
+      </LocationContext.Provider>,
+    ),
+  );
 };
 
 describe('WeatherProvider', () => {
-  it('By default contains no location details', async () => {
+  it('By default contains no weather details', async () => {
     // Arrange / Action
-    // const wrapper = render(
-    //   <LocationProvider>
-    //     <TestProviderChildComponent />
-    //   </LocationProvider>,
-    // );
-    // // Assert
-    // const cityEl = await wrapper.findByTestId('location-provider-city');
-    // const countryEl = await wrapper.findByTestId('location-provider-country');
-    // const latEl = await wrapper.findByTestId('location-provider-lat');
-    // const lonEl = await wrapper.findByTestId('location-provider-lon');
-    // expect(cityEl.textContent).toBe('');
-    // expect(countryEl.textContent).toBe('');
-    // expect(latEl.textContent).toBe('');
-    // expect(lonEl.textContent).toBe('');
+    const wrapper = await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'No where',
+        country: 'No country',
+        lat: -1.4949,
+        lon: 22.93938,
+      },
+    );
+
+    // Assert
+    const noWeatherDataEl = await wrapper.findByTestId('no-weather-data');
+
+    expect(noWeatherDataEl).toBeTruthy();
   });
 
-  it('Location details will be populated upon calling the update location button', async () => {
-    // // Arrange
-    // const wrapper = render(
-    //   <LocationProvider>
-    //     <TestProviderChildComponent />
-    //   </LocationProvider>,
-    // );
-    // // Action
-    // const updateLocationButton = await wrapper.findByTestId(
-    //   'location-provider-update-button',
-    // );
-    // updateLocationButton.click();
-    // // Assert
-    // const cityEl = await wrapper.findByTestId('location-provider-city');
-    // const countryEl = await wrapper.findByTestId('location-provider-country');
-    // const latEl = await wrapper.findByTestId('location-provider-lat');
-    // const lonEl = await wrapper.findByTestId('location-provider-lon');
-    // expect(cityEl.textContent).toBe('Melbourne');
-    // expect(countryEl.textContent).toBe('Australia');
-    // expect(latEl.textContent).toBe('30');
-    // expect(lonEl.textContent).toBe('45');
+  it('Passing in Melbourne geocode. Returns current weather data for Melbourne', async () => {
+    // Arrange / Action
+    const wrapper = await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'Melbourne',
+        country: 'Australia',
+        lat: -33.8688197,
+        lon: 151.2092955,
+      },
+    );
+
+    // Assert
+    const currentTempEl = await wrapper.findByTestId('current-temp');
+    const timezoneEl = await wrapper.findByTestId('timezone');
+
+    expect(currentTempEl.textContent).toBe('17');
+    expect(timezoneEl.textContent).toBe('Australia/Sydney');
+  });
+
+  it('Passing in London geocode. Returns current weather data for London', async () => {
+    // Arrange / Action
+    const wrapper = await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'London',
+        country: 'England',
+        lat: 51.5072178,
+        lon: -0.1275862,
+      },
+    );
+
+    // Assert
+    const currentTempEl = await wrapper.findByTestId('current-temp');
+    const timezoneEl = await wrapper.findByTestId('timezone');
+
+    expect(currentTempEl.textContent).toBe('5');
+    expect(timezoneEl.textContent).toBe('Europe/London');
+  });
+
+  it('Passing in London geocode. Returns current weather data for London', async () => {
+    // Arrange / Action
+    const wrapper = await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'New York',
+        country: 'United States',
+        lat: 40.7127753,
+        lon: -74.0059728,
+      },
+    );
+
+    // Assert
+    const currentTempEl = await wrapper.findByTestId('current-temp');
+    const timezoneEl = await wrapper.findByTestId('timezone');
+
+    expect(currentTempEl.textContent).toBe('17.44');
+    expect(timezoneEl.textContent).toBe('America/New_York');
   });
 });

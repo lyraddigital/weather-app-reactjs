@@ -10,5 +10,6 @@ global.WeatherApp = {
     WEATHER_API_KEY: 'testWeatherApiKey',
     WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS: '30000',
     WEATHER_LOCATION_STORAGE_KEY: 'test-location-key',
+    USE_INMEMORY_APIS: 'true',
   },
 };
