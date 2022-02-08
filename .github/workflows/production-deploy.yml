@@ -19,8 +19,8 @@ jobs:
       - name: Building Application Code
         run: npm run build
 
-      #- name: Running Unit Tests
-      #  run: npm run test
+      - name: Running Unit Tests
+        run: npm run test
 
       - name: Archive Application Code
         uses: actions/upload-artifact@v2
