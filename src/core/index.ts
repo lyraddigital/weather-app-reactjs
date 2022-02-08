@@ -1,5 +1,5 @@
 export { Configuration } from './Configuration';
-export { WEATHER_API_URL } from './Constants';
+export { GOOGLE_PLACE_PHOTOS_URL, WEATHER_API_URL } from './Constants';
 export {
   formatDay,
   formatFriendlyDate,
@@ -19,6 +19,4 @@ export {
   getWeatherDescription,
   WeatherType,
 } from './WeatherDetails';
-export {
-  getLocationByAddress
-} from './GooglePlaces';
+export { getLocationByAddress } from './GooglePlaces';

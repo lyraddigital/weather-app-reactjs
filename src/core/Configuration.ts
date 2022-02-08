@@ -1,5 +1,6 @@
 declare var WeatherApp: {
   weatherConfig: {
+    GOOGLE_PLACES_API_KEY: string;
     WEATHER_API_KEY: string;
     WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS: string;
     WEATHER_LOCATION_STORAGE_KEY: string;
@@ -9,10 +10,16 @@ declare var WeatherApp: {
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const apiKey = isDevelopment
+const weatherApiKey = isDevelopment
   ? process.env.REACT_APP_WEATHER_API_KEY || ''
   : !isDevelopment && WeatherApp?.weatherConfig?.WEATHER_API_KEY
   ? WeatherApp.weatherConfig.WEATHER_API_KEY
+  : '';
+
+const googlePlacesApiKey = isDevelopment
+  ? process.env.REACT_APP_GOOGLE_PLACES_API_KEY || ''
+  : !isDevelopment && WeatherApp?.weatherConfig?.GOOGLE_PLACES_API_KEY
+  ? WeatherApp.weatherConfig.GOOGLE_PLACES_API_KEY
   : '';
 
 const weatherRefreshRateInMilliseconds =
@@ -37,7 +44,8 @@ const isUsingInMemoryApis = isDevelopment
   : WeatherApp?.weatherConfig?.USE_INMEMORY_APIS == 'true';
 
 export const Configuration = {
-  apiKey,
+  googlePlacesApiKey,
+  weatherApiKey,
   weatherRefreshRateInMilliseconds,
   weatherLocationStorageKey,
   isUsingInMemoryApis,

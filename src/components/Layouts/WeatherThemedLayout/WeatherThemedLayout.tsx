@@ -1,9 +1,8 @@
 import { PropsWithChildren } from 'react';
 
-import { useCurrentWeather } from 'hooks';
+import { useCurrentWeather, useLocationImage, useWeatherLoading } from 'hooks';
 import { Loader } from 'components/Loader';
 
-import { useWeatherLoading } from 'hooks/useWeatherLoading';
 import style from './WeatherThemedLayout.module.scss';
 
 export const WeatherThemedLayout = ({
@@ -11,9 +10,13 @@ export const WeatherThemedLayout = ({
 }: PropsWithChildren<any>): JSX.Element => {
   const { isLoading, isFirstLoad } = useWeatherLoading();
   const { isDarkMode } = useCurrentWeather();
+  const locationImage = useLocationImage();
 
   const isLoadingFirstTime = isLoading && isFirstLoad;
   const childContent = isLoadingFirstTime ? null : children;
+  const locationBackgroundImage = locationImage
+    ? `url(${locationImage})`
+    : undefined;
 
   let classes = style.layoutContainer;
 
@@ -24,10 +27,7 @@ export const WeatherThemedLayout = ({
   return (
     <div
       className={style.cityImage}
-      style={{
-        backgroundImage:
-          'url(https://ichef.bbci.co.uk/news/976/cpsprodpb/5F54/production/_115040442_gettyimages-1264168420.jpg)',
-      }}
+      style={{ backgroundImage: locationBackgroundImage }}
     >
       <div className={classes}>
         <div className={style.innerContainer}>
