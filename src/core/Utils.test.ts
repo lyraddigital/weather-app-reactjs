@@ -637,12 +637,12 @@ describe('Utils', () => {
       // Arrange
       const epochSeconds = 1638057600;
       const timezone = 'Australia/Sydney';
+      const expectedLocalTime = utcToZonedTime(epochSeconds * 1000, timezone);
 
       // Action
       const localTime = convertEpochSecondsToDate(epochSeconds, timezone);
 
       // Assert
-      const expectedLocalTime = new Date('2021-11-28T00:00:00.000Z');
       expect(localTime).toStrictEqual(expectedLocalTime);
     });
 
@@ -650,12 +650,12 @@ describe('Utils', () => {
       // Arrange
       const epochSeconds = 1638057600;
       const timezone = 'America/New_York';
+      const expectedLocalTime = utcToZonedTime(epochSeconds * 1000, timezone);
 
       // Action
       const localTime = convertEpochSecondsToDate(epochSeconds, timezone);
 
       // Assert
-      const expectedLocalTime = new Date('2021-11-27T08:00:00.000Z');
       expect(localTime).toStrictEqual(expectedLocalTime);
     });
 
