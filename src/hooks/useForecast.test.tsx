@@ -51,7 +51,9 @@ describe('useForecast', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempForecastChild />
       </WeatherContext.Provider>,
     );
@@ -102,7 +104,9 @@ describe('useForecast', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempForecastChild />
       </WeatherContext.Provider>,
     );
@@ -118,7 +122,9 @@ describe('useForecast', () => {
   it('Returns an empty Forecast array when the ApiResponse.daily object is not defined', async () => {
     // Arrange / Action
     const wrapper = render(
-      <WeatherContext.Provider value={undefined}>
+      <WeatherContext.Provider
+        value={{ data: undefined, isFirstLoad: false, isLoading: true }}
+      >
         <TempForecastChild />
       </WeatherContext.Provider>,
     );
@@ -143,7 +149,9 @@ describe('useForecast', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempForecastChild />
       </WeatherContext.Provider>,
     );

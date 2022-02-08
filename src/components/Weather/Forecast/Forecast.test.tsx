@@ -9,7 +9,9 @@ describe('Forecast', () => {
   it('No weather data, shows no forecast data', async () => {
     // Arrange / Action
     const wrapper = render(
-      <WeatherContext.Provider value={undefined}>
+      <WeatherContext.Provider
+        value={{ data: undefined, isFirstLoad: false, isLoading: true }}
+      >
         <Forecast />
       </WeatherContext.Provider>,
     );
@@ -51,7 +53,9 @@ describe('Forecast', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={weatherData}>
+      <WeatherContext.Provider
+        value={{ data: weatherData, isFirstLoad: false, isLoading: true }}
+      >
         <Forecast />
       </WeatherContext.Provider>,
     );
@@ -73,7 +77,9 @@ describe('Forecast', () => {
   it('Shows the correct heading text', async () => {
     // Arrange / Action
     const wrapper = render(
-      <WeatherContext.Provider value={undefined}>
+      <WeatherContext.Provider
+        value={{ data: undefined, isFirstLoad: false, isLoading: true }}
+      >
         <Forecast />
       </WeatherContext.Provider>,
     );

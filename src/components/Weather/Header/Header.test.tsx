@@ -46,7 +46,9 @@ describe('Header', () => {
         <LocationContext.Provider
           value={{ location, updateLocation: () => {} }}
         >
-          <WeatherContext.Provider value={weatherData}>
+          <WeatherContext.Provider
+            value={{ data: weatherData, isFirstLoad: false, isLoading: true }}
+          >
             <Header />
           </WeatherContext.Provider>
         </LocationContext.Provider>

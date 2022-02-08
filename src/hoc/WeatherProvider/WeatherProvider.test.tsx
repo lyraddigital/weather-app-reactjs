@@ -2,18 +2,18 @@ import { useContext } from 'react';
 import { render, RenderResult, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router, Route, Switch } from 'react-router';
 
-import { WeatherLocation } from 'models';
+import { WeatherLocation, WeatherState } from 'models';
 import { LocationContext, WeatherContext } from 'context';
 
 import { WeatherProvider } from './WeatherProvider';
 
 const TestProviderChildComponent = () => {
-  const weatherApiResponse = useContext(WeatherContext);
+  const weatherResult = useContext<WeatherState>(WeatherContext);
 
   return (
     <>
-      <div data-testid="current-temp">{weatherApiResponse?.current?.temp}</div>
-      <div data-testid="timezone">{weatherApiResponse?.timezone}</div>
+      <div data-testid="current-temp">{weatherResult.data?.current?.temp}</div>
+      <div data-testid="timezone">{weatherResult.data?.timezone}</div>
     </>
   );
 };

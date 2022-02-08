@@ -9,24 +9,22 @@ import {
   CurrentWeatherResponse,
   DailyForecastApiResponse,
   TimelinePeriodApiResponse,
-  WeatherApiResponse,
+  WeatherState,
 } from 'models';
 import { WeatherContext } from 'context';
 
 export const useCurrentWeather = (): CurrentWeatherResponse => {
-  const weatherData = useContext<WeatherApiResponse | undefined>(
-    WeatherContext,
-  );
+  const weatherResult = useContext<WeatherState>(WeatherContext);
 
-  const timezone = weatherData?.timezone || ''; // UTC time will be used if not set
-  const currentDetails = weatherData?.current;
+  const timezone = weatherResult.data?.timezone || ''; // UTC time will be used if not set
+  const currentDetails = weatherResult.data?.current;
   const weatherId =
     currentDetails?.weather && currentDetails.weather.length > 0
       ? currentDetails.weather[0].id
       : 0;
   const dailyTemperatures =
-    weatherData?.daily && weatherData.daily.length > 0
-      ? weatherData.daily[0]?.temp
+    weatherResult.data?.daily && weatherResult.data.daily.length > 0
+      ? weatherResult.data.daily[0]?.temp
       : undefined;
   const localTime = convertEpochSecondsToDate(currentDetails?.dt, timezone);
 
@@ -42,7 +40,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
       sunsetTime: convertEpochSecondsToDate(currentDetails?.sunset, timezone),
       localTime,
     },
-    timeline: (weatherData?.hourly || []).map(
+    timeline: (weatherResult.data?.hourly || []).map(
       (h?: TimelinePeriodApiResponse) => ({
         weatherId:
           h?.weather && h.weather.length > 0 ? h.weather[0]?.id || 0 : 0,
@@ -50,7 +48,7 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         time: convertEpochSecondsToDate(h?.dt, timezone),
       }),
     ),
-    forecast: (weatherData?.daily || []).map(
+    forecast: (weatherResult.data?.daily || []).map(
       (d?: DailyForecastApiResponse) => ({
         date: convertEpochSecondsToDate(d?.dt, timezone),
         weatherId:
@@ -61,7 +59,6 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         windSpeed: roundNumberOrZero(d?.wind_speed),
       }),
     ),
-    isLoading: weatherData?.isLoading ? true : false,
     isDarkMode: isCurrentTimeNight(localTime),
   };
 };

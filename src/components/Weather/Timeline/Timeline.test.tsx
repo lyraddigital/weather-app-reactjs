@@ -9,7 +9,9 @@ describe('Timeline', () => {
   it('Shows the correct heading for the timeline section', async () => {
     // Arrange / Action
     const wrapper = render(
-      <WeatherContext.Provider value={undefined}>
+      <WeatherContext.Provider
+        value={{ data: undefined, isFirstLoad: false, isLoading: true }}
+      >
         <Timeline />
       </WeatherContext.Provider>,
     );
@@ -149,7 +151,9 @@ describe('Timeline', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={weatherData}>
+      <WeatherContext.Provider
+        value={{ data: weatherData, isFirstLoad: false, isLoading: true }}
+      >
         <Timeline />
       </WeatherContext.Provider>,
     );

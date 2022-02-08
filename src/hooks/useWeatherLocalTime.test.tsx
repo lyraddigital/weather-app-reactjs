@@ -22,7 +22,9 @@ describe('useWeatherLocalTime', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempLocalTimeChild />
       </WeatherContext.Provider>,
     );
@@ -37,7 +39,9 @@ describe('useWeatherLocalTime', () => {
   it('Returns empty for the local time based on an undefined api response.', async () => {
     // Arrange / Action
     const wrapper = render(
-      <WeatherContext.Provider value={undefined}>
+      <WeatherContext.Provider
+        value={{ data: undefined, isFirstLoad: false, isLoading: true }}
+      >
         <TempLocalTimeChild />
       </WeatherContext.Provider>,
     );
@@ -58,7 +62,9 @@ describe('useWeatherLocalTime', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempLocalTimeChild />
       </WeatherContext.Provider>,
     );

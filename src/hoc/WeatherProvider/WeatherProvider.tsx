@@ -12,7 +12,11 @@ import { getWeatherApiData } from 'core/apis/Weather';
 export const WeatherProvider = ({
   children,
 }: PropsWithChildren<any>): JSX.Element => {
-  const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
+  const [weatherData, setWeatherData] = useState<
+    WeatherApiResponse | undefined
+  >();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [hasWeatherRequestFailed, setHasWeatherRequestFailed] =
     useState<boolean>(false);
   const location = useLocation();
@@ -20,18 +24,21 @@ export const WeatherProvider = ({
   const getWeatherFromApi = async (
     lat: number | undefined,
     lon: number | undefined,
-    setWeatherData: React.Dispatch<WeatherApiResponse>,
+    setWeatherData: React.Dispatch<WeatherApiResponse | undefined>,
   ) => {
     setHasWeatherRequestFailed(false);
-    setWeatherData({ ...weatherData, isLoading: true });
+    setIsLoading(true);
 
     try {
       const weatherApiData = await getWeatherApiData(lat, lon);
 
-      setWeatherData({ ...weatherApiData, isLoading: false });
+      setWeatherData(weatherApiData);
     } catch (e) {
       setHasWeatherRequestFailed(true);
-      setWeatherData({ ...weatherData, isLoading: false });
+      setWeatherData(undefined);
+    } finally {
+      setIsLoading(false);
+      setIsFirstLoad(false);
     }
   };
 
@@ -55,7 +62,9 @@ export const WeatherProvider = ({
   }
 
   return (
-    <WeatherContext.Provider value={weatherData}>
+    <WeatherContext.Provider
+      value={{ data: weatherData, isLoading, isFirstLoad }}
+    >
       {children}
     </WeatherContext.Provider>
   );

@@ -50,7 +50,9 @@ describe('useTimeline', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempTimelineChild />
       </WeatherContext.Provider>,
     );
@@ -80,7 +82,9 @@ describe('useTimeline', () => {
   it('Returns an empty timeline array when the ApiResponse is not defined', async () => {
     // Arrange / Action
     const wrapper = render(
-      <WeatherContext.Provider value={undefined}>
+      <WeatherContext.Provider
+        value={{ data: undefined, isFirstLoad: false, isLoading: true }}
+      >
         <TempTimelineChild />
       </WeatherContext.Provider>,
     );
@@ -101,7 +105,9 @@ describe('useTimeline', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempTimelineChild />
       </WeatherContext.Provider>,
     );
@@ -127,7 +133,9 @@ describe('useTimeline', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempTimelineChild />
       </WeatherContext.Provider>,
     );

@@ -4,6 +4,7 @@ export type { WeatherLocation } from './WeatherLocation';
 export type { WeatherForecastDay } from './WeatherForecastDay';
 export type { WeatherStatistics } from './WeatherStatistics';
 export type { WeatherTimelinePeriod } from './WeatherTimelinePeriod';
+export type { WeatherState } from './WeatherState';
 export type {
   DailyForecastApiResponse,
   WeatherApiResponse,

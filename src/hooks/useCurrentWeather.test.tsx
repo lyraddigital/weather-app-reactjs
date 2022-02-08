@@ -106,7 +106,9 @@ describe('useCurrentWeather', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempChild />
       </WeatherContext.Provider>,
     );
@@ -309,7 +311,9 @@ describe('useCurrentWeather', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempChild />
       </WeatherContext.Provider>,
     );
@@ -396,7 +400,9 @@ describe('useCurrentWeather', () => {
 
     // Action
     const wrapper = render(
-      <WeatherContext.Provider value={apiResponse}>
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
+      >
         <TempChild />
       </WeatherContext.Provider>,
     );

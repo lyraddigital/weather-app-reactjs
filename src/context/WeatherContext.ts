@@ -1,7 +1,8 @@
 import { createContext } from 'react';
 
-import { WeatherApiResponse } from 'models';
+import { WeatherState } from 'models';
 
-export const WeatherContext = createContext<WeatherApiResponse | undefined>(
-  undefined,
-);
+export const WeatherContext = createContext<WeatherState>({
+  isLoading: true,
+  isFirstLoad: true,
+});
