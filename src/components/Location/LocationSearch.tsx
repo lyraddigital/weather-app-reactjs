@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Redirect } from 'react-router';
 
-import { getLocationByAddress } from 'core';
+import { getLocationByAddress, getPhotoReferenceForLocation } from 'core';
 import { useLocationUpdater } from 'hooks';
 
 import { CitiesAutocomplete } from 'components/Autocomplete';
@@ -18,11 +18,16 @@ export const LocationSearch = (): JSX.Element => {
       const response = await getLocationByAddress(address);
 
       if (response && response.success) {
+        const photoReferenceId = await getPhotoReferenceForLocation(
+          response.placeId,
+        );
+
         updateLocation({
           lat: response.lat,
           lon: response.lon,
           city: response.city,
           country: response.country,
+          photoReferenceId: photoReferenceId,
         });
       }
     }
