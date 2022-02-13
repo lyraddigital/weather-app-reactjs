@@ -107,7 +107,7 @@ describe('WeatherProvider', () => {
     expect(timezoneEl.textContent).toBe('Europe/London');
   });
 
-  it('Passing in London geocode. Returns current weather data for London', async () => {
+  it('Passing in New York geocode. Returns current weather data for New York', async () => {
     // Arrange / Action
     const wrapper = await renderWithLocation(
       <WeatherProvider>
