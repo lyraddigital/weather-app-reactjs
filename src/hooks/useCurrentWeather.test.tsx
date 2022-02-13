@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { getUnixTime } from 'date-fns';
+import { format, getUnixTime } from 'date-fns';
 
 import { WeatherContext } from 'context';
 import { useCurrentWeather } from 'hooks';
@@ -7,10 +7,13 @@ import { WeatherApiResponse } from 'models';
 
 const TempChild = () => {
   const currentWeather = useCurrentWeather();
+  const formatTime = (date: Date | undefined): string => {
+    return format(date || 0, 'yyyy-MM-dd HH:mm:ss');
+  };
 
   const forecastDayEls = currentWeather.forecast.map((fd, i) => (
     <div key={`forecast-day-${i}`}>
-      <div data-testid={`forecast-day-date-${i}`}>{fd.date?.toString()}</div>
+      <div data-testid={`forecast-day-date-${i}`}>{formatTime(fd.date)}</div>
       <div data-testid={`forecast-day-highTemp-${i}`}>{fd.highTemp}</div>
       <div data-testid={`forecast-day-lowTemp-${i}`}>{fd.lowTemp}</div>
       <div data-testid={`forecast-day-weatherId-${i}`}>{fd.weatherId}</div>
@@ -23,7 +26,7 @@ const TempChild = () => {
 
   const timelinePeriodEls = currentWeather.timeline.map((tp, i) => (
     <div key={`timeline-period-${i}`}>
-      <div data-testid={`timeline-period-time-${i}`}>{tp.time?.toString()}</div>
+      <div data-testid={`timeline-period-time-${i}`}>{formatTime(tp.time)}</div>
       <div data-testid={`timeline-period-temp-${i}`}>{tp.temp}</div>
       <div data-testid={`timeline-period-weatherId-${i}`}>{tp.weatherId}</div>
     </div>
@@ -46,13 +49,13 @@ const TempChild = () => {
         {currentWeather.statistics.rainPercentage}
       </div>
       <div data-testid="weather-statistics-sunriseTime">
-        {currentWeather.statistics.sunriseTime?.toString()}
+        {formatTime(currentWeather.statistics.sunriseTime)}
       </div>
       <div data-testid="weather-statistics-sunsetTime">
-        {currentWeather.statistics.sunsetTime?.toString()}
+        {formatTime(currentWeather.statistics.sunsetTime)}
       </div>
       <div data-testid="weather-statistics-localTime">
-        {currentWeather.statistics.localTime?.toString()}
+        {formatTime(currentWeather.statistics.localTime)}
       </div>
       {forecastDayEls}
       {timelinePeriodEls}
@@ -61,7 +64,7 @@ const TempChild = () => {
 };
 
 describe('useCurrentWeather', () => {
-  it('Maps the api response correctly to the hook response object', async () => {
+  fit('Maps the api response correctly to the hook response object', async () => {
     // Arrange
     const apiResponse: WeatherApiResponse = {
       current: {
@@ -216,21 +219,10 @@ describe('useCurrentWeather', () => {
       apiResponse.current!.humidity!.toString(),
     );
 
-    expect(statisticsSunriseTimeEl.textContent).toBe(
-      'Sat Nov 27 2021 18:30:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
-
-    expect(statisticsSunsetTimeEl.textContent).toBe(
-      'Sun Nov 28 2021 07:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
-
-    expect(statisticsLocalTimeEl.textContent).toBe(
-      'Sat Nov 27 2021 21:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
-
-    expect(firstDayForecastDateEl.textContent).toBe(
-      'Mon Nov 29 2021 07:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(statisticsSunriseTimeEl.textContent).toBe('2021-11-27 18:30:00');
+    expect(statisticsSunsetTimeEl.textContent).toBe('2021-11-28 07:00:00');
+    expect(statisticsLocalTimeEl.textContent).toBe('2021-11-27 21:00:00');
+    expect(firstDayForecastDateEl.textContent).toBe('2021-11-29 07:00:00');
 
     expect(firstDayForecastHighTempEl.textContent).toBe(
       apiResponse.daily![0]!.temp!.max.toString(),
@@ -252,9 +244,7 @@ describe('useCurrentWeather', () => {
       apiResponse.daily![0]!.wind_speed!.toString(),
     );
 
-    expect(secondDayForecastDateEl.textContent).toBe(
-      'Tue Nov 30 2021 07:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(secondDayForecastDateEl.textContent).toBe('2021-11-30 07:00:00');
 
     expect(secondDayForecastHighTempEl.textContent).toBe(
       apiResponse.daily![1]!.temp!.max.toString(),
@@ -284,9 +274,7 @@ describe('useCurrentWeather', () => {
       apiResponse.hourly![0]!.temp!.toString(),
     );
 
-    expect(firstTimePeriodTimeEl.textContent).toBe(
-      'Sat Nov 27 2021 20:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(firstTimePeriodTimeEl.textContent).toBe('2021-11-27 20:00:00');
 
     expect(secondTimePeriodWeatherIdEl.textContent).toBe(
       apiResponse.hourly![1]!.weather![0].id.toString(),
@@ -296,9 +284,7 @@ describe('useCurrentWeather', () => {
       apiResponse.hourly![1]!.temp!.toString(),
     );
 
-    expect(secondTimePeriodTimeEl.textContent).toBe(
-      'Sat Nov 27 2021 21:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(secondTimePeriodTimeEl.textContent).toBe('2021-11-27 21:00:00');
   });
 
   it('Maps the api response correctly to the hook response when some data is missing', async () => {
