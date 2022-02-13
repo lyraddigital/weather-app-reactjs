@@ -1,13 +1,14 @@
 import { render } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
+import { formatTime } from 'utilities';
 import { WeatherContext } from 'context';
 import { useWeatherLocalTime } from 'hooks';
 import { WeatherApiResponse } from 'models';
 
 const TempLocalTimeChild = () => {
   const localTime = useWeatherLocalTime();
-  return <div data-testid="local-time">{localTime?.toString()}</div>;
+  return <div data-testid="local-time">{formatTime(localTime)}</div>;
 };
 
 describe('useWeatherLocalTime', () => {
@@ -31,9 +32,7 @@ describe('useWeatherLocalTime', () => {
 
     // Assert
     const localTimeEl = await wrapper.getByTestId('local-time');
-    expect(localTimeEl.textContent).toBe(
-      'Sat Nov 27 2021 11:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(localTimeEl.textContent).toBe('2021-11-27 11:00:00');
   });
 
   it('Returns empty for the local time based on an undefined api response.', async () => {

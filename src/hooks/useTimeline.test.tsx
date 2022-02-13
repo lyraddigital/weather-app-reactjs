@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
+import { formatTime } from 'utilities';
 import { useTimeline } from 'hooks';
 import { WeatherContext } from 'context';
 import {
@@ -17,7 +18,7 @@ const TempTimelineChild = () => {
       <div key={i}>
         <div data-testid={`timeline-period-temp-${i}`}>{p.temp}</div>
         <div data-testid={`timeline-period-time-${i}`}>
-          {p.time?.toString()}
+          {formatTime(p.time)}
         </div>
         <div data-testid={`timeline-period-weatherId-${i}`}>{p.weatherId}</div>
       </div>
@@ -71,9 +72,7 @@ describe('useTimeline', () => {
     expect(timelineHourTempEl.textContent).toBe(
       apiResponse.hourly![3]!.temp!.toString(),
     );
-    expect(timelineHourDtEl.textContent).toBe(
-      'Sat Nov 27 2021 11:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(timelineHourDtEl.textContent).toBe('2021-11-27 11:00:00');
     expect(timelineHourWheatherIdEl.textContent).toBe(
       apiResponse.hourly![3]!.weather![0].id.toString(),
     );

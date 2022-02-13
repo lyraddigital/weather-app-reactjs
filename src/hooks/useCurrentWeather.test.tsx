@@ -1,15 +1,13 @@
 import { render } from '@testing-library/react';
-import { format, getUnixTime } from 'date-fns';
+import { getUnixTime } from 'date-fns';
 
+import { formatTime } from 'utilities';
 import { WeatherContext } from 'context';
 import { useCurrentWeather } from 'hooks';
 import { WeatherApiResponse } from 'models';
 
 const TempChild = () => {
   const currentWeather = useCurrentWeather();
-  const formatTime = (date: Date | undefined): string => {
-    return format(date || 0, 'yyyy-MM-dd HH:mm:ss');
-  };
 
   const forecastDayEls = currentWeather.forecast.map((fd, i) => (
     <div key={`forecast-day-${i}`}>
@@ -64,7 +62,7 @@ const TempChild = () => {
 };
 
 describe('useCurrentWeather', () => {
-  fit('Maps the api response correctly to the hook response object', async () => {
+  it('Maps the api response correctly to the hook response object', async () => {
     // Arrange
     const apiResponse: WeatherApiResponse = {
       current: {

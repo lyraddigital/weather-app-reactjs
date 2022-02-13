@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
+import { formatTime } from 'utilities';
 import { useForecast } from 'hooks';
 import { WeatherContext } from 'context';
 import {
@@ -14,7 +15,7 @@ const TempForecastChild = () => {
 
   const forecastDayEls = forecast.map((f: WeatherForecastDay, i: number) => (
     <div key={i}>
-      <div data-testid={`forecast-day-dt-${i}`}>{f.date?.toString()}</div>
+      <div data-testid={`forecast-day-dt-${i}`}>{formatTime(f.date)}</div>
       <div data-testid={`forecast-day-high-temp-${i}`}>{f.highTemp}</div>
       <div data-testid={`forecast-day-low-temp-${i}`}>{f.lowTemp}</div>
       <div data-testid={`forecast-day-rain-percentage-${i}`}>
@@ -76,9 +77,7 @@ describe('useForecast', () => {
       `forecast-day-wind-speed-0`,
     );
 
-    expect(forecastDayDtEl.textContent).toBe(
-      'Sat Nov 27 2021 11:00:00 GMT+1100 (Australian Eastern Daylight Time)',
-    );
+    expect(forecastDayDtEl.textContent).toBe('2021-11-27 11:00:00');
     expect(forecastDayHighTempEl.textContent).toBe(
       apiResponse.daily![1]!.temp!.max.toString(),
     );
