@@ -73,7 +73,7 @@ jobs:
         run: cd infrastructure-code && npm install
 
       - name: CDK Synth
-        run: npm run cdk synth
+        run: cd infrastructure-code && npm run cdk synth
 
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
