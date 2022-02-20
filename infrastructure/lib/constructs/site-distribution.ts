@@ -1,8 +1,8 @@
 import { Construct } from '@aws-cdk/core';
 import { HostedZone } from '@aws-cdk/aws-route53';
 import { IBucket } from "@aws-cdk/aws-s3";
-import { CertificateValidation, DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
-import { CloudFrontWebDistribution, OriginAccessIdentity, SecurityPolicyProtocol, SSLMethod } from '@aws-cdk/aws-cloudfront';
+import { Certificate, CertificateValidation, DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
+import { CloudFrontWebDistribution, OriginAccessIdentity, SecurityPolicyProtocol, SSLMethod, ViewerCertificate } from '@aws-cdk/aws-cloudfront';
 
 import { DomainProps } from '../props/domain-props';
 
@@ -31,12 +31,10 @@ export class SiteDistribution extends Construct {
         props.siteBucket.grantRead(originIdentity);
 
         this.instance = new CloudFrontWebDistribution(this, 'WebsiteDistribution', {
-            aliasConfiguration: {
-                acmCertRef: certificate.certificateArn,
-                names: [ domainName ],
+            viewerCertificate: ViewerCertificate.fromAcmCertificate(certificate, {
                 sslMethod: SSLMethod.SNI,
-                securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
-            },
+                securityPolicy: SecurityPolicyProtocol.TLS_V1_2_2021,
+            }),
             errorConfigurations: [
                 {
                     errorCode: 404,
