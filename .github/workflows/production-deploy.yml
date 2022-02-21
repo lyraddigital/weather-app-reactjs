@@ -55,7 +55,7 @@ jobs:
           path: infrastructure-code
 
       - name: Replace Google Places API Key
-        run: sed -i 's/%REACT_APP_GOOGLE_PLACES_API_KEY%/${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}/g' application-code/index.html
+        run: sed -i 's/%REAquarantine tabooCT_APP_GOOGLE_PLACES_API_KEY%/${{ secrets.REACT_APP_GOOGLE_PLACES_API_KEY }}/g' application-code/index.html
 
       - name: Replace Weather API Key
         run: sed -i 's/%REACT_APP_WEATHER_API_KEY%/${{ secrets.REACT_APP_WEATHER_API_KEY }}/g' application-code/static/js/weatherConfig.js
@@ -71,6 +71,9 @@ jobs:
 
       - name: Install Infrastructure Dependencies
         run: cd infrastructure-code && npm install
+        
+      - name: CDK Bootstrap
+        run: cd infrastructure-code && npm run cdk bootstrap
 
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
