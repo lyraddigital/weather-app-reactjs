@@ -73,7 +73,7 @@ jobs:
         run: cd infrastructure-code && npm install
         
       - name: CDK Bootstrap
-        run: cd infrastructure-code && npm run cdk bootstrap
+        run: cd infrastructure-code && npm run cdk bootstrap aws://767013533477/ap-southeast-2
 
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
