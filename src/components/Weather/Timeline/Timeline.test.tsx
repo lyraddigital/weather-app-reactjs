@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { WeatherContext } from 'context';
 import { WeatherApiResponse } from 'models';
@@ -6,9 +6,9 @@ import { WeatherApiResponse } from 'models';
 import { Timeline } from './Timeline';
 
 describe('Timeline', () => {
-  it('Shows the correct heading for the timeline section', async () => {
+  it('Shows the correct heading for the timeline section', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: undefined, isFirstLoad: false, isLoading: true }}
       >
@@ -17,11 +17,11 @@ describe('Timeline', () => {
     );
 
     // Assert
-    const timelineHeading = await wrapper.findByTestId('timeline-heading');
+    const timelineHeading = screen.getByRole('heading');
     expect(timelineHeading.textContent).toBe("Today's weather");
   });
 
-  it('Shows the correct timeline data based on 24 hours of hourly data', async () => {
+  it('Shows the correct timeline data based on 24 hours of hourly data', () => {
     // Arrange
     const weatherData: WeatherApiResponse = {
       hourly: [
@@ -150,7 +150,7 @@ describe('Timeline', () => {
     };
 
     // Action
-    const wrapper = render(
+    const { container } = render(
       <WeatherContext.Provider
         value={{ data: weatherData, isFirstLoad: false, isLoading: true }}
       >
@@ -159,23 +159,20 @@ describe('Timeline', () => {
     );
 
     // Assert
-    const timelinePeriodTimes = await wrapper.findAllByTestId('period-time');
-    const timelinePeriodTemps = await wrapper.findAllByTestId('period-temp');
+    const timelinePeriodEls = container.querySelectorAll('.item');
 
-    expect(timelinePeriodTimes.length).toBe(6);
-    expect(timelinePeriodTimes[0].textContent).toBe('3AM');
-    expect(timelinePeriodTimes[1].textContent).toBe('6AM');
-    expect(timelinePeriodTimes[2].textContent).toBe('9AM');
-    expect(timelinePeriodTimes[3].textContent).toBe('12PM');
-    expect(timelinePeriodTimes[4].textContent).toBe('3PM');
-    expect(timelinePeriodTimes[5].textContent).toBe('6PM');
-
-    expect(timelinePeriodTemps.length).toBe(6);
-    expect(timelinePeriodTemps[0].textContent).toBe('13\u00b0');
-    expect(timelinePeriodTemps[1].textContent).toBe('15\u00b0');
-    expect(timelinePeriodTemps[2].textContent).toBe('20\u00b0');
-    expect(timelinePeriodTemps[3].textContent).toBe('24\u00b0');
-    expect(timelinePeriodTemps[4].textContent).toBe('25\u00b0');
-    expect(timelinePeriodTemps[5].textContent).toBe('24\u00b0');
+    expect(timelinePeriodEls.length).toBe(6);
+    expect(timelinePeriodEls[0].firstChild?.textContent).toBe('3AM');
+    expect(timelinePeriodEls[1].firstChild?.textContent).toBe('6AM');
+    expect(timelinePeriodEls[2].firstChild?.textContent).toBe('9AM');
+    expect(timelinePeriodEls[3].firstChild?.textContent).toBe('12PM');
+    expect(timelinePeriodEls[4].firstChild?.textContent).toBe('3PM');
+    expect(timelinePeriodEls[5].firstChild?.textContent).toBe('6PM');
+    expect(timelinePeriodEls[0].lastChild?.textContent).toBe('13\u00b0');
+    expect(timelinePeriodEls[1].lastChild?.textContent).toBe('15\u00b0');
+    expect(timelinePeriodEls[2].lastChild?.textContent).toBe('20\u00b0');
+    expect(timelinePeriodEls[3].lastChild?.textContent).toBe('24\u00b0');
+    expect(timelinePeriodEls[4].lastChild?.textContent).toBe('25\u00b0');
+    expect(timelinePeriodEls[5].lastChild?.textContent).toBe('24\u00b0');
   });
 });

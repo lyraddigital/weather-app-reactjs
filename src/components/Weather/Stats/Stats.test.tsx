@@ -4,7 +4,7 @@ import { WeatherStatistics } from 'models';
 import { Stats } from './Stats';
 
 describe('Stats', () => {
-  it('Shows the correct information in the component when all data is set', async () => {
+  it('Shows the correct information in the component when all data is set', () => {
     // Arrange
     const sunriseTime = new Date(2022, 2, 13, 6, 33);
     const sunsetTime = new Date(2022, 2, 13, 19, 45);
@@ -18,27 +18,20 @@ describe('Stats', () => {
     };
 
     // Action
-    const wrapper = render(<Stats details={details} />);
+    const { container } = render(<Stats details={details} />);
 
     // Assert
-    const highTempEl = await wrapper.findByTestId('statistics-high-temp');
-    const lowTempEl = await wrapper.findByTestId('statistics-low-temp');
-    const windSpeedEl = await wrapper.findByTestId('statistics-wind-speed');
-    const rainPercentageEl = await wrapper.findByTestId(
-      'statistics-rain-percentage',
-    );
-    const sunriseTimeEl = await wrapper.findByTestId('statistics-sunrise-time');
-    const sunsetTimeEl = await wrapper.findByTestId('statistics-sunset-time');
+    const fieldValueEls = container.querySelectorAll('.value');
 
-    expect(highTempEl.textContent).toBe(`${details.highTemp}\u00b0`);
-    expect(lowTempEl.textContent).toBe(`${details.lowTemp}\u00b0`);
-    expect(windSpeedEl.textContent).toBe(`${details.windSpeed}km/h`);
-    expect(rainPercentageEl.textContent).toBe(`${details.rainPercentage}%`);
-    expect(sunriseTimeEl.textContent).toBe('6:33');
-    expect(sunsetTimeEl.textContent).toBe('19:45');
+    expect(fieldValueEls[0]?.textContent).toBe(`${details.highTemp}\u00b0`);
+    expect(fieldValueEls[1]?.textContent).toBe(`${details.lowTemp}\u00b0`);
+    expect(fieldValueEls[2]?.textContent).toBe(`${details.windSpeed}km/h`);
+    expect(fieldValueEls[3]?.textContent).toBe(`${details.rainPercentage}%`);
+    expect(fieldValueEls[4]?.textContent).toBe('6:33');
+    expect(fieldValueEls[5]?.textContent).toBe('19:45');
   });
 
-  it('Shows blank for sunrise and sunset time as it is not included', async () => {
+  it('Shows blank for sunrise and sunset time as it is not included', () => {
     // Arrange
     const details: WeatherStatistics = {
       highTemp: 35,
@@ -48,13 +41,12 @@ describe('Stats', () => {
     };
 
     // Action
-    const wrapper = render(<Stats details={details} />);
+    const { container } = render(<Stats details={details} />);
 
     // Assert
-    const sunriseTimeEl = await wrapper.findByTestId('statistics-sunrise-time');
-    const sunsetTimeEl = await wrapper.findByTestId('statistics-sunset-time');
+    const fieldValueEls = container.querySelectorAll('.value');
 
-    expect(sunriseTimeEl.textContent).toBe('');
-    expect(sunsetTimeEl.textContent).toBe('');
+    expect(fieldValueEls[4]?.textContent).toBe('');
+    expect(fieldValueEls[5]?.textContent).toBe('');
   });
 });
