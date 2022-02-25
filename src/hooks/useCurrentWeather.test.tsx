@@ -1,10 +1,9 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
 import { formatTime } from 'utilities';
 import { WeatherContext } from 'context';
 import { useCurrentWeather } from 'hooks';
-import { WeatherApiResponse } from 'models';
 
 const TempChild = () => {
   const currentWeather = useCurrentWeather();
@@ -62,9 +61,9 @@ const TempChild = () => {
 };
 
 describe('useCurrentWeather', () => {
-  it('Maps the api response correctly to the hook response object', async () => {
+  it('Maps the api response correctly to the hook response object', () => {
     // Arrange
-    const apiResponse: WeatherApiResponse = {
+    const apiResponse = {
       current: {
         temp: 5,
         weather: [{ id: 800 }],
@@ -106,7 +105,7 @@ describe('useCurrentWeather', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -115,106 +114,92 @@ describe('useCurrentWeather', () => {
     );
 
     // Assert
-    const currentTempEl = await wrapper.findByTestId('weather-current-temp');
-    const weatherIdEl = await wrapper.findByTestId('weather-id');
-    const statisticsHighTempEl = await wrapper.findByTestId(
+    const currentTempEl = screen.getByTestId('weather-current-temp');
+    const weatherIdEl = screen.getByTestId('weather-id');
+    const statisticsHighTempEl = screen.getByTestId(
       'weather-statistics-highTemp',
     );
-    const statisticsLowTempEl = await wrapper.findByTestId(
+    const statisticsLowTempEl = screen.getByTestId(
       'weather-statistics-lowTemp',
     );
-    const statisticsWindSpeedEl = await wrapper.findByTestId(
+    const statisticsWindSpeedEl = screen.getByTestId(
       'weather-statistics-windSpeed',
     );
-    const statisticsRainPercentageEl = await wrapper.findByTestId(
+    const statisticsRainPercentageEl = screen.getByTestId(
       'weather-statistics-rainPercentage',
     );
-    const statisticsSunriseTimeEl = await wrapper.findByTestId(
+    const statisticsSunriseTimeEl = screen.getByTestId(
       'weather-statistics-sunriseTime',
     );
-    const statisticsSunsetTimeEl = await wrapper.findByTestId(
+    const statisticsSunsetTimeEl = screen.getByTestId(
       'weather-statistics-sunsetTime',
     );
-    const statisticsLocalTimeEl = await wrapper.findByTestId(
+    const statisticsLocalTimeEl = screen.getByTestId(
       'weather-statistics-localTime',
     );
-    const firstDayForecastDateEl = await wrapper.findByTestId(
-      'forecast-day-date-0',
-    );
-    const firstDayForecastHighTempEl = await wrapper.findByTestId(
+    const firstDayForecastDateEl = screen.getByTestId('forecast-day-date-0');
+    const firstDayForecastHighTempEl = screen.getByTestId(
       'forecast-day-highTemp-0',
     );
-    const firstDayForecastLowTempEl = await wrapper.findByTestId(
+    const firstDayForecastLowTempEl = screen.getByTestId(
       'forecast-day-lowTemp-0',
     );
-    const firstDayForecastWeatherIdEl = await wrapper.findByTestId(
+    const firstDayForecastWeatherIdEl = screen.getByTestId(
       'forecast-day-weatherId-0',
     );
-    const firstDayForecastRainPercentageEl = await wrapper.findByTestId(
+    const firstDayForecastRainPercentageEl = screen.getByTestId(
       'forecast-day-rainPercentage-0',
     );
-    const firstDayForecastWindSpeedEl = await wrapper.findByTestId(
+    const firstDayForecastWindSpeedEl = screen.getByTestId(
       'forecast-day-windSpeed-0',
     );
-    const secondDayForecastDateEl = await wrapper.findByTestId(
-      'forecast-day-date-1',
-    );
-    const secondDayForecastHighTempEl = await wrapper.findByTestId(
+    const secondDayForecastDateEl = screen.getByTestId('forecast-day-date-1');
+    const secondDayForecastHighTempEl = screen.getByTestId(
       'forecast-day-highTemp-1',
     );
-    const secondDayForecastLowTempEl = await wrapper.findByTestId(
+    const secondDayForecastLowTempEl = screen.getByTestId(
       'forecast-day-lowTemp-1',
     );
-    const secondDayForecastWeatherIdEl = await wrapper.findByTestId(
+    const secondDayForecastWeatherIdEl = screen.getByTestId(
       'forecast-day-weatherId-1',
     );
-    const secondDayForecastRainPercentageEl = await wrapper.findByTestId(
+    const secondDayForecastRainPercentageEl = screen.getByTestId(
       'forecast-day-rainPercentage-1',
     );
-    const secondDayForecastWindSpeedEl = await wrapper.findByTestId(
+    const secondDayForecastWindSpeedEl = screen.getByTestId(
       'forecast-day-windSpeed-1',
     );
-    const firstTimePeriodWeatherIdEl = await wrapper.findByTestId(
+    const firstTimePeriodWeatherIdEl = screen.getByTestId(
       'timeline-period-weatherId-0',
     );
-    const firstTimePeriodTempEl = await wrapper.findByTestId(
-      'timeline-period-temp-0',
-    );
-    const firstTimePeriodTimeEl = await wrapper.findByTestId(
-      'timeline-period-time-0',
-    );
-    const secondTimePeriodWeatherIdEl = await wrapper.findByTestId(
+    const firstTimePeriodTempEl = screen.getByTestId('timeline-period-temp-0');
+    const firstTimePeriodTimeEl = screen.getByTestId('timeline-period-time-0');
+    const secondTimePeriodWeatherIdEl = screen.getByTestId(
       'timeline-period-weatherId-1',
     );
-    const secondTimePeriodTempEl = await wrapper.findByTestId(
-      'timeline-period-temp-1',
-    );
-    const secondTimePeriodTimeEl = await wrapper.findByTestId(
-      'timeline-period-time-1',
-    );
+    const secondTimePeriodTempEl = screen.getByTestId('timeline-period-temp-1');
+    const secondTimePeriodTimeEl = screen.getByTestId('timeline-period-time-1');
 
-    expect(currentTempEl.textContent).toBe(
-      apiResponse.current!.temp!.toString(),
-    );
+    expect(currentTempEl.textContent).toBe(apiResponse.current.temp.toString());
 
     expect(weatherIdEl.textContent).toBe(
-      apiResponse.current!.weather![0].id.toString(),
+      apiResponse.current.weather[0].id.toString(),
     );
 
     expect(statisticsHighTempEl.textContent).toBe(
-      apiResponse.daily![0]!.temp!.max.toString(),
+      apiResponse.daily[0].temp.max.toString(),
     );
 
     expect(statisticsLowTempEl.textContent).toBe(
-      apiResponse.daily![0]!.temp!.min.toString(),
+      apiResponse.daily[0].temp.min.toString(),
     );
 
     expect(statisticsWindSpeedEl.textContent).toBe(
-      apiResponse.current!.wind_speed!.toString(),
+      apiResponse.current.wind_speed.toString(),
     );
 
     expect(statisticsRainPercentageEl.textContent).toBe(
-      apiResponse.current!.humidity!.toString(),
+      apiResponse.current.humidity.toString(),
     );
 
     expect(statisticsSunriseTimeEl.textContent).toBe('2021-11-27 18:30:00');
@@ -223,78 +208,78 @@ describe('useCurrentWeather', () => {
     expect(firstDayForecastDateEl.textContent).toBe('2021-11-29 07:00:00');
 
     expect(firstDayForecastHighTempEl.textContent).toBe(
-      apiResponse.daily![0]!.temp!.max.toString(),
+      apiResponse.daily[0].temp.max.toString(),
     );
 
     expect(firstDayForecastLowTempEl.textContent).toBe(
-      apiResponse.daily![0]!.temp!.min.toString(),
+      apiResponse.daily[0].temp.min.toString(),
     );
 
     expect(firstDayForecastWeatherIdEl.textContent).toBe(
-      apiResponse.daily![0]!.weather![0].id.toString(),
+      apiResponse.daily[0].weather[0].id.toString(),
     );
 
     expect(firstDayForecastRainPercentageEl.textContent).toBe(
-      apiResponse.daily![0]!.humidity!.toString(),
+      apiResponse.daily[0].humidity.toString(),
     );
 
     expect(firstDayForecastWindSpeedEl.textContent).toBe(
-      apiResponse.daily![0]!.wind_speed!.toString(),
+      apiResponse.daily[0].wind_speed.toString(),
     );
 
     expect(secondDayForecastDateEl.textContent).toBe('2021-11-30 07:00:00');
 
     expect(secondDayForecastHighTempEl.textContent).toBe(
-      apiResponse.daily![1]!.temp!.max.toString(),
+      apiResponse.daily[1].temp.max.toString(),
     );
 
     expect(secondDayForecastLowTempEl.textContent).toBe(
-      apiResponse.daily![1]!.temp!.min.toString(),
+      apiResponse.daily[1].temp.min.toString(),
     );
 
     expect(secondDayForecastWeatherIdEl.textContent).toBe(
-      apiResponse.daily![1]!.weather![0].id.toString(),
+      apiResponse.daily[1].weather[0].id.toString(),
     );
 
     expect(secondDayForecastRainPercentageEl.textContent).toBe(
-      apiResponse.daily![1]!.humidity!.toString(),
+      apiResponse.daily[1].humidity.toString(),
     );
 
     expect(secondDayForecastWindSpeedEl.textContent).toBe(
-      apiResponse.daily![1]!.wind_speed!.toString(),
+      apiResponse.daily[1].wind_speed.toString(),
     );
 
     expect(firstTimePeriodWeatherIdEl.textContent).toBe(
-      apiResponse.hourly![0]!.weather![0].id.toString(),
+      apiResponse.hourly[0].weather[0].id.toString(),
     );
 
     expect(firstTimePeriodTempEl.textContent).toBe(
-      apiResponse.hourly![0]!.temp!.toString(),
+      apiResponse.hourly[0].temp.toString(),
     );
 
     expect(firstTimePeriodTimeEl.textContent).toBe('2021-11-27 20:00:00');
 
     expect(secondTimePeriodWeatherIdEl.textContent).toBe(
-      apiResponse.hourly![1]!.weather![0].id.toString(),
+      apiResponse.hourly[1].weather[0].id.toString(),
     );
 
     expect(secondTimePeriodTempEl.textContent).toBe(
-      apiResponse.hourly![1]!.temp!.toString(),
+      apiResponse.hourly[1].temp.toString(),
     );
 
     expect(secondTimePeriodTimeEl.textContent).toBe('2021-11-27 21:00:00');
   });
 
-  it('Maps the api response correctly to the hook response when some data is missing', async () => {
+  it('Maps the api response correctly to the hook response when some data is missing', () => {
     // Arrange
-    const apiResponse: WeatherApiResponse = {
+    const apiResponse = {
       daily: [{}],
       hourly: [{}],
       timezone: 'Australia/Sydney',
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -303,56 +288,50 @@ describe('useCurrentWeather', () => {
     );
 
     // Assert
-    const currentTempEl = await wrapper.findByTestId('weather-current-temp');
-    const weatherIdEl = await wrapper.findByTestId('weather-id');
-    const statisticsHighTempEl = await wrapper.findByTestId(
+    const currentTempEl = screen.getByTestId('weather-current-temp');
+    const weatherIdEl = screen.getByTestId('weather-id');
+    const statisticsHighTempEl = screen.getByTestId(
       'weather-statistics-highTemp',
     );
-    const statisticsLowTempEl = await wrapper.findByTestId(
+    const statisticsLowTempEl = screen.getByTestId(
       'weather-statistics-lowTemp',
     );
-    const statisticsWindSpeedEl = await wrapper.findByTestId(
+    const statisticsWindSpeedEl = screen.getByTestId(
       'weather-statistics-windSpeed',
     );
-    const statisticsRainPercentageEl = await wrapper.findByTestId(
+    const statisticsRainPercentageEl = screen.getByTestId(
       'weather-statistics-rainPercentage',
     );
-    const statisticsSunriseTimeEl = await wrapper.findByTestId(
+    const statisticsSunriseTimeEl = screen.getByTestId(
       'weather-statistics-sunriseTime',
     );
-    const statisticsSunsetTimeEl = await wrapper.findByTestId(
+    const statisticsSunsetTimeEl = screen.getByTestId(
       'weather-statistics-sunsetTime',
     );
-    const statisticsLocalTimeEl = await wrapper.findByTestId(
+    const statisticsLocalTimeEl = screen.getByTestId(
       'weather-statistics-localTime',
     );
-    const firstDayForecastDateEl = await wrapper.findByTestId(
-      'forecast-day-date-0',
-    );
-    const firstDayForecastHighTempEl = await wrapper.findByTestId(
+    const firstDayForecastDateEl = screen.getByTestId('forecast-day-date-0');
+    const firstDayForecastHighTempEl = screen.getByTestId(
       'forecast-day-highTemp-0',
     );
-    const firstDayForecastLowTempEl = await wrapper.findByTestId(
+    const firstDayForecastLowTempEl = screen.getByTestId(
       'forecast-day-lowTemp-0',
     );
-    const firstDayForecastWeatherIdEl = await wrapper.findByTestId(
+    const firstDayForecastWeatherIdEl = screen.getByTestId(
       'forecast-day-weatherId-0',
     );
-    const firstDayForecastRainPercentageEl = await wrapper.findByTestId(
+    const firstDayForecastRainPercentageEl = screen.getByTestId(
       'forecast-day-rainPercentage-0',
     );
-    const firstDayForecastWindSpeedEl = await wrapper.findByTestId(
+    const firstDayForecastWindSpeedEl = screen.getByTestId(
       'forecast-day-windSpeed-0',
     );
-    const firstTimePeriodWeatherIdEl = await wrapper.findByTestId(
+    const firstTimePeriodWeatherIdEl = screen.getByTestId(
       'timeline-period-weatherId-0',
     );
-    const firstTimePeriodTempEl = await wrapper.findByTestId(
-      'timeline-period-temp-0',
-    );
-    const firstTimePeriodTimeEl = await wrapper.findByTestId(
-      'timeline-period-time-0',
-    );
+    const firstTimePeriodTempEl = screen.getByTestId('timeline-period-temp-0');
+    const firstTimePeriodTimeEl = screen.getByTestId('timeline-period-time-0');
 
     expect(currentTempEl.textContent).toBe('0');
     expect(weatherIdEl.textContent).toBe('0');
@@ -374,9 +353,9 @@ describe('useCurrentWeather', () => {
     expect(firstTimePeriodTimeEl.textContent).toBe('');
   });
 
-  it('Maps the api response correctly to the hook response when an item in the daily and hourly is undefined or null', async () => {
+  it('Maps the api response correctly to the hook response when an item in the daily and hourly is undefined or null', () => {
     // Arrange
-    const apiResponse: WeatherApiResponse = {
+    const apiResponse = {
       daily: [undefined],
       hourly: [undefined],
       timezone: 'Australia/Sydney',
@@ -392,33 +371,27 @@ describe('useCurrentWeather', () => {
     );
 
     // Assert
-    const firstDayForecastDateEl = await wrapper.findByTestId(
-      'forecast-day-date-0',
-    );
-    const firstDayForecastHighTempEl = await wrapper.findByTestId(
+    const firstDayForecastDateEl = screen.getByTestId('forecast-day-date-0');
+    const firstDayForecastHighTempEl = screen.getByTestId(
       'forecast-day-highTemp-0',
     );
-    const firstDayForecastLowTempEl = await wrapper.findByTestId(
+    const firstDayForecastLowTempEl = screen.getByTestId(
       'forecast-day-lowTemp-0',
     );
-    const firstDayForecastWeatherIdEl = await wrapper.findByTestId(
+    const firstDayForecastWeatherIdEl = screen.getByTestId(
       'forecast-day-weatherId-0',
     );
-    const firstDayForecastRainPercentageEl = await wrapper.findByTestId(
+    const firstDayForecastRainPercentageEl = screen.getByTestId(
       'forecast-day-rainPercentage-0',
     );
-    const firstDayForecastWindSpeedEl = await wrapper.findByTestId(
+    const firstDayForecastWindSpeedEl = screen.getByTestId(
       'forecast-day-windSpeed-0',
     );
-    const firstTimePeriodWeatherIdEl = await wrapper.findByTestId(
+    const firstTimePeriodWeatherIdEl = screen.getByTestId(
       'timeline-period-weatherId-0',
     );
-    const firstTimePeriodTempEl = await wrapper.findByTestId(
-      'timeline-period-temp-0',
-    );
-    const firstTimePeriodTimeEl = await wrapper.findByTestId(
-      'timeline-period-time-0',
-    );
+    const firstTimePeriodTempEl = screen.getByTestId('timeline-period-temp-0');
+    const firstTimePeriodTimeEl = screen.getByTestId('timeline-period-time-0');
 
     expect(firstDayForecastDateEl.textContent).toBe('');
     expect(firstDayForecastHighTempEl.textContent).toBe('0');
