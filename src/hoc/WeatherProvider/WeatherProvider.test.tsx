@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { render, RenderResult, waitFor } from '@testing-library/react';
+import { render, RenderResult, screen } from '@testing-library/react';
 import { MemoryRouter as Router, Route, Switch } from 'react-router';
 
 import { WeatherLocation, WeatherState } from 'models';
@@ -18,34 +18,32 @@ const TestProviderChildComponent = () => {
   );
 };
 
-const renderWithLocation = async (
+const renderWithLocation = (
   weatherProvider: JSX.Element,
   location: WeatherLocation,
-): Promise<RenderResult> => {
+): RenderResult => {
   const updateLocation = (_: WeatherLocation): void => {
     // Do nothing
   };
 
-  return waitFor(() =>
-    render(
-      <LocationContext.Provider value={{ location, updateLocation }}>
-        <Router initialEntries={['/', 'load-error']}>
-          <Switch>
-            <Route path="/load-error">
-              <div data-testid="no-weather-data">No data found.</div>
-            </Route>
-            <Route path="">{weatherProvider}</Route>
-          </Switch>
-        </Router>
-      </LocationContext.Provider>,
-    ),
+  return render(
+    <LocationContext.Provider value={{ location, updateLocation }}>
+      <Router initialEntries={['/', 'load-error']}>
+        <Switch>
+          <Route path="/load-error">
+            <div data-testid="no-weather-data">No data found.</div>
+          </Route>
+          <Route path="">{weatherProvider}</Route>
+        </Switch>
+      </Router>
+    </LocationContext.Provider>,
   );
 };
 
 describe('WeatherProvider', () => {
-  it('By default contains no weather details', async () => {
+  it('By default contains no weather details', () => {
     // Arrange / Action
-    const wrapper = await renderWithLocation(
+    renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -58,14 +56,14 @@ describe('WeatherProvider', () => {
     );
 
     // Assert
-    const noWeatherDataEl = await wrapper.findByTestId('no-weather-data');
+    const noWeatherDataEl = screen.getByTestId('no-weather-data');
 
     expect(noWeatherDataEl).toBeTruthy();
   });
 
-  it('Passing in Melbourne geocode. Returns current weather data for Melbourne', async () => {
+  it('Passing in Melbourne geocode. Returns current weather data for Melbourne', () => {
     // Arrange / Action
-    const wrapper = await renderWithLocation(
+    renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -78,16 +76,16 @@ describe('WeatherProvider', () => {
     );
 
     // Assert
-    const currentTempEl = await wrapper.findByTestId('current-temp');
-    const timezoneEl = await wrapper.findByTestId('timezone');
+    const currentTempEl = screen.getByTestId('current-temp');
+    const timezoneEl = screen.getByTestId('timezone');
 
     expect(currentTempEl.textContent).toBe('17');
     expect(timezoneEl.textContent).toBe('Australia/Sydney');
   });
 
-  it('Passing in London geocode. Returns current weather data for London', async () => {
+  it('Passing in London geocode. Returns current weather data for London', () => {
     // Arrange / Action
-    const wrapper = await renderWithLocation(
+    renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -100,16 +98,16 @@ describe('WeatherProvider', () => {
     );
 
     // Assert
-    const currentTempEl = await wrapper.findByTestId('current-temp');
-    const timezoneEl = await wrapper.findByTestId('timezone');
+    const currentTempEl = screen.getByTestId('current-temp');
+    const timezoneEl = screen.getByTestId('timezone');
 
     expect(currentTempEl.textContent).toBe('5');
     expect(timezoneEl.textContent).toBe('Europe/London');
   });
 
-  it('Passing in New York geocode. Returns current weather data for New York', async () => {
+  it('Passing in New York geocode. Returns current weather data for New York', () => {
     // Arrange / Action
-    const wrapper = await renderWithLocation(
+    renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -122,8 +120,8 @@ describe('WeatherProvider', () => {
     );
 
     // Assert
-    const currentTempEl = await wrapper.findByTestId('current-temp');
-    const timezoneEl = await wrapper.findByTestId('timezone');
+    const currentTempEl = screen.getByTestId('current-temp');
+    const timezoneEl = screen.getByTestId('timezone');
 
     expect(currentTempEl.textContent).toBe('17.44');
     expect(timezoneEl.textContent).toBe('America/New_York');
