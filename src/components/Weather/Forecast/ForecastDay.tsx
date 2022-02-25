@@ -21,36 +21,39 @@ export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
   const dayName = formatDay(day.date);
   const shortDate = formatShortDate(day.date);
 
-  let classes = classNames({
+  const classes = classNames({
     [style.row]: true,
     [style.darkMode]: isDarkMode,
   });
 
+  const iconClasses = classNames({
+    [style.fieldValue]: true,
+    [style.icon]: true,
+  });
+
   return (
     <div className={classes}>
-      <div className={style.date}>
-        <div data-testid="forecast-day-name">{dayName}</div>
-        <div data-testid="forecast-day-date" className={style.label}>
-          {shortDate}
-        </div>
+      <div className={style.fieldValue}>
+        <div>{dayName}</div>
+        <div className={style.label}>{shortDate}</div>
       </div>
-      <div className={style.icon}>
+      <div className={iconClasses}>
         <WeatherIcon weatherId={day.weatherId} />
       </div>
-      <div className={style.low}>
-        <div data-testid="forecast-day-lowTemp">{day.lowTemp}&deg;</div>
+      <div className={style.fieldValue}>
+        <div>{day.lowTemp}&deg;</div>
         <div className={style.label}>Low</div>
       </div>
-      <div className={style.high}>
-        <div data-testid="forecast-day-highTemp">{day.highTemp}&deg;</div>
+      <div className={style.fieldValue}>
+        <div>{day.highTemp}&deg;</div>
         <div className={style.label}>High</div>
       </div>
-      <div className={style.rain}>
-        <div data-testid="forecast-rain-percentage">{day.rainPercentage}%</div>
+      <div className={style.fieldValue}>
+        <div>{day.rainPercentage}%</div>
         <div className={style.label}>Rain</div>
       </div>
-      <div className={style.wind}>
-        <div data-testid="forecast-day-windSpeed">{day.windSpeed}km/h</div>
+      <div className={style.fieldValue}>
+        <div>{day.windSpeed}km/h</div>
         <div className={style.label}>Wind</div>
       </div>
     </div>

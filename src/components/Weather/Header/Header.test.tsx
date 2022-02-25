@@ -7,7 +7,7 @@ import { WeatherApiResponse, WeatherLocation } from 'models';
 import { Header } from './Header';
 
 describe('Header', () => {
-  it('No location or weather data, renders an empty header', async () => {
+  it('No location or weather data, renders an empty header', () => {
     // Arrange / Action
     render(
       <Router>
@@ -21,7 +21,7 @@ describe('Header', () => {
     expect(headingEl?.textContent).toBe(', ');
   });
 
-  it('Location and weather data set, renders the header correctly', async () => {
+  it('Location and weather data set, renders the header correctly', () => {
     // Arrange
     const location: WeatherLocation = {
       city: 'Melbourne',

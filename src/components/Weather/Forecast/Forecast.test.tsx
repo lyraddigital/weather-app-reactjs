@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { WeatherContext } from 'context';
 import { WeatherApiResponse } from 'models';
@@ -6,9 +6,9 @@ import { WeatherApiResponse } from 'models';
 import { Forecast } from './Forecast';
 
 describe('Forecast', () => {
-  it('No weather data, shows no forecast data', async () => {
+  it('No weather data, shows no forecast data', () => {
     // Arrange / Action
-    const wrapper = render(
+    const { container } = render(
       <WeatherContext.Provider
         value={{ data: undefined, isFirstLoad: false, isLoading: true }}
       >
@@ -17,11 +17,11 @@ describe('Forecast', () => {
     );
 
     // Assert
-    const forecastDayEls = await wrapper.queryAllByTestId('forecast-day-name');
-    expect(forecastDayEls.length).toBe(0);
+    const rowEls = container.querySelectorAll('.row');
+    expect(rowEls.length).toBe(0);
   });
 
-  it('Weather data with forecast details, shows forecast entries on screen', async () => {
+  it('Weather data with forecast details, shows forecast entries on screen', () => {
     // Arrange
     const weatherData: WeatherApiResponse = {
       daily: [
@@ -52,7 +52,7 @@ describe('Forecast', () => {
     };
 
     // Action
-    const wrapper = render(
+    const { container } = render(
       <WeatherContext.Provider
         value={{ data: weatherData, isFirstLoad: false, isLoading: true }}
       >
@@ -61,22 +61,22 @@ describe('Forecast', () => {
     );
 
     // Assert
-    const forecastDayEls = await wrapper.queryAllByTestId('forecast-day-name');
-    expect(forecastDayEls.length).toBe(5);
+    const dateEls = container.querySelectorAll('.row');
+    expect(dateEls.length).toBe(5);
 
     // Note that we only get the day name, so we'll ensure that
     // the first day shown is on a Thursday (as 01/12/2021 was on a Thursday).
     // The last one will be on a Monday (as 06/12/2021 was on a Monday)
-    expect(forecastDayEls[0].textContent).toBe('Thu');
-    expect(forecastDayEls[1].textContent).toBe('Fri');
-    expect(forecastDayEls[2].textContent).toBe('Sat');
-    expect(forecastDayEls[3].textContent).toBe('Sun');
-    expect(forecastDayEls[4].textContent).toBe('Mon');
+    expect(dateEls[0].firstChild?.firstChild?.textContent).toBe('Thu');
+    expect(dateEls[1].firstChild?.firstChild?.textContent).toBe('Fri');
+    expect(dateEls[2].firstChild?.firstChild?.textContent).toBe('Sat');
+    expect(dateEls[3].firstChild?.firstChild?.textContent).toBe('Sun');
+    expect(dateEls[4].firstChild?.firstChild?.textContent).toBe('Mon');
   });
 
-  it('Shows the correct heading text', async () => {
+  it('Shows the correct heading text', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: undefined, isFirstLoad: false, isLoading: true }}
       >
@@ -85,7 +85,7 @@ describe('Forecast', () => {
     );
 
     // Assert
-    const headingEl = await wrapper.findByTestId('forecast-heading');
+    const headingEl = screen.getByRole('heading');
     expect(headingEl.textContent).toBe('Next 5 days');
   });
 });

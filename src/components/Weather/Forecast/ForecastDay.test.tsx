@@ -4,16 +4,16 @@ import { WeatherForecastDay } from 'models';
 import { ForecastDay } from './ForecastDay';
 
 describe('ForecastDay', () => {
-  it('day property not set. Returns null', async () => {
+  it('day property not set. Returns null', () => {
     // Arrange / Action
-    const wrapper = render(<ForecastDay />);
+    const { container } = render(<ForecastDay />);
 
     // Assert
-    const forecastDayNameEls = wrapper.queryAllByTestId('forecast-day-name');
+    const forecastDayNameEls = container.querySelectorAll('.row');
     expect(forecastDayNameEls.length).toBe(0);
   });
 
-  it('day property is set, sets the correct data in the correct places', async () => {
+  it('day property is set, sets the correct data in the correct places', () => {
     // Arrange
     const day: WeatherForecastDay = {
       date: new Date(2021, 11, 30),
@@ -25,29 +25,20 @@ describe('ForecastDay', () => {
     };
 
     // Action
-    const wrapper = render(<ForecastDay day={day} />);
+    const { container } = render(<ForecastDay day={day} />);
 
     // Assert
-    const forecastDayNameEl = await wrapper.findByTestId('forecast-day-name');
-    const forecastDayDateEl = await wrapper.findByTestId('forecast-day-date');
-    const forecastDayLowTempEl = await wrapper.findByTestId(
-      'forecast-day-lowTemp',
-    );
-    const forecastDayHighTempEl = await wrapper.findByTestId(
-      'forecast-day-highTemp',
-    );
-    const forecastDayRainPercentageEl = await wrapper.findByTestId(
-      'forecast-rain-percentage',
-    );
-    const forecastDayWindSpeedEl = await wrapper.findByTestId(
-      'forecast-day-windSpeed',
-    );
+    const forecastDayFieldValueEls = container.querySelectorAll('.fieldValue');
 
-    expect(forecastDayNameEl.textContent).toBe('Thu');
-    expect(forecastDayDateEl.textContent).toBe('30/12');
-    expect(forecastDayLowTempEl.textContent).toBe('11\u00b0');
-    expect(forecastDayHighTempEl.textContent).toBe('22\u00b0');
-    expect(forecastDayRainPercentageEl.textContent).toBe('2%');
-    expect(forecastDayWindSpeedEl.textContent).toBe('22km/h');
+    expect(forecastDayFieldValueEls[0]?.firstChild?.textContent).toBe('Thu');
+    expect(forecastDayFieldValueEls[0]?.lastChild?.textContent).toBe('30/12');
+    expect(forecastDayFieldValueEls[2]?.firstChild?.textContent).toBe(
+      '11\u00b0',
+    );
+    expect(forecastDayFieldValueEls[3].firstChild?.textContent).toBe(
+      '22\u00b0',
+    );
+    expect(forecastDayFieldValueEls[4].firstChild?.textContent).toBe('2%');
+    expect(forecastDayFieldValueEls[5].firstChild?.textContent).toBe('22km/h');
   });
 });
