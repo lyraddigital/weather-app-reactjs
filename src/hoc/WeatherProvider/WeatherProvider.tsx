@@ -11,7 +11,7 @@ import { getWeatherApiData } from 'core/apis/Weather';
 
 export const WeatherProvider = ({
   children,
-}: PropsWithChildren<any>): JSX.Element => {
+}: PropsWithChildren<unknown>): JSX.Element => {
   const [weatherData, setWeatherData] = useState<
     WeatherApiResponse | undefined
   >();

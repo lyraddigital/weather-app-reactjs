@@ -6,7 +6,7 @@ import { Configuration, getFromLocalStorage, setToLocalStorage } from 'core';
 
 export const LocationProvider = ({
   children,
-}: PropsWithChildren<any>): JSX.Element => {
+}: PropsWithChildren<unknown>): JSX.Element => {
   const [location, setLocation] = useState<WeatherLocation | undefined>(
     getFromLocalStorage<WeatherLocation>(
       Configuration.weatherLocationStorageKey,

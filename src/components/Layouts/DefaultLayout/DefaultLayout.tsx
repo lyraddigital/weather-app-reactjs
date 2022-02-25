@@ -4,7 +4,7 @@ import style from './DefaultLayout.module.scss';
 
 export const DefaultLayout = ({
   children,
-}: PropsWithChildren<any>): JSX.Element => {
+}: PropsWithChildren<unknown>): JSX.Element => {
   return (
     <div className={style.layoutContainer}>
       <div className={style.innerContainer}>{children}</div>

@@ -2,7 +2,7 @@ import { isCurrentTimeNight } from 'core';
 
 import { useCurrentWeather } from './useCurrentWeather';
 
-export const useCurrentWeatherTheme = () => {
+export const useCurrentWeatherTheme = (): { isDarkMode: boolean } => {
   const { statistics } = useCurrentWeather();
 
   const isDarkMode = isCurrentTimeNight(

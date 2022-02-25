@@ -18,6 +18,7 @@ describe('Timeline', () => {
 
     // Assert
     const timelineHeading = screen.getByRole('heading');
+
     expect(timelineHeading.textContent).toBe("Today's weather");
   });
 

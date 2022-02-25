@@ -12,7 +12,7 @@ import style from './WeatherThemedLayout.module.scss';
 
 export const WeatherThemedLayout = ({
   children,
-}: PropsWithChildren<any>): JSX.Element => {
+}: PropsWithChildren<unknown>): JSX.Element => {
   const { isLoading, isFirstLoad } = useWeatherLoading();
   const { isDarkMode } = useCurrentWeatherTheme();
   const locationImage = useLocationImage();

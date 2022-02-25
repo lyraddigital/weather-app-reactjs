@@ -31,7 +31,9 @@ const TempLocationChild = () => {
 describe('useLocationUpdater', () => {
   it('Exists and can be called when LocationStore is defined', async () => {
     // Arrange
-    const locationUpdater: (location: WeatherLocation) => void = () => {};
+    const locationUpdater: (location: WeatherLocation) => void = () => {
+      // Do nothing
+    };
     const store: LocationStore = {
       location: undefined,
       updateLocation: locationUpdater,
@@ -51,6 +53,7 @@ describe('useLocationUpdater', () => {
     const locationMessages = wrapper.queryAllByTestId(
       'update-location-message',
     );
+
     expect(locationMessages.length).toBe(1);
   });
 
@@ -69,6 +72,7 @@ describe('useLocationUpdater', () => {
     const locationMessages = wrapper.queryAllByTestId(
       'update-location-message',
     );
+
     expect(locationMessages.length).toBe(0);
   });
 });

@@ -24,6 +24,7 @@ describe('TimePeriod', () => {
     expect((timePeriodEl?.children[1] as HTMLImageElement).alt).toBe(
       'Light rain',
     );
+
     expect((timePeriodEl?.children[1] as HTMLImageElement).src).toBe(
       'http://localhost/rain.svg',
     );

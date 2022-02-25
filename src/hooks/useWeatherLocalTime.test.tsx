@@ -32,6 +32,7 @@ describe('useWeatherLocalTime', () => {
 
     // Assert
     const localTimeEl = await wrapper.getByTestId('local-time');
+
     expect(localTimeEl.textContent).toBe('2021-11-27 11:00:00');
   });
 
@@ -47,6 +48,7 @@ describe('useWeatherLocalTime', () => {
 
     // Assert
     const localTimeEl = await wrapper.getByTestId('local-time');
+
     expect(localTimeEl.textContent).toBe('');
   });
 
@@ -70,6 +72,7 @@ describe('useWeatherLocalTime', () => {
 
     // Assert
     const localTimeEl = await wrapper.getByTestId('local-time');
+
     expect(localTimeEl.textContent).toBe('');
   });
 });

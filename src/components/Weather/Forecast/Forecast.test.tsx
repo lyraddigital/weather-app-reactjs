@@ -18,6 +18,7 @@ describe('Forecast', () => {
 
     // Assert
     const rowEls = container.querySelectorAll('.row');
+
     expect(rowEls.length).toBe(0);
   });
 
@@ -62,6 +63,7 @@ describe('Forecast', () => {
 
     // Assert
     const dateEls = container.querySelectorAll('.row');
+
     expect(dateEls.length).toBe(5);
 
     // Note that we only get the day name, so we'll ensure that
@@ -86,6 +88,7 @@ describe('Forecast', () => {
 
     // Assert
     const headingEl = screen.getByRole('heading');
+
     expect(headingEl.textContent).toBe('Next 5 days');
   });
 });

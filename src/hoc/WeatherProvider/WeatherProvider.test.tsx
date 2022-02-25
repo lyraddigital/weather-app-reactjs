@@ -22,7 +22,7 @@ const renderWithLocation = (
   weatherProvider: JSX.Element,
   location: WeatherLocation,
 ): RenderResult => {
-  const updateLocation = (_: WeatherLocation): void => {
+  const updateLocation = () => {
     // Do nothing
   };
 

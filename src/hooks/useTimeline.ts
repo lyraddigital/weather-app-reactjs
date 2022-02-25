@@ -2,7 +2,7 @@ import { WeatherTimelinePeriod } from 'models';
 
 import { useCurrentWeather } from './useCurrentWeather';
 
-export const useTimeline = () => {
+export const useTimeline = (): Array<WeatherTimelinePeriod> => {
   const { timeline } = useCurrentWeather();
 
   if (!timeline) {

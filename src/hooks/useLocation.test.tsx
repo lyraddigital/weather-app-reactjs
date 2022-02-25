@@ -28,7 +28,9 @@ describe('useLocation', () => {
     };
     const store: LocationStore = {
       location,
-      updateLocation: (_: WeatherLocation) => {},
+      updateLocation: () => {
+        // Do nothing
+      },
     };
 
     // Action
@@ -54,7 +56,9 @@ describe('useLocation', () => {
     // Arrange
     const store: LocationStore = {
       location: undefined,
-      updateLocation: (_: WeatherLocation) => {},
+      updateLocation: () => {
+        // Do nothing
+      },
     };
 
     // Action

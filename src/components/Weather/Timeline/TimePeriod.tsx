@@ -16,7 +16,7 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
   const { isDarkMode } = useCurrentWeatherTheme();
   const formattedTime = formatShortHour(period.time);
 
-  let classes = classNames({
+  const classes = classNames({
     [style.item]: true,
     [style.darkMode]: isDarkMode,
   });

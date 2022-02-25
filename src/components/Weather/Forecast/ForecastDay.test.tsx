@@ -10,6 +10,7 @@ describe('ForecastDay', () => {
 
     // Assert
     const forecastDayNameEls = container.querySelectorAll('.row');
+
     expect(forecastDayNameEls.length).toBe(0);
   });
 
@@ -35,9 +36,11 @@ describe('ForecastDay', () => {
     expect(forecastDayFieldValueEls[2]?.firstChild?.textContent).toBe(
       '11\u00b0',
     );
+
     expect(forecastDayFieldValueEls[3].firstChild?.textContent).toBe(
       '22\u00b0',
     );
+
     expect(forecastDayFieldValueEls[4].firstChild?.textContent).toBe('2%');
     expect(forecastDayFieldValueEls[5].firstChild?.textContent).toBe('22km/h');
   });

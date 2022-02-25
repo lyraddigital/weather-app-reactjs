@@ -1,4 +1,4 @@
-declare var WeatherApp: {
+declare let WeatherApp: {
   weatherConfig: {
     GOOGLE_PLACES_API_KEY: string;
     WEATHER_API_KEY: string;

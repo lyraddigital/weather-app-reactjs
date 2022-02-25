@@ -25,7 +25,7 @@ const getClearLogo = (isDarkMode?: boolean): string => {
   return isDarkMode ? clearNightLogo : clearLogo;
 };
 
-export const WeatherIcon = ({ className, weatherId }: WeatherIconProps) => {
+export const WeatherIcon = ({ className, weatherId }: WeatherIconProps): JSX.Element | null => {
   const weatherType = getWeatherType(weatherId);
   const altText = getWeatherDescription(weatherId);
   const { isDarkMode } = useCurrentWeatherTheme();

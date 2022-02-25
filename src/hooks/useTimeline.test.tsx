@@ -72,6 +72,7 @@ describe('useTimeline', () => {
     expect(timelineHourTempEl.textContent).toBe(
       apiResponse.hourly![3]!.temp!.toString(),
     );
+
     expect(timelineHourDtEl.textContent).toBe('2021-11-27 11:00:00');
     expect(timelineHourWheatherIdEl.textContent).toBe(
       apiResponse.hourly![3]!.weather![0].id.toString(),
@@ -165,21 +166,27 @@ describe('useTimeline', () => {
     expect(timelinePeriodTempElOne.textContent).toBe(
       apiResponse.hourly![3]!.temp!.toString(),
     );
+
     expect(timelinePeriodTempElTwo.textContent).toBe(
       apiResponse.hourly![6]!.temp!.toString(),
     );
+
     expect(timelinePeriodTempElThree.textContent).toBe(
       apiResponse.hourly![9]!.temp!.toString(),
     );
+
     expect(timelinePeriodTempElFour.textContent).toBe(
       apiResponse.hourly![12]!.temp!.toString(),
     );
+
     expect(timelinePeriodTempElFive.textContent).toBe(
       apiResponse.hourly![15]!.temp!.toString(),
     );
+
     expect(timelinePeriodTempElSix.textContent).toBe(
       apiResponse.hourly![18]!.temp!.toString(),
     );
+
     expect(timelinePeriodTempSevenEls.length).toBe(0);
   });
 });

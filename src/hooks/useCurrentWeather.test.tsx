@@ -362,7 +362,7 @@ describe('useCurrentWeather', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
