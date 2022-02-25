@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { LocationContext } from 'context';
 import { LocationProvider } from './LocationProvider';
@@ -41,19 +41,19 @@ const TestProviderChildComponent = () => {
 };
 
 describe('LocationProvider', () => {
-  it('By default contains no location details', async () => {
+  it('By default contains no location details', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <LocationProvider>
         <TestProviderChildComponent />
       </LocationProvider>,
     );
 
     // Assert
-    const cityEl = await wrapper.findByTestId('location-provider-city');
-    const countryEl = await wrapper.findByTestId('location-provider-country');
-    const latEl = await wrapper.findByTestId('location-provider-lat');
-    const lonEl = await wrapper.findByTestId('location-provider-lon');
+    const cityEl = screen.getByTestId('location-provider-city');
+    const countryEl = screen.getByTestId('location-provider-country');
+    const latEl = screen.getByTestId('location-provider-lat');
+    const lonEl = screen.getByTestId('location-provider-lon');
 
     expect(cityEl.textContent).toBe('');
     expect(countryEl.textContent).toBe('');
@@ -61,26 +61,26 @@ describe('LocationProvider', () => {
     expect(lonEl.textContent).toBe('');
   });
 
-  it('Location details will be populated upon calling the update location button', async () => {
+  it('Location details will be populated upon calling the update location button', () => {
     // Arrange
-    const wrapper = render(
+    render(
       <LocationProvider>
         <TestProviderChildComponent />
       </LocationProvider>,
     );
 
     // Action
-    const updateLocationButton = await wrapper.findByTestId(
+    const updateLocationButton = screen.getByTestId(
       'location-provider-update-button',
     );
 
     updateLocationButton.click();
 
     // Assert
-    const cityEl = await wrapper.findByTestId('location-provider-city');
-    const countryEl = await wrapper.findByTestId('location-provider-country');
-    const latEl = await wrapper.findByTestId('location-provider-lat');
-    const lonEl = await wrapper.findByTestId('location-provider-lon');
+    const cityEl = screen.getByTestId('location-provider-city');
+    const countryEl = screen.getByTestId('location-provider-country');
+    const latEl = screen.getByTestId('location-provider-lat');
+    const lonEl = screen.getByTestId('location-provider-lon');
 
     expect(cityEl.textContent).toBe('Melbourne');
     expect(countryEl.textContent).toBe('Australia');
