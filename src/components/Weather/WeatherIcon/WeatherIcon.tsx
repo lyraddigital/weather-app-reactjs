@@ -65,12 +65,5 @@ export const WeatherIcon = ({ className, weatherId }: WeatherIconProps) => {
       break;
   }
 
-  return (
-    <img
-      data-testid="weather-icon"
-      src={image}
-      className={className}
-      alt={altText}
-    />
-  );
+  return <img src={image} className={className} alt={altText} />;
 };

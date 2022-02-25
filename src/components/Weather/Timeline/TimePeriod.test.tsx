@@ -29,7 +29,7 @@ describe('TimePeriod', () => {
     );
   });
 
-  it('Time is empty if time is not set on the period prop.', async () => {
+  it('Time is empty if time is not set on the period prop.', () => {
     // Arrange
     const period: WeatherTimelinePeriod = {
       weatherId: 500,
