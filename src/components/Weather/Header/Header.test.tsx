@@ -1,5 +1,5 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { LocationContext, WeatherContext } from 'context';
 import { WeatherApiResponse, WeatherLocation } from 'models';
@@ -9,22 +9,16 @@ import { Header } from './Header';
 describe('Header', () => {
   it('No location or weather data, renders an empty header', async () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <Router>
         <Header />
       </Router>,
     );
 
-    // Assert
-    const headingEl = await wrapper.findByTestId('weather-heading');
-    const headingCityEl = await wrapper.findByTestId('weather-heading-city');
-    const headingCountryEl = await wrapper.findByTestId(
-      'weather-heading-country',
-    );
+    const headingEl = screen.queryByRole('heading');
 
-    expect(headingEl.textContent).toBe(', ');
-    expect(headingCityEl.textContent).toBe('');
-    expect(headingCountryEl.textContent).toBe('');
+    // Assert
+    expect(headingEl?.textContent).toBe(', ');
   });
 
   it('Location and weather data set, renders the header correctly', async () => {
@@ -41,7 +35,7 @@ describe('Header', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <Router>
         <LocationContext.Provider
           value={{ location, updateLocation: () => {} }}
@@ -52,27 +46,16 @@ describe('Header', () => {
             <Header />
           </WeatherContext.Provider>
         </LocationContext.Provider>
-        ,
       </Router>,
     );
 
     // Assert
-    const headingEl = await wrapper.findByTestId('weather-heading');
-    const headingCityEl = await wrapper.findByTestId('weather-heading-city');
-    const headingCountryEl = await wrapper.findByTestId(
-      'weather-heading-country',
-    );
-    const updatedDateEl = await wrapper.findByTestId('weather-updated-date');
-    const upatedTimeMessageEl = await wrapper.findByTestId(
-      'weather-updated-time-message',
-    );
-    const upatedTimeEl = await wrapper.findByTestId('weather-updated-time');
+    const headingEl = screen.queryByRole('heading');
+    const updatedDateEl = screen.queryByText('Tuesday 30th November');
+    const updatedTimeMessageEl = screen.queryByText('Last updated at 12:00 AM');
 
-    expect(headingEl.textContent).toBe('Melbourne, Australia');
-    expect(headingCityEl.textContent).toBe('Melbourne');
-    expect(headingCountryEl.textContent).toBe('Australia');
-    expect(updatedDateEl.textContent).toBe('Tuesday 30th November');
-    expect(upatedTimeMessageEl.textContent).toBe('Last updated at 12:00 AM');
-    expect(upatedTimeEl.textContent).toBe('12:00 AM');
+    expect(headingEl?.textContent).toBe('Melbourne, Australia');
+    expect(updatedDateEl).toBeTruthy();
+    expect(updatedTimeMessageEl).toBeTruthy();
   });
 });

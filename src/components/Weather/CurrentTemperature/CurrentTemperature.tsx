@@ -7,23 +7,18 @@ import style from './CurrentTemperature.module.scss';
 interface CurrentTemperatureProps {
   temp?: number;
   weatherId?: number;
-  isNightTime?: boolean;
 }
 
 export const CurrentTemperature = (
   props: CurrentTemperatureProps,
 ): JSX.Element => {
-  const { temp, weatherId, isNightTime } = props;
+  const { temp, weatherId } = props;
   const weatherSummary = getWeatherDescription(weatherId);
 
   return (
     <div className={style.currentTemperature}>
       <div className={style.iconContainer}>
-        <WeatherIcon
-          weatherId={weatherId}
-          className={style.icon}
-          isNightTime={isNightTime}
-        />
+        <WeatherIcon weatherId={weatherId} className={style.icon} />
       </div>
       <div className={style.contentContainer}>
         <div data-testid="current-weather-temp" className={style.value}>

@@ -1,4 +1,5 @@
 import { getWeatherDescription, getWeatherType, WeatherType } from 'core';
+import { useCurrentWeatherTheme } from 'hooks';
 
 import atmosphereLogo from '../../../assets/atmosphere.svg';
 import clearNightLogo from '../../../assets/clear-night.svg';
@@ -14,24 +15,20 @@ import thunderStormLogo from '../../../assets/thunder-storm.svg';
 interface WeatherIconProps {
   className?: string;
   weatherId?: number;
-  isNightTime?: boolean;
 }
 
-const getCloudyLogo = (isNightTime?: boolean): string => {
-  return isNightTime ? cloudyNightLogo : cloudyLogo;
+const getCloudyLogo = (isDarkMode?: boolean): string => {
+  return isDarkMode ? cloudyNightLogo : cloudyLogo;
 };
 
-const getClearLogo = (isNightTime?: boolean): string => {
-  return isNightTime ? clearNightLogo : clearLogo;
+const getClearLogo = (isDarkMode?: boolean): string => {
+  return isDarkMode ? clearNightLogo : clearLogo;
 };
 
-export const WeatherIcon = ({
-  className,
-  weatherId,
-  isNightTime,
-}: WeatherIconProps) => {
+export const WeatherIcon = ({ className, weatherId }: WeatherIconProps) => {
   const weatherType = getWeatherType(weatherId);
   const altText = getWeatherDescription(weatherId);
+  const { isDarkMode } = useCurrentWeatherTheme();
 
   if (weatherType === undefined || weatherType === null) {
     return null;
@@ -44,10 +41,10 @@ export const WeatherIcon = ({
       image = atmosphereLogo;
       break;
     case WeatherType.Clear:
-      image = getClearLogo(isNightTime);
+      image = getClearLogo(isDarkMode);
       break;
     case WeatherType.Clouds:
-      image = getCloudyLogo(isNightTime);
+      image = getCloudyLogo(isDarkMode);
       break;
     case WeatherType.Drizzle:
       image = drizzleLogo;

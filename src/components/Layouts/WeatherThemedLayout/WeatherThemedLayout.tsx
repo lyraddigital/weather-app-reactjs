@@ -1,6 +1,11 @@
 import { PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
-import { useCurrentWeather, useLocationImage, useWeatherLoading } from 'hooks';
+import {
+  useCurrentWeatherTheme,
+  useLocationImage,
+  useWeatherLoading,
+} from 'hooks';
 import { Loader } from 'components/Loader';
 
 import style from './WeatherThemedLayout.module.scss';
@@ -9,7 +14,7 @@ export const WeatherThemedLayout = ({
   children,
 }: PropsWithChildren<any>): JSX.Element => {
   const { isLoading, isFirstLoad } = useWeatherLoading();
-  const { isDarkMode } = useCurrentWeather();
+  const { isDarkMode } = useCurrentWeatherTheme();
   const locationImage = useLocationImage();
 
   const isLoadingFirstTime = isLoading && isFirstLoad;
@@ -18,11 +23,10 @@ export const WeatherThemedLayout = ({
     ? `url(${locationImage})`
     : undefined;
 
-  let classes = style.layoutContainer;
-
-  if (isDarkMode) {
-    classes += ` ${style.darkMode}`;
-  }
+  const classes = classNames({
+    [style.layoutContainer]: true,
+    [style.darkMode]: isDarkMode,
+  });
 
   return (
     <div

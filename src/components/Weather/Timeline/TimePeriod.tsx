@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { formatShortHour, isCurrentTimeNight } from 'core';
+import { formatShortHour } from 'core';
 import { useCurrentWeatherTheme } from 'hooks';
 import { WeatherTimelinePeriod } from 'models';
 
@@ -15,7 +15,6 @@ interface TimePeriodProps {
 export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
   const { isDarkMode } = useCurrentWeatherTheme();
   const formattedTime = formatShortHour(period.time);
-  const isNightTime = isCurrentTimeNight(period.time);
 
   let classes = classNames({
     [style.item]: true,
@@ -30,7 +29,6 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
       <WeatherIcon
         weatherId={period.weatherId}
         className={style.timePeriodIcon}
-        isNightTime={isNightTime}
       />
       <div data-testid="period-temp">{period.temp}&deg;</div>
     </div>

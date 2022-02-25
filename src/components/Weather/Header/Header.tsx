@@ -13,20 +13,16 @@ export const Header = (): JSX.Element => {
 
   const lastUpdatedEl = formattedDate ? (
     <>
-      <div data-testid="weather-updated-date">{formattedDate}</div>
-      <div data-testid="weather-updated-time-message">
-        Last updated at{' '}
-        <span data-testid="weather-updated-time">{formattedTime}</span>
-      </div>
+      <div>{formattedDate}</div>
+      <div>Last updated at {formattedTime}</div>
     </>
   ) : null;
 
   return (
     <div className={style.header}>
       <div>
-        <h1 className={style.location} data-testid="weather-heading">
-          <span data-testid="weather-heading-city">{location?.city}</span>,{' '}
-          <span data-testid="weather-heading-country">{location?.country}</span>
+        <h1 className={style.location}>
+          <span>{location?.city}</span>, <span>{location?.country}</span>
         </h1>
         {lastUpdatedEl}
       </div>

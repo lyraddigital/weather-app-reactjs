@@ -1,4 +1,4 @@
-import { format, getHours } from 'date-fns';
+import { format, isAfter, isBefore } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
 export const formatTime = (date?: Date): string => {
@@ -42,14 +42,16 @@ export const zeroIfUndefined = (value?: number): number => {
   return value || 0;
 };
 
-export const isCurrentTimeNight = (localTime?: Date): boolean => {
-  if (!localTime) {
+export const isCurrentTimeNight = (
+  localTime?: Date,
+  sunriseTime?: Date,
+  sunsetTime?: Date,
+): boolean => {
+  if (!localTime || !sunriseTime || !sunsetTime) {
     return false;
   }
 
-  const hour = getHours(localTime);
-
-  return hour < 7 || hour > 18;
+  return isBefore(localTime, sunriseTime) || isAfter(localTime, sunsetTime);
 };
 
 export const getFromLocalStorage = <T>(storageKey: string): T | undefined => {

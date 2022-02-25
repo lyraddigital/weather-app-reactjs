@@ -15,17 +15,17 @@
     );
     transition: background-color 600ms;
 
-    .innerContainer {
-      width: 100%;
-      max-width: 880px;
-    }
-
     &.darkMode {
       background-image: linear-gradient(
         to bottom,
         rgba(5, 5, 20, 0.95) 0%,
         rgba(1, 6, 10, 0.95) 100%
       );
+    }
+
+    .innerContainer {
+      width: 100%;
+      max-width: 880px;
     }
   }
 }

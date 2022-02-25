@@ -1,10 +1,6 @@
 import { useContext } from 'react';
 
-import {
-  convertEpochSecondsToDate,
-  isCurrentTimeNight,
-  roundNumberOrZero,
-} from 'core';
+import { convertEpochSecondsToDate, roundNumberOrZero } from 'core';
 import {
   CurrentWeatherResponse,
   DailyForecastApiResponse,
@@ -59,6 +55,5 @@ export const useCurrentWeather = (): CurrentWeatherResponse => {
         windSpeed: roundNumberOrZero(d?.wind_speed),
       }),
     ),
-    isDarkMode: isCurrentTimeNight(localTime),
   };
 };

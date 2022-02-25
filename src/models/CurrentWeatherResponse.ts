@@ -8,5 +8,4 @@ export interface CurrentWeatherResponse {
   statistics: WeatherStatistics;
   timeline: Array<WeatherTimelinePeriod>;
   forecast: Array<WeatherForecastDay>;
-  isDarkMode: boolean;
 }

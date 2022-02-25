@@ -1,14 +1,46 @@
-import { render } from '@testing-library/react';
+import { render, RenderResult, waitFor } from '@testing-library/react';
+import { getUnixTime, setHours } from 'date-fns';
+
+import { WeatherContext } from 'context';
+import { WeatherApiResponse } from 'models';
 
 import { WeatherIcon } from './WeatherIcon';
+
+const renderWeatherIcon = async (
+  weatherId: number,
+  localTime: Date,
+  className?: string,
+): Promise<RenderResult> => {
+  const sunriseTime = setHours(localTime, 6);
+  const sunsetTime = setHours(localTime, 20);
+
+  const apiResponse: WeatherApiResponse = {
+    current: {
+      dt: getUnixTime(localTime),
+      sunrise: getUnixTime(sunriseTime),
+      sunset: getUnixTime(sunsetTime),
+    },
+  };
+
+  return waitFor(() =>
+    render(
+      <WeatherContext.Provider
+        value={{ data: apiResponse, isLoading: false, isFirstLoad: false }}
+      >
+        <WeatherIcon weatherId={weatherId} className={className} />
+      </WeatherContext.Provider>,
+    ),
+  );
+};
 
 describe('WeatherIcon', () => {
   it('Returns null if weatherId is not a valid value', async () => {
     // Arrange
     const weatherId = -1;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElements = await wrapper.queryAllByTestId('weather-icon');
@@ -16,25 +48,13 @@ describe('WeatherIcon', () => {
     expect(imgElements.length).toBe(0);
   });
 
-  it('Image is shown weatherType is set correctly', async () => {
-    // Arrange
-    const weatherId = 500;
-
-    // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
-
-    // Assert
-    const imgElements = await wrapper.queryAllByTestId('weather-icon');
-
-    expect(imgElements.length).toBe(1);
-  });
-
   it('Image class is empty when className is not set', async () => {
     // Arrange
     const weatherId = 500;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -48,11 +68,10 @@ describe('WeatherIcon', () => {
     // Arrange
     const weatherId = 500;
     const className = 'testClass';
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(
-      <WeatherIcon weatherId={weatherId} className={className} />,
-    );
+    const wrapper = await renderWeatherIcon(weatherId, localTime, className);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -65,9 +84,10 @@ describe('WeatherIcon', () => {
   it('Alt attribute is set correctly on img tag', async () => {
     // Arrange
     const weatherId = 500;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -81,9 +101,10 @@ describe('WeatherIcon', () => {
   it('Image src and alt is correct when weatherId an Atmospheric one', async () => {
     // Arrange
     const weatherId = 701;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -97,9 +118,10 @@ describe('WeatherIcon', () => {
   it('Image src and alt is correct when weatherId is a Clear one', async () => {
     // Arrange
     const weatherId = 800;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -113,9 +135,10 @@ describe('WeatherIcon', () => {
   it('Image src is correct when weatherId is a Clouds one', async () => {
     // Arrange
     const weatherId = 801;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -129,9 +152,10 @@ describe('WeatherIcon', () => {
   it('Image src is correct when weatherId is a Drizzle one', async () => {
     // Arrange
     const weatherId = 301;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -145,9 +169,10 @@ describe('WeatherIcon', () => {
   it('Image src is correct when weatherId is Rain one', async () => {
     // Arrange
     const weatherId = 502;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -161,9 +186,10 @@ describe('WeatherIcon', () => {
   it('Image src is correct when weatherId is a Shower one', async () => {
     // Arrange
     const weatherId = 520;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -177,9 +203,10 @@ describe('WeatherIcon', () => {
   it('Image src is correct when weatherId is a Snow one', async () => {
     // Arrange
     const weatherId = 602;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -193,9 +220,10 @@ describe('WeatherIcon', () => {
   it('Image src is correct when weatherId is Thunderstorm one', async () => {
     // Arrange
     const weatherId = 201;
+    const localTime = new Date(2022, 3, 14, 12);
 
     // Action
-    const wrapper = render(<WeatherIcon weatherId={weatherId} />);
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -209,11 +237,10 @@ describe('WeatherIcon', () => {
   it('Img src is correct if the weatherId is Clear, but it is night time', async () => {
     // Arrange
     const weatherId = 800;
+    const localTime = new Date(2022, 3, 14, 22);
 
     // Action
-    const wrapper = render(
-      <WeatherIcon weatherId={weatherId} isNightTime={true} />,
-    );
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
@@ -226,11 +253,10 @@ describe('WeatherIcon', () => {
   it('Img src is correct if the weatherId is a Cloudy one, but it is night time', async () => {
     // Arrange
     const weatherId = 801;
+    const localTime = new Date(2022, 3, 14, 22);
 
     // Action
-    const wrapper = render(
-      <WeatherIcon weatherId={weatherId} isNightTime={true} />,
-    );
+    const wrapper = await renderWeatherIcon(weatherId, localTime);
 
     // Assert
     const imgElement = (await wrapper.findByTestId(
