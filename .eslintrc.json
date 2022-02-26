@@ -1,44 +1,27 @@
 {
-  "globals": {
-    "JSX": true
-  },
-  "env": {
-    "node": true,
-    "browser": true,
-    "es2021": true
-  },
-  "ignorePatterns": "public/**",
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:jasmine/recommended",
-    "plugin:react/recommended"
-  ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["react", "jasmine", "prettier"],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "prettier/prettier": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "react/react-in-jsx-scope": "off", 
+        "@typescript-eslint/no-use-before-define": ["error"]
     }
-  },
-  "overrides": [
-    {
-      "files": ["**/*.test.js"],
-      "env": {
-        "jest": true
-      }
-    }
-  ]
 }
