@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
 import { formatTime } from 'utilities';
@@ -6,7 +6,7 @@ import { useForecast } from 'hooks';
 import { WeatherContext } from 'context';
 import {
   DailyForecastApiResponse,
-  WeatherApiResponse,
+  WeatherDetailsApiResponse,
   WeatherForecastDay,
 } from 'models';
 
@@ -29,12 +29,17 @@ const TempForecastChild = () => {
   return <div>{forecastDayEls}</div>;
 };
 
-const createDailyForecast = (index: number): DailyForecastApiResponse => {
+const createDailyForecast = (
+  index: number,
+  dailyWeather?: WeatherDetailsApiResponse,
+): DailyForecastApiResponse => {
+  const weather = dailyWeather || { id: 1 };
+
   return {
     dt: getUnixTime(Date.UTC(2021, 10, 27)),
     humidity: 3 * index,
     wind_speed: 6 * index,
-    weather: [{ id: 1 }],
+    weather: [weather],
     temp: {
       min: 1 * index,
       max: 2 * index,
@@ -43,15 +48,18 @@ const createDailyForecast = (index: number): DailyForecastApiResponse => {
 };
 
 describe('useForecast', () => {
-  it('Returns a Forecast array when the ApiResponse is defined', async () => {
+  it('Returns a Forecast array when the ApiResponse is defined', () => {
     // Arrange
-    const apiResponse: WeatherApiResponse = {
-      daily: [createDailyForecast(0), createDailyForecast(1)],
+    const weatherIdResponse = { id: 3 };
+    const dailyForecastOne = createDailyForecast(0);
+    const dailyForecastTwo = createDailyForecast(1, weatherIdResponse);
+    const apiResponse = {
+      daily: [dailyForecastOne, dailyForecastTwo],
       timezone: 'Australia/Sydney',
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -60,53 +68,51 @@ describe('useForecast', () => {
     );
 
     // Assert
-    const forecastDayDtEl = await wrapper.findByTestId(`forecast-day-dt-0`);
-    const forecastDayHighTempEl = await wrapper.findByTestId(
+    const forecastDayDtEl = screen.getByTestId(`forecast-day-dt-0`);
+    const forecastDayHighTempEl = screen.getByTestId(
       `forecast-day-high-temp-0`,
     );
-    const forecastDayLowTempEl = await wrapper.findByTestId(
-      `forecast-day-low-temp-0`,
-    );
-    const forecastDayRainPercentageEl = await wrapper.findByTestId(
+    const forecastDayLowTempEl = screen.getByTestId(`forecast-day-low-temp-0`);
+    const forecastDayRainPercentageEl = screen.getByTestId(
       `forecast-day-rain-percentage-0`,
     );
-    const forecastDayWeatherIdEl = await wrapper.findByTestId(
+    const forecastDayWeatherIdEl = screen.getByTestId(
       `forecast-day-weather-id-0`,
     );
-    const forecastDayWindSpeedEl = await wrapper.findByTestId(
+    const forecastDayWindSpeedEl = screen.getByTestId(
       `forecast-day-wind-speed-0`,
     );
 
     expect(forecastDayDtEl.textContent).toBe('2021-11-27 11:00:00');
     expect(forecastDayHighTempEl.textContent).toBe(
-      apiResponse.daily![1]!.temp!.max.toString(),
+      dailyForecastTwo.temp?.max.toString(),
     );
 
     expect(forecastDayLowTempEl.textContent).toBe(
-      apiResponse.daily![1]!.temp!.min.toString(),
+      dailyForecastTwo.temp?.min.toString(),
     );
 
     expect(forecastDayRainPercentageEl.textContent).toBe(
-      apiResponse.daily![1]!.humidity!.toString(),
+      dailyForecastTwo.humidity?.toString(),
     );
 
     expect(forecastDayWeatherIdEl.textContent).toBe(
-      apiResponse.daily![1]!.weather![0].id.toString(),
+      weatherIdResponse.id.toString(),
     );
 
     expect(forecastDayWindSpeedEl.textContent).toBe(
-      apiResponse.daily![1]!.wind_speed!.toString(),
+      dailyForecastTwo.wind_speed?.toString(),
     );
   });
 
-  it('Returns an empty Forecast array when the ApiResponse is not defined', async () => {
+  it('Returns an empty Forecast array when the ApiResponse is not defined', () => {
     // Arrange
-    const apiResponse: WeatherApiResponse = {
+    const apiResponse = {
       timezone: 'Australia/Sydney',
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -115,16 +121,14 @@ describe('useForecast', () => {
     );
 
     // Assert
-    const forecastDayDtEls = await wrapper.queryAllByTestId(
-      `forecast-day-dt-0`,
-    );
+    const forecastDayDtEls = screen.queryAllByTestId(`forecast-day-dt-0`);
 
     expect(forecastDayDtEls.length).toBe(0);
   });
 
-  it('Returns an empty Forecast array when the ApiResponse.daily object is not defined', async () => {
+  it('Returns an empty Forecast array when the ApiResponse.daily object is not defined', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: undefined, isFirstLoad: false, isLoading: true }}
       >
@@ -133,25 +137,23 @@ describe('useForecast', () => {
     );
 
     // Assert
-    const forecastDayDtEls = await wrapper.queryAllByTestId(
-      `forecast-day-dt-0`,
-    );
+    const forecastDayDtEls = screen.queryAllByTestId(`forecast-day-dt-0`);
 
     expect(forecastDayDtEls.length).toBe(0);
   });
 
-  it('Returns a maximum of 5 forecasts starting from the second record to the 6th', async () => {
+  it('Returns a maximum of 5 forecasts starting from the second record to the 6th', () => {
     // Arrange
     const daily = [0, 1, 2, 3, 4, 5, 6].map((i: number) =>
       createDailyForecast(i),
     );
-    const apiResponse: WeatherApiResponse = {
+    const apiResponse = {
       daily,
       timezone: 'Australia/Sydney',
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -160,43 +162,43 @@ describe('useForecast', () => {
     );
 
     // Assert
-    const forecastDayHighTempElOne = await wrapper.findByTestId(
+    const forecastDayHighTempElOne = screen.getByTestId(
       `forecast-day-high-temp-0`,
     );
-    const forecastDayHighTempElTwo = await wrapper.findByTestId(
+    const forecastDayHighTempElTwo = screen.getByTestId(
       `forecast-day-high-temp-1`,
     );
-    const forecastDayHighTempElThree = await wrapper.findByTestId(
+    const forecastDayHighTempElThree = screen.getByTestId(
       `forecast-day-high-temp-2`,
     );
-    const forecastDayHighTempElFour = await wrapper.findByTestId(
+    const forecastDayHighTempElFour = screen.getByTestId(
       `forecast-day-high-temp-3`,
     );
-    const forecastDayHighTempElFive = await wrapper.findByTestId(
+    const forecastDayHighTempElFive = screen.getByTestId(
       `forecast-day-high-temp-4`,
     );
-    const forecastDayHighTempElSixes = await wrapper.queryAllByTestId(
+    const forecastDayHighTempElSixes = screen.queryAllByTestId(
       `forecast-day-high-temp-5`,
     );
 
     expect(forecastDayHighTempElOne.textContent).toBe(
-      apiResponse.daily![1]!.temp!.max.toString(),
+      apiResponse.daily[1].temp?.max.toString(),
     );
 
     expect(forecastDayHighTempElTwo.textContent).toBe(
-      apiResponse.daily![2]!.temp!.max.toString(),
+      apiResponse.daily[2].temp?.max.toString(),
     );
 
     expect(forecastDayHighTempElThree.textContent).toBe(
-      apiResponse.daily![3]!.temp!.max.toString(),
+      apiResponse.daily[3].temp?.max.toString(),
     );
 
     expect(forecastDayHighTempElFour.textContent).toBe(
-      apiResponse.daily![4]!.temp!.max.toString(),
+      apiResponse.daily[4].temp?.max.toString(),
     );
 
     expect(forecastDayHighTempElFive.textContent).toBe(
-      apiResponse.daily![5]!.temp!.max.toString(),
+      apiResponse.daily[5].temp?.max.toString(),
     );
 
     expect(forecastDayHighTempElSixes.length).toBe(0);

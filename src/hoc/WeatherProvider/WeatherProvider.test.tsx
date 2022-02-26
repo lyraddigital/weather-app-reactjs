@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { render, RenderResult, screen } from '@testing-library/react';
+import { render, RenderResult, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router, Route, Switch } from 'react-router';
 
 import { WeatherLocation, WeatherState } from 'models';
@@ -18,32 +18,34 @@ const TestProviderChildComponent = () => {
   );
 };
 
-const renderWithLocation = (
+const renderWithLocation = async (
   weatherProvider: JSX.Element,
   location: WeatherLocation,
-): RenderResult => {
+): Promise<RenderResult> => {
   const updateLocation = () => {
     // Do nothing
   };
 
-  return render(
-    <LocationContext.Provider value={{ location, updateLocation }}>
-      <Router initialEntries={['/', 'load-error']}>
-        <Switch>
-          <Route path="/load-error">
-            <div data-testid="no-weather-data">No data found.</div>
-          </Route>
-          <Route path="">{weatherProvider}</Route>
-        </Switch>
-      </Router>
-    </LocationContext.Provider>,
+  return waitFor(() =>
+    render(
+      <LocationContext.Provider value={{ location, updateLocation }}>
+        <Router initialEntries={['/', 'load-error']}>
+          <Switch>
+            <Route path="/load-error">
+              <div data-testid="no-weather-data">No data found.</div>
+            </Route>
+            <Route path="">{weatherProvider}</Route>
+          </Switch>
+        </Router>
+      </LocationContext.Provider>,
+    ),
   );
 };
 
 describe('WeatherProvider', () => {
-  it('By default contains no weather details', () => {
+  it('By default contains no weather details', async () => {
     // Arrange / Action
-    renderWithLocation(
+    await renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -61,9 +63,9 @@ describe('WeatherProvider', () => {
     expect(noWeatherDataEl).toBeTruthy();
   });
 
-  it('Passing in Melbourne geocode. Returns current weather data for Melbourne', () => {
+  it('Passing in Melbourne geocode. Returns current weather data for Melbourne', async () => {
     // Arrange / Action
-    renderWithLocation(
+    await renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -83,9 +85,9 @@ describe('WeatherProvider', () => {
     expect(timezoneEl.textContent).toBe('Australia/Sydney');
   });
 
-  it('Passing in London geocode. Returns current weather data for London', () => {
+  it('Passing in London geocode. Returns current weather data for London', async () => {
     // Arrange / Action
-    renderWithLocation(
+    await renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
@@ -105,9 +107,9 @@ describe('WeatherProvider', () => {
     expect(timezoneEl.textContent).toBe('Europe/London');
   });
 
-  it('Passing in New York geocode. Returns current weather data for New York', () => {
+  it('Passing in New York geocode. Returns current weather data for New York', async () => {
     // Arrange / Action
-    renderWithLocation(
+    await renderWithLocation(
       <WeatherProvider>
         <TestProviderChildComponent />
       </WeatherProvider>,
