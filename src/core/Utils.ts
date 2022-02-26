@@ -34,12 +34,12 @@ export const convertEpochSecondsToDate = (
     : undefined;
 };
 
-export const roundNumberOrZero = (value?: number): number => {
-  return Math.round(zeroIfUndefined(value));
-};
-
 export const zeroIfUndefined = (value?: number): number => {
   return value || 0;
+};
+
+export const roundNumberOrZero = (value?: number): number => {
+  return Math.round(zeroIfUndefined(value));
 };
 
 export const isCurrentTimeNight = (

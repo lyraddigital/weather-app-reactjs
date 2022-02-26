@@ -4,21 +4,6 @@ import { Configuration, WEATHER_API_URL } from 'core';
 import { WeatherApiResponse } from 'models';
 import { cityWeather } from './mocks/CityWeather';
 
-export const getWeatherApiData = async (
-  lat?: number,
-  lon?: number,
-): Promise<WeatherApiResponse> => {
-  if (Configuration.isUsingInMemoryApis) {
-    return getWeatherApiDataFromFiles(lat, lon);
-  }
-
-  const response = await axios.get<WeatherApiResponse>(
-    `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.weatherApiKey}&units=metric`,
-  );
-
-  return response.data;
-};
-
 const getWeatherApiDataFromFiles = (
   lat?: number,
   lon?: number,
@@ -32,4 +17,19 @@ const getWeatherApiDataFromFiles = (
       reject();
     }
   });
+};
+
+export const getWeatherApiData = async (
+  lat?: number,
+  lon?: number,
+): Promise<WeatherApiResponse> => {
+  if (Configuration.isUsingInMemoryApis) {
+    return getWeatherApiDataFromFiles(lat, lon);
+  }
+
+  const response = await axios.get<WeatherApiResponse>(
+    `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.weatherApiKey}&units=metric`,
+  );
+
+  return response.data;
 };

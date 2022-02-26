@@ -31,7 +31,6 @@ export const getLocationByAddress = async (address: string) => {
 export const getPhotoReferenceForLocation = async (
   placeId?: string,
 ): Promise<string> => {
-  console.log(placeId);
 
   return await new Promise((resolve) =>
     resolve(

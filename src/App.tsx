@@ -5,7 +5,7 @@ import { LocationPage, LoadFailedPage, WeatherPage } from './pages';
 
 import style from './App.module.scss';
 
-function App() {
+function App(): JSX.Element {
   return (
     <LocationProvider>
       <main className={style.mainContainer}>

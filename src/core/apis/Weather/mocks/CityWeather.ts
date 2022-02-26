@@ -1,4 +1,6 @@
-export const cityWeather: { [key: string]: any } = {
+import { WeatherApiResponse } from "models";
+
+export const cityWeather: { [key: string]: WeatherApiResponse } = {
   '-33.8688197-151.2092955': {
     current: {
       dt: 1639216800,
@@ -1508,8 +1510,6 @@ export const cityWeather: { [key: string]: any } = {
       },
       {
         dt: 1639324800,
-        sunrise: 1639311063,
-        sunset: 1639344536,
         temp: {
           min: 5.11,
           max: 12.81,
@@ -1524,8 +1524,6 @@ export const cityWeather: { [key: string]: any } = {
       },
       {
         dt: 1639411200,
-        sunrise: 1639397508,
-        sunset: 1639430945,
         temp: {
           min: 4.81,
           max: 10.93,
@@ -1540,8 +1538,6 @@ export const cityWeather: { [key: string]: any } = {
       },
       {
         dt: 1639497600,
-        sunrise: 1639483951,
-        sunset: 1639517358,
         temp: {
           min: 6.11,
           max: 10.62,
@@ -1556,8 +1552,6 @@ export const cityWeather: { [key: string]: any } = {
       },
       {
         dt: 1639584000,
-        sunrise: 1639570393,
-        sunset: 1639603772,
         temp: {
           min: 6.86,
           max: 10.73,
@@ -1586,8 +1580,6 @@ export const cityWeather: { [key: string]: any } = {
       },
       {
         dt: 1639756800,
-        sunrise: 1639743271,
-        sunset: 1639776607,
         temp: {
           min: 9.07,
           max: 13.39,
@@ -1602,8 +1594,6 @@ export const cityWeather: { [key: string]: any } = {
       },
       {
         dt: 1639843200,
-        sunrise: 1639829707,
-        sunset: 1639863028,
         temp: {
           min: 6.43,
           max: 14.4,
