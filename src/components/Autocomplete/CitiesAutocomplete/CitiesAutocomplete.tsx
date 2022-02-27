@@ -9,7 +9,11 @@ export const CitiesAutocomplete = ({
   cityName,
   setCityName,
   selectCity,
-}: any) => {
+}: {
+  cityName: string;
+  setCityName: (cityName: string) => void;
+  selectCity: (city: string) => void;
+}) => {
   return (
     <PlacesAutocomplete
       value={cityName}
@@ -23,7 +27,7 @@ export const CitiesAutocomplete = ({
         <div className={style.autoCompleteContainer}>
           <AutocompleteInput inputProps={getInputProps} isLoading={loading} />
           <AutocompleteResults
-            suggestions={suggestions}
+            suggestions={suggestions.map((s) => s)}
             getSuggestionItemProps={getSuggestionItemProps}
           />
         </div>
