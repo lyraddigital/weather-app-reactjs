@@ -13,7 +13,7 @@ export const CitiesAutocomplete = ({
   cityName: string;
   setCityName: (cityName: string) => void;
   selectCity: (city: string) => void;
-}) => {
+}): JSX.Element => {
   return (
     <PlacesAutocomplete
       value={cityName}

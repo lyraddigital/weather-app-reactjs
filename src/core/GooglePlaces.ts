@@ -1,6 +1,15 @@
 import { geocodeByAddress } from 'react-places-autocomplete';
 
-export const getLocationByAddress = async (address: string) => {
+export const getLocationByAddress = async (
+  address: string,
+): Promise<{
+  success: boolean;
+  lat?: number;
+  lon?: number;
+  city?: string;
+  country?: string;
+  placeId?: string;
+}> => {
   try {
     const response = await geocodeByAddress(address);
 
