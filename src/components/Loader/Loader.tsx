@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import ClipLoader from 'react-spinners/ClipLoader';
 
@@ -15,8 +16,11 @@ export const Loader = ({ isLoading }: LoaderProps): JSX.Element | null => {
     [style.loaderOverlay]: true,
     [style.darkMode]: isDarkMode,
   });
+  const bodyRef = useRef(document.body);
 
-  document.body.style.overflow = isLoading ? 'hidden' : 'auto';
+  useEffect(() => {
+    bodyRef.current.style.overflow = isLoading ? 'hidden' : 'auto';
+  }, [isLoading]);
 
   return isLoading ? (
     <div className={overlayClasses}>
