@@ -45,15 +45,13 @@ describe('useTimeline', () => {
     const weather = { id: 1 };
     const apiResponse = {
       hourly: [
-        createTimePeriod(0, weather),
+        createTimePeriod(0),
         createTimePeriod(1),
         createTimePeriod(2),
-        createTimePeriod(3),
+        createTimePeriod(3, weather),
       ],
       timezone: 'Australia/Sydney',
     };
-
-    console.log(apiResponse.hourly[3].weather);
 
     // Action
     render(
@@ -63,8 +61,6 @@ describe('useTimeline', () => {
         <TempTimelineChild />
       </WeatherContext.Provider>,
     );
-
-    screen.debug();
 
     // Assert
     const timelineHourTempEl = screen.getByTestId(`timeline-period-temp-0`);
@@ -77,8 +73,6 @@ describe('useTimeline', () => {
       apiResponse.hourly[3].temp?.toString(),
     );
 
-    console.log(weather.id.toString());
-    console.log(timelineHourWeatherIdEl.textContent);
     expect(timelineHourDtEl.textContent).toBe('2021-11-27 11:00:00');
     expect(timelineHourWeatherIdEl.textContent).toBe(weather.id.toString());
   });

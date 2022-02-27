@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useLocation } from 'hooks';
 import { LocationContext } from 'context';
@@ -18,7 +18,7 @@ const TempLocationChild = () => {
 };
 
 describe('useLocation', () => {
-  it('Returns a WeatherLocation object when the LocationStore is defined', async () => {
+  it('Returns a WeatherLocation object when the LocationStore is defined', () => {
     // Arrange
     const location: WeatherLocation = {
       city: 'Melbourne',
@@ -34,17 +34,17 @@ describe('useLocation', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <LocationContext.Provider value={store}>
         <TempLocationChild />
       </LocationContext.Provider>,
     );
 
     // Assert
-    const cityEl = await wrapper.findByTestId('use-location-city');
-    const countryEl = await wrapper.findByTestId('use-location-country');
-    const latEl = await wrapper.findByTestId('use-location-lat');
-    const lonEl = await wrapper.findByTestId('use-location-lon');
+    const cityEl = screen.getByTestId('use-location-city');
+    const countryEl = screen.getByTestId('use-location-country');
+    const latEl = screen.getByTestId('use-location-lat');
+    const lonEl = screen.getByTestId('use-location-lon');
 
     expect(cityEl.textContent).toBe(location.city);
     expect(countryEl.textContent).toBe(location.country);
@@ -52,7 +52,7 @@ describe('useLocation', () => {
     expect(lonEl.textContent).toBe(location.lon?.toString());
   });
 
-  it('Returns an undefined when the LocationStore is not defined', async () => {
+  it('Returns an undefined when the LocationStore is not defined', () => {
     // Arrange
     const store: LocationStore = {
       location: undefined,
@@ -62,17 +62,17 @@ describe('useLocation', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <LocationContext.Provider value={store}>
         <TempLocationChild />
       </LocationContext.Provider>,
     );
 
     // Assert
-    const cityEl = await wrapper.findByTestId('use-location-city');
-    const countryEl = await wrapper.findByTestId('use-location-country');
-    const latEl = await wrapper.findByTestId('use-location-lat');
-    const lonEl = await wrapper.findByTestId('use-location-lon');
+    const cityEl = screen.getByTestId('use-location-city');
+    const countryEl = screen.getByTestId('use-location-country');
+    const latEl = screen.getByTestId('use-location-lat');
+    const lonEl = screen.getByTestId('use-location-lon');
 
     expect(cityEl.textContent).toBe('');
     expect(countryEl.textContent).toBe('');
@@ -80,19 +80,19 @@ describe('useLocation', () => {
     expect(lonEl.textContent).toBe('');
   });
 
-  it('Returns an undefined when location on the LocationStore is undefined', async () => {
+  it('Returns an undefined when location on the LocationStore is undefined', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <LocationContext.Provider value={undefined}>
         <TempLocationChild />
       </LocationContext.Provider>,
     );
 
     // Assert
-    const cityEl = await wrapper.findByTestId('use-location-city');
-    const countryEl = await wrapper.findByTestId('use-location-country');
-    const latEl = await wrapper.findByTestId('use-location-lat');
-    const lonEl = await wrapper.findByTestId('use-location-lon');
+    const cityEl = screen.getByTestId('use-location-city');
+    const countryEl = screen.getByTestId('use-location-country');
+    const latEl = screen.getByTestId('use-location-lat');
+    const lonEl = screen.getByTestId('use-location-lon');
 
     expect(cityEl.textContent).toBe('');
     expect(countryEl.textContent).toBe('');

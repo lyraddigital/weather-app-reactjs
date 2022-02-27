@@ -1,21 +1,19 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { LoadFailedPage } from './LoadFailedPage';
 
 describe('LoadFailedPage', () => {
-  it('Shows the correct message content', async () => {
+  it('Shows the correct message content', () => {
     // Arrange / Action
-    const wrapper = render(<LoadFailedPage />);
+    render(<LoadFailedPage />);
 
     // Assert
-    const h1El = await wrapper.findByTestId('loader-error-heading');
-    const messageEl = await wrapper.findByTestId('loader-error-message');
-
-    expect(h1El.tagName).toBe('H1');
-    expect(h1El.textContent).toBe('Weather load failed');
-    expect(messageEl.tagName).toBe('P');
-    expect(messageEl.textContent).toBe(
+    const h1El = screen.getByRole('heading', { level: 1 });
+    const messageEl = screen.getByText(
       'Could not load latest weather. Please call administration.',
     );
+
+    expect(h1El.textContent).toBe('Weather load failed');
+    expect(messageEl.tagName).toBe('P');
   });
 });

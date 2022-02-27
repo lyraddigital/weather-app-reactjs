@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
 import { formatTime } from 'utilities';
@@ -12,7 +12,7 @@ const TempLocalTimeChild = () => {
 };
 
 describe('useWeatherLocalTime', () => {
-  it('Returns the correct format for the local time based on the current time in the Weather api.', async () => {
+  it('Returns the correct format for the local time based on the current time in the Weather api.', () => {
     // Arrange
     const apiResponse: WeatherApiResponse = {
       timezone: 'Australia/Sydney',
@@ -22,7 +22,7 @@ describe('useWeatherLocalTime', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -31,14 +31,14 @@ describe('useWeatherLocalTime', () => {
     );
 
     // Assert
-    const localTimeEl = await wrapper.getByTestId('local-time');
+    const localTimeEl = screen.getByTestId('local-time');
 
     expect(localTimeEl.textContent).toBe('2021-11-27 11:00:00');
   });
 
-  it('Returns empty for the local time based on an undefined api response.', async () => {
+  it('Returns empty for the local time based on an undefined api response.', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: undefined, isFirstLoad: false, isLoading: true }}
       >
@@ -47,12 +47,12 @@ describe('useWeatherLocalTime', () => {
     );
 
     // Assert
-    const localTimeEl = await wrapper.getByTestId('local-time');
+    const localTimeEl = screen.getByTestId('local-time');
 
     expect(localTimeEl.textContent).toBe('');
   });
 
-  it('Returns empty for the local time based on an undefined current date in the api response.', async () => {
+  it('Returns empty for the local time based on an undefined current date in the api response.', () => {
     // Arrange
     const apiResponse: WeatherApiResponse = {
       timezone: 'Australia/Sydney',
@@ -62,7 +62,7 @@ describe('useWeatherLocalTime', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <WeatherContext.Provider
         value={{ data: apiResponse, isFirstLoad: false, isLoading: true }}
       >
@@ -71,7 +71,7 @@ describe('useWeatherLocalTime', () => {
     );
 
     // Assert
-    const localTimeEl = await wrapper.getByTestId('local-time');
+    const localTimeEl = screen.getByTestId('local-time');
 
     expect(localTimeEl.textContent).toBe('');
   });

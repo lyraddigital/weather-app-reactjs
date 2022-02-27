@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useLocationUpdater } from 'hooks';
 import { LocationContext } from 'context';
@@ -29,7 +29,7 @@ const TempLocationChild = () => {
 };
 
 describe('useLocationUpdater', () => {
-  it('Exists and can be called when LocationStore is defined', async () => {
+  it('Exists and can be called when LocationStore is defined', () => {
     // Arrange
     const locationUpdater: (location: WeatherLocation) => void = () => {
       // Do nothing
@@ -40,38 +40,34 @@ describe('useLocationUpdater', () => {
     };
 
     // Action
-    const wrapper = render(
+    render(
       <LocationContext.Provider value={store}>
         <TempLocationChild />
       </LocationContext.Provider>,
     );
 
-    const button = await wrapper.findByTestId('update-location-button');
+    const button = screen.getByTestId('update-location-button');
     button.click();
 
     // Assert
-    const locationMessages = wrapper.queryAllByTestId(
-      'update-location-message',
-    );
+    const locationMessages = screen.queryAllByTestId('update-location-message');
 
     expect(locationMessages.length).toBe(1);
   });
 
-  it('Returns an undefined when the LocationStore is not defined', async () => {
+  it('Returns an undefined when the LocationStore is not defined', () => {
     // Arrange / Action
-    const wrapper = render(
+    render(
       <LocationContext.Provider value={undefined}>
         <TempLocationChild />
       </LocationContext.Provider>,
     );
 
-    const button = await wrapper.findByTestId('update-location-button');
+    const button = screen.getByTestId('update-location-button');
     button.click();
 
     // Assert
-    const locationMessages = wrapper.queryAllByTestId(
-      'update-location-message',
-    );
+    const locationMessages = screen.queryAllByTestId('update-location-message');
 
     expect(locationMessages.length).toBe(0);
   });
