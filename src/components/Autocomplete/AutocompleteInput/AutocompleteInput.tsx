@@ -3,11 +3,13 @@ import { ClipLoader } from 'react-spinners';
 
 import style from './AutocompleteInput.module.scss';
 
+interface HtmlInputProps {
+  placeholder: string;
+  className: string;
+}
+
 interface AutocompleteInputProps {
-  inputProps: (props: {
-    placeholder: string;
-    className: string;
-  }) => DetailedHTMLProps<
+  inputProps: (props: HtmlInputProps) => DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >;

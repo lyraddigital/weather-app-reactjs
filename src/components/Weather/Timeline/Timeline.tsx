@@ -8,7 +8,7 @@ import style from './Timeline.module.scss';
 export const Timeline = (): JSX.Element => {
   const periods = useTimeline();
 
-  const periodsEl = periods.map((p: WeatherTimelinePeriod, i: number) => (
+  const periodsEl = periods.map((p: WeatherTimelinePeriod, i: number): JSX.Element => (
     <TimePeriod key={i} period={p} />
   ));
 

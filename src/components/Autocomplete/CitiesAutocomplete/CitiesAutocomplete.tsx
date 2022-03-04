@@ -5,15 +5,17 @@ import { AutocompleteResults } from '../AutocompleteResults/AutocompleteResults'
 
 import style from './CitiesAutocomplete.module.scss';
 
+interface CitiesAutocompleteProps {
+  cityName: string;
+  setCityName: (cityName: string) => void;
+  selectCity: (city: string) => void;
+}
+
 export const CitiesAutocomplete = ({
   cityName,
   setCityName,
   selectCity,
-}: {
-  cityName: string;
-  setCityName: (cityName: string) => void;
-  selectCity: (city: string) => void;
-}): JSX.Element => {
+}: CitiesAutocompleteProps): JSX.Element => {
   return (
     <PlacesAutocomplete
       value={cityName}

@@ -11,7 +11,7 @@ export const LocationSearch = (): JSX.Element => {
   const [locationSelected, setLocationSelected] = useState(false);
   const updateLocation = useLocationUpdater();
 
-  const selectCity = async (address: string) => {
+  const selectCity = async (address: string): Promise<void> => {
     setCityName(address);
 
     if (updateLocation) {
