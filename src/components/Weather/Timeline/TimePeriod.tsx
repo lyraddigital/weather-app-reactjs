@@ -24,10 +24,9 @@ export const TimePeriod = ({ period }: TimePeriodProps): JSX.Element => {
   return (
     <div className={classes}>
       <div className={style.hour}>{formattedTime}</div>
-      <WeatherIcon
-        weatherId={period.weatherId}
-        className={style.timePeriodIcon}
-      />
+      <div className={style.timePeriodIcon}>
+        <WeatherIcon weatherId={period.weatherId} />
+      </div>
       <div>{period.temp}&deg;</div>
     </div>
   );

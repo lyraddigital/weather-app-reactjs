@@ -1,10 +1,13 @@
 import { geocodeByAddress } from 'react-places-autocomplete';
-import axios from 'axios';
+// import axios from 'axios';
 
-import { LocationByAddressResponse } from 'models';
+import {
+  // GooglePlacePhotosApiResponse,
+  LocationByAddressResponse,
+} from 'models';
 
-import { GOOGLE_PLACE_DETAILS_API_URL } from './Constants';
-import { Configuration } from './Configuration';
+// import { GOOGLE_PLACE_DETAILS_API_URL } from './Constants';
+// import { Configuration } from './Configuration';
 
 export const getLocationByAddress = async (
   address: string,
@@ -39,12 +42,19 @@ export const getLocationByAddress = async (
 export const getPhotoReferenceForLocation = async (
   placeId?: string,
 ): Promise<string> => {
-  const response = await axios.get<Array<string>>(
-    `${GOOGLE_PLACE_DETAILS_API_URL}?fields=photos/photo_reference&placeId=${placeId}&key=${Configuration.googlePlacesApiKey}`,
-  );
+  return new Promise<string>((resolve) => {
+    resolve(placeId || '');
+  });
+  // const response = await axios.get<GooglePlacePhotosApiResponse>(
+  //   `${GOOGLE_PLACE_DETAILS_API_URL}?fields=photos/photo_reference&place_id=${placeId}&key=${Configuration.googlePlacesApiKey}`,
+  // );
 
-  const photoReferenceIds = response.data;
-  const randomReferenceIndex = Math.floor(Math.random() * photoReferenceIds.length);
+  // console.log(response);
 
-  return photoReferenceIds[randomReferenceIndex];
+  // const photoReferenceIds = response.data.photos.map((p) => p.photo_reference);
+  // const randomReferenceIndex = Math.floor(
+  //   Math.random() * photoReferenceIds.length,
+  // );
+
+  // return photoReferenceIds[randomReferenceIndex];
 };

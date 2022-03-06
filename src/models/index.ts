@@ -8,7 +8,7 @@ export type { WeatherState } from './WeatherState';
 export type { LocationByAddressResponse } from './LocationByAddressResponse';
 export type {
   DailyForecastApiResponse,
+  TimelinePeriodApiResponse,
   WeatherApiResponse,
   WeatherDetailsApiResponse,
-  TimelinePeriodApiResponse,
 } from './api';

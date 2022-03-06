@@ -21,13 +21,6 @@ describe('TimePeriod', () => {
 
     expect(timePeriodEl?.firstChild?.textContent).toBe('12AM');
     expect(timePeriodEl?.lastChild?.textContent).toBe('30\u00b0');
-    expect((timePeriodEl?.children[1] as HTMLImageElement).alt).toBe(
-      'Light rain',
-    );
-
-    expect((timePeriodEl?.children[1] as HTMLImageElement).src).toBe(
-      'http://localhost/rain.svg',
-    );
   });
 
   it('Time is empty if time is not set on the period prop.', () => {

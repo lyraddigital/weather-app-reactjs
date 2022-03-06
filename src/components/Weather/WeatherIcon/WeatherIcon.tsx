@@ -1,69 +1,59 @@
-import { getWeatherDescription, getWeatherType, WeatherType } from 'core';
+import { getWeatherType, WeatherType } from 'core';
 import { useCurrentWeatherTheme } from 'hooks';
 
-import atmosphereLogo from '../../../assets/atmosphere.svg';
-import clearNightLogo from '../../../assets/clear-night.svg';
-import clearLogo from '../../../assets/clear.svg';
-import cloudyNightLogo from '../../../assets/cloudy-night.svg';
-import cloudyLogo from '../../../assets/cloudy.svg';
-import drizzleLogo from '../../../assets/drizzle.svg';
-import rainLogo from '../../../assets/rain.svg';
-import showerLogo from '../../../assets/shower.svg';
-import snowLogo from '../../../assets/snow.svg';
-import thunderStormLogo from '../../../assets/thunder-storm.svg';
+import {
+  AtmosphereIcon,
+  ClearIcon,
+  ClearNightIcon,
+  CloudyIcon,
+  CloudyNightIcon,
+  DrizzleIcon,
+  RainIcon,
+  ShowerIcon,
+  SnowIcon,
+  ThunderStormIcon,
+} from 'components/Icons';
 
 interface WeatherIconProps {
-  className?: string;
   weatherId?: number;
 }
 
-const getCloudyLogo = (isDarkMode?: boolean): string => {
-  return isDarkMode ? cloudyNightLogo : cloudyLogo;
+const getCloudyLogo = (isDarkMode?: boolean): JSX.Element => {
+  return isDarkMode ? <CloudyNightIcon /> : <CloudyIcon />;
 };
 
-const getClearLogo = (isDarkMode?: boolean): string => {
-  return isDarkMode ? clearNightLogo : clearLogo;
+const getClearLogo = (isDarkMode?: boolean): JSX.Element => {
+  return isDarkMode ? <ClearNightIcon /> : <ClearIcon />;
 };
 
-export const WeatherIcon = ({ className, weatherId }: WeatherIconProps): JSX.Element | null => {
+export const WeatherIcon = ({
+  weatherId,
+}: WeatherIconProps): JSX.Element | null => {
   const weatherType = getWeatherType(weatherId);
-  const altText = getWeatherDescription(weatherId);
   const { isDarkMode } = useCurrentWeatherTheme();
 
   if (weatherType === undefined || weatherType === null) {
     return null;
   }
 
-  let image: string | undefined = undefined;
-
   switch (weatherType) {
     case WeatherType.Atmospheric:
-      image = atmosphereLogo;
-      break;
+      return <AtmosphereIcon />;
     case WeatherType.Clear:
-      image = getClearLogo(isDarkMode);
-      break;
+      return getClearLogo(isDarkMode);
     case WeatherType.Clouds:
-      image = getCloudyLogo(isDarkMode);
-      break;
+      return getCloudyLogo(isDarkMode);
     case WeatherType.Drizzle:
-      image = drizzleLogo;
-      break;
+      return <DrizzleIcon />;
     case WeatherType.Rain:
-      image = rainLogo;
-      break;
+      return <RainIcon />;
     case WeatherType.Shower:
-      image = showerLogo;
-      break;
+      return <ShowerIcon />;
     case WeatherType.Snow:
-      image = snowLogo;
-      break;
+      return <SnowIcon />;
     case WeatherType.Thunderstorm:
-      image = thunderStormLogo;
-      break;
+      return <ThunderStormIcon />;
     default:
-      break;
+      return null;
   }
-
-  return <img src={image} className={className} alt={altText} />;
 };

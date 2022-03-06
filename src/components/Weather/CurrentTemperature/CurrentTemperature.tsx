@@ -18,7 +18,9 @@ export const CurrentTemperature = (
   return (
     <div className={style.currentTemperature}>
       <div className={style.iconContainer}>
-        <WeatherIcon weatherId={weatherId} className={style.icon} />
+        <div className={style.icon}>
+          <WeatherIcon weatherId={weatherId} />
+        </div>
       </div>
       <div className={style.contentContainer}>
         <div className={style.value}>{temp}&deg;</div>
