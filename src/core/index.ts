@@ -1,5 +1,5 @@
 export { Configuration } from './Configuration';
-export { GOOGLE_PLACE_PHOTOS_URL, WEATHER_API_URL } from './Constants';
+export { WEATHER_API_URL } from './Constants';
 export {
   formatDay,
   formatFriendlyDate,
