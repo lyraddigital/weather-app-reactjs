@@ -3,5 +3,4 @@ export interface WeatherLocation {
   country?: string;
   lat?: number;
   lon?: number;
-  photoReferenceId?: string;
 }

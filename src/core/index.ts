@@ -19,7 +19,4 @@ export {
   getWeatherDescription,
   WeatherType,
 } from './WeatherDetails';
-export {
-  getLocationByAddress,
-  getPhotoReferenceForLocation,
-} from './GooglePlaces';
+export { getLocationByAddress } from './GooglePlaces';

@@ -31,9 +31,3 @@ export const getLocationByAddress = async (
     return { success: false };
   }
 };
-
-export const getPhotoReferenceForLocation = async (
-  placeId?: string,
-): Promise<string> => {
-  return new Promise((resolve) => resolve(placeId || ''));
-};
