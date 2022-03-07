@@ -1,8 +1,8 @@
 import { useCurrentWeather } from 'hooks';
 
-import { CurrentWeather } from '../CurrentWeather/CurrentWeather';
-import { Forecast } from '../Forecast/Forecast';
-import { Timeline } from '../Timeline/Timeline';
+import { CurrentWeather } from '../CurrentWeather';
+import { Forecast } from '../Forecast';
+import { Timeline } from '../Timeline';
 
 import style from './WeatherContent.module.scss';
 

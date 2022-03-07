@@ -4,7 +4,7 @@ import { formatShortHour } from 'core';
 import { useCurrentWeatherTheme } from 'hooks';
 import { WeatherTimelinePeriod } from 'models';
 
-import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
+import { WeatherIcon } from '../WeatherIcon';
 
 import style from './TimePeriod.module.scss';
 

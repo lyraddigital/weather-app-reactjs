@@ -1,0 +1,1 @@
+export { CurrentTemperature } from './CurrentTemperature';

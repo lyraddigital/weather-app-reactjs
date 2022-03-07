@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import classNames from 'classnames';
 import ClipLoader from 'react-spinners/ClipLoader';
+import classNames from 'classnames';
 
 import { useCurrentWeatherTheme } from 'hooks';
 

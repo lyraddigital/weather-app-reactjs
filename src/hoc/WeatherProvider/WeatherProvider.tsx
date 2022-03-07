@@ -1,13 +1,10 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 
 import { WeatherApiResponse } from 'models';
 import { WeatherContext } from 'context';
-import { Configuration } from 'core';
+import { Configuration, getWeatherApiData } from 'core';
 import { useLocation } from 'hooks';
-
-import { Redirect } from 'react-router';
-
-import { getWeatherApiData } from 'core/apis/Weather';
 
 export const WeatherProvider = ({
   children,

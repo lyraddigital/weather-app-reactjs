@@ -1,4 +1,4 @@
-import { WeatherLocation } from 'models';
+import { WeatherLocation } from './WeatherLocation';
 
 export interface LocationStore {
   location?: WeatherLocation;

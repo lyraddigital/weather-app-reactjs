@@ -4,7 +4,7 @@ import { formatDay, formatShortDate } from 'core';
 import { useCurrentWeatherTheme } from 'hooks';
 import { WeatherForecastDay } from 'models';
 
-import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
+import { WeatherIcon } from '../WeatherIcon';
 
 import style from './ForecastDay.module.scss';
 

@@ -1,0 +1,1 @@
+export { getWeatherApiData } from './Weather';

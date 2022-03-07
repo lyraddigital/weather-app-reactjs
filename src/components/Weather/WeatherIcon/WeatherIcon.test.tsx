@@ -1,4 +1,4 @@
-import { render, RenderResult, screen } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import { getUnixTime, setHours } from 'date-fns';
 
 import { WeatherContext } from 'context';
@@ -9,7 +9,6 @@ import { WeatherIcon } from './WeatherIcon';
 const renderWeatherIcon = (
   weatherId: number,
   localTime: Date,
-  className?: string,
 ): RenderResult => {
   const sunriseTime = setHours(localTime, 6);
   const sunsetTime = setHours(localTime, 20);

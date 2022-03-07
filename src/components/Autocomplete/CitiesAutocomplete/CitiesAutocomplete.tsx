@@ -1,7 +1,7 @@
 import PlacesAutocomplete from 'react-places-autocomplete';
 
-import { AutocompleteInput } from '../AutocompleteInput/AutocompleteInput';
-import { AutocompleteResults } from '../AutocompleteResults/AutocompleteResults';
+import { AutocompleteInput } from '../AutocompleteInput';
+import { AutocompleteResults } from '../AutocompleteResults';
 
 import style from './CitiesAutocomplete.module.scss';
 

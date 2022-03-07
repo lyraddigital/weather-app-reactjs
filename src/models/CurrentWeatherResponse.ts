@@ -1,4 +1,4 @@
-import { WeatherForecastDay } from 'models';
+import { WeatherForecastDay } from './WeatherForecastDay';
 import { WeatherStatistics } from './WeatherStatistics';
 import { WeatherTimelinePeriod } from './WeatherTimelinePeriod';
 

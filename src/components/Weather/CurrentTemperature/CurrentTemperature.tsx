@@ -1,6 +1,6 @@
 import { getWeatherDescription } from 'core';
 
-import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
+import { WeatherIcon } from '../WeatherIcon';
 
 import style from './CurrentTemperature.module.scss';
 

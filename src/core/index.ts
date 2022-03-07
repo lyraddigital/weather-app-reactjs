@@ -19,4 +19,5 @@ export {
   getWeatherDescription,
   WeatherType,
 } from './WeatherDetails';
+export { getWeatherApiData } from './apis';
 export { getLocationByAddress } from './GooglePlaces';
