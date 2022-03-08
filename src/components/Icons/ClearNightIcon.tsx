@@ -1,6 +1,10 @@
 export const ClearNightIcon = (): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.76 42">
+    <svg
+      id="clear-night"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 41.76 42"
+    >
       <defs>
         <style>{`.cls-1{fill:#fff;}`}</style>
       </defs>

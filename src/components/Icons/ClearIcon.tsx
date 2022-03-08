@@ -1,6 +1,10 @@
 export const ClearIcon = (): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 38.29">
+    <svg
+      id="clear-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 40 38.29"
+    >
       <defs>
         <style>{`.cls-1{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px;}.cls-2{fill:#fff;}`}</style>
       </defs>

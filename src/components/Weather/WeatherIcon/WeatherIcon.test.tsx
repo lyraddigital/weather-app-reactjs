@@ -40,151 +40,151 @@ describe('WeatherIcon', () => {
     const { container } = renderWeatherIcon(weatherId, localTime);
 
     // Assert
-    const imgElement = container.querySelector('img');
+    const imgElement = container.querySelector('svg');
 
     expect(imgElement).toBeFalsy();
   });
 
-  // TODO: Ensure we write the bug fixes for the below
-  // it('Image src and alt is correct when weatherId an Atmospheric one', () => {
-  //   // Arrange
-  //   const weatherId = 701;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src and alt is correct when weatherId an Atmospheric one', () => {
+    // Arrange
+    const weatherId = 701;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Misty') as HTMLImageElement;
+    // Assert
+    const atmosphereSvgEl = container.querySelector('#atmosphere-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/atmosphere.svg');
-  // });
+    expect(atmosphereSvgEl).toBeTruthy();
+  });
 
-  // it('Image src and alt is correct when weatherId is a Clear one', () => {
-  //   // Arrange
-  //   const weatherId = 800;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src and alt is correct when weatherId is a Clear one', () => {
+    // Arrange
+    const weatherId = 800;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Clear') as HTMLImageElement;
+    // Assert
+    const clearSvgEl = container.querySelector('#clear-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/clear.svg');
-  // });
+    expect(clearSvgEl).toBeTruthy();
+  });
 
-  // it('Image src is correct when weatherId is a Clouds one', () => {
-  //   // Arrange
-  //   const weatherId = 801;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src is correct when weatherId is a Clouds one', () => {
+    // Arrange
+    const weatherId = 801;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Few clouds') as HTMLImageElement;
+    // Assert
+    const cloudsSvgEl = container.querySelector('#clouds-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/cloudy.svg');
-  // });
+    expect(cloudsSvgEl).toBeTruthy();
+  });
 
-  // it('Image src is correct when weatherId is a Drizzle one', () => {
-  //   // Arrange
-  //   const weatherId = 301;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src is correct when weatherId is a Drizzle one', () => {
+    // Arrange
+    const weatherId = 301;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Drizzle') as HTMLImageElement;
+    // Assert
+    const drizzlingSvgEl = container.querySelector('#drizzling-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/drizzle.svg');
-  // });
+    expect(drizzlingSvgEl).toBeTruthy();
+  });
 
-  // it('Image src is correct when weatherId is Rain one', () => {
-  //   // Arrange
-  //   const weatherId = 502;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src is correct when weatherId is Rain one', () => {
+    // Arrange
+    const weatherId = 502;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Heavy rain') as HTMLImageElement;
+    // Assert
+    const rainSvgEl = container.querySelector('#rain-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/rain.svg');
-  // });
+    expect(rainSvgEl).toBeTruthy();
+  });
 
-  // it('Image src is correct when weatherId is a Shower one', () => {
-  //   // Arrange
-  //   const weatherId = 520;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src is correct when weatherId is a Shower one', () => {
+    // Arrange
+    const weatherId = 520;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Light rain') as HTMLImageElement;
+    // Assert
+    const showerSvgEl = container.querySelector('#shower-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/shower.svg');
-  // });
+    expect(showerSvgEl).toBeTruthy();
+  });
 
-  // it('Image src is correct when weatherId is a Snow one', () => {
-  //   // Arrange
-  //   const weatherId = 602;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src is correct when weatherId is a Snow one', () => {
+    // Arrange
+    const weatherId = 602;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Heavy snow') as HTMLImageElement;
+    // Assert
+    const snowSvgEl = container.querySelector('#snow-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/snow.svg');
-  // });
+    expect(snowSvgEl).toBeTruthy();
+  });
 
-  // it('Image src is correct when weatherId is Thunderstorm one', () => {
-  //   // Arrange
-  //   const weatherId = 201;
-  //   const localTime = new Date(2022, 3, 14, 12);
+  it('Image src is correct when weatherId is Thunderstorm one', () => {
+    // Arrange
+    const weatherId = 201;
+    const localTime = new Date(2022, 3, 14, 12);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText(
-  //     'Rain and thunderstorms',
-  //   ) as HTMLImageElement;
+    // Assert
+    const thunderSvgEl = container.querySelector('#thunder-icon');
 
-  //   expect(imgElement.src).toBe('http://localhost/thunder-storm.svg');
-  // });
+    expect(thunderSvgEl).toBeTruthy();
+  });
 
-  // it('Img src is correct if the weatherId is Clear, but it is night time', () => {
-  //   // Arrange
-  //   const weatherId = 800;
-  //   const localTime = new Date(2022, 3, 14, 22);
+  it('Img src is correct if the weatherId is Clear, but it is night time', () => {
+    // Arrange
+    const weatherId = 800;
+    const localTime = new Date(2022, 3, 14, 22);
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+    // Action
+    renderWeatherIcon(weatherId, localTime);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Clear') as HTMLImageElement;
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   expect(imgElement.src).toBe('http://localhost/clear-night.svg');
-  // });
+    // Assert
+    const clearNightSvgEl = container.querySelector('#clear-night');
 
-  // it('Img src is correct if the weatherId is a Cloudy one, but it is night time', () => {
-  //   // Arrange
-  //   const weatherId = 801;
-  //   const localTime = new Date(2022, 3, 14, 22);
+    expect(clearNightSvgEl).toBeTruthy();
+  });
 
-  //   // Action
-  //   renderWeatherIcon(weatherId, localTime);
+  it('Img src is correct if the weatherId is a Cloudy one, but it is night time', () => {
+    // Arrange
+    const weatherId = 801;
+    const localTime = new Date(2022, 3, 14, 22);
 
-  //   // Assert
-  //   const imgElement = screen.getByAltText('Few clouds') as HTMLImageElement;
+    // Action
+    const { container } = renderWeatherIcon(weatherId, localTime);
 
-  //   expect(imgElement.src).toBe('http://localhost/cloudy-night.svg');
-  // });
+    // Assert
+    const cloudyNightSvgEl = container.querySelector('#cloudy-night');
+
+    expect(cloudyNightSvgEl).toBeTruthy();
+  });
 });

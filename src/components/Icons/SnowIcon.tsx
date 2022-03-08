@@ -1,6 +1,10 @@
 export const SnowIcon = (): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.42 26.44">
+    <svg
+      id="snow-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32.42 26.44"
+    >
       <defs>
         <style>{`.cls-1{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:1.5px;}.cls-2{fill:#fff;}`}</style>
       </defs>

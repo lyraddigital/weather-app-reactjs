@@ -1,6 +1,10 @@
 export const DrizzleIcon = (): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.42 26.2">
+    <svg
+      id="drizzling-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32.42 26.2"
+    >
       <defs>
         <style>{`.cls-1{fill:#fff;}.cls-2{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:1.5px;}`}</style>
       </defs>

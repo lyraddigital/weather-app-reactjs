@@ -1,6 +1,10 @@
 export const CloudyIcon = (): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38.37 29.75">
+    <svg
+      id="clouds-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 38.37 29.75"
+    >
       <defs>
         <style>{`.cls-1{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:1.5px;}.cls-2{fill:#fff;}`}</style>
       </defs>

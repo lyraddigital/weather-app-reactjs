@@ -1,6 +1,10 @@
 export const RainIcon = (): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.42 25.91">
+    <svg
+      id="rain-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32.42 25.91"
+    >
       <defs>
         <style>{`.cls-1{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:1.5px;}.cls-2{fill:#fff;}`}</style>
       </defs>
