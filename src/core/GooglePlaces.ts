@@ -27,7 +27,7 @@ export const getLocationByAddress = async (
     } else {
       return { success: false };
     }
-  } catch {
+  } catch (e) {
     return { success: false };
   }
 };
