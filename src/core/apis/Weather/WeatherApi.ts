@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Configuration, WEATHER_API_URL } from 'core';
+import { getConfiguration, WEATHER_API_URL } from 'core';
 import { WeatherApiResponse } from 'models';
 import { cityWeather } from './mocks/CityWeather';
 
@@ -23,12 +23,12 @@ export const getWeatherApiData = async (
   lat?: number,
   lon?: number,
 ): Promise<WeatherApiResponse> => {
-  if (Configuration.isUsingInMemoryApis) {
+  if (getConfiguration().isUsingInMemoryApis) {
     return getWeatherApiDataFromFiles(lat, lon);
   }
 
   const response = await axios.get<WeatherApiResponse>(
-    `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${Configuration.weatherApiKey}&units=metric`,
+    `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${getConfiguration().weatherApiKey}&units=metric`,
   );
 
   return response.data;

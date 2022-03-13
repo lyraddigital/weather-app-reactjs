@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 
 import { WeatherApiResponse } from 'models';
 import { WeatherContext } from 'context';
-import { Configuration, getWeatherApiData } from 'core';
+import { getConfiguration, getWeatherApiData } from 'core';
 import { useLocation } from 'hooks';
 
 export const WeatherProvider = ({
@@ -46,7 +46,7 @@ export const WeatherProvider = ({
 
       const interval = setInterval(() => {
         getWeatherFromApi(lat, lon, setWeatherData);
-      }, Configuration.weatherRefreshRateInMilliseconds);
+      }, getConfiguration().weatherRefreshRateInMilliseconds);
 
       return () => {
         clearInterval(interval);

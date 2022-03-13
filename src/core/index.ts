@@ -1,4 +1,4 @@
-export { Configuration } from './Configuration';
+export { getConfiguration } from './Configuration';
 export { WEATHER_API_URL } from './Constants';
 export {
   formatDay,
