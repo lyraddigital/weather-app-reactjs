@@ -7,7 +7,7 @@ import { useCurrentWeatherTheme } from 'hooks';
 const TempChild = () => {
   const { isDarkMode } = useCurrentWeatherTheme();
 
-  return isDarkMode ? <div>Dark Mode</div>: <div>Light Mode</div>;
+  return isDarkMode ? <div>Dark Mode</div> : <div>Light Mode</div>;
 };
 
 describe('useCurrentWeatherTheme', () => {
