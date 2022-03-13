@@ -1,4 +1,3 @@
-import { isCurrentTimeNight } from 'core';
 import { utcToZonedTime } from 'date-fns-tz';
 import {
   formatDay,
@@ -8,6 +7,7 @@ import {
   formatShortDate,
   formatShortHour,
   getFromLocalStorage,
+  isCurrentTimeNight,
   setToLocalStorage,
   convertEpochSecondsToDate,
   roundNumberOrZero,

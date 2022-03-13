@@ -43,25 +43,25 @@ const renderWithLocation = async (
 };
 
 describe('WeatherProvider', () => {
-  // it('By default contains no weather details', async () => {
-  //   // Arrange / Action
-  //   await renderWithLocation(
-  //     <WeatherProvider>
-  //       <TestProviderChildComponent />
-  //     </WeatherProvider>,
-  //     {
-  //       city: 'No where',
-  //       country: 'No country',
-  //       lat: -1.4949,
-  //       lon: 22.93938,
-  //     },
-  //   );
+  it('By default contains no weather details', async () => {
+    // Arrange / Action
+    await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'No where',
+        country: 'No country',
+        lat: -1.4949,
+        lon: 22.93938,
+      },
+    );
 
-  //   // Assert
-  //   const noWeatherDataEl = screen.getByTestId('no-weather-data');
+    // Assert
+    const noWeatherDataEl = screen.getByTestId('no-weather-data');
 
-  //   expect(noWeatherDataEl).toBeTruthy();
-  // });
+    expect(noWeatherDataEl).toBeTruthy();
+  });
 
   it('Passing in Melbourne geocode. Returns current weather data for Melbourne', async () => {
     // Arrange / Action
@@ -85,47 +85,47 @@ describe('WeatherProvider', () => {
     expect(timezoneEl.textContent).toBe('Australia/Sydney');
   });
 
-  // it('Passing in London geocode. Returns current weather data for London', async () => {
-  //   // Arrange / Action
-  //   await renderWithLocation(
-  //     <WeatherProvider>
-  //       <TestProviderChildComponent />
-  //     </WeatherProvider>,
-  //     {
-  //       city: 'London',
-  //       country: 'England',
-  //       lat: 51.5072178,
-  //       lon: -0.1275862,
-  //     },
-  //   );
+  it('Passing in London geocode. Returns current weather data for London', async () => {
+    // Arrange / Action
+    await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'London',
+        country: 'England',
+        lat: 51.5072178,
+        lon: -0.1275862,
+      },
+    );
 
-  //   // Assert
-  //   const currentTempEl = screen.getByTestId('current-temp');
-  //   const timezoneEl = screen.getByTestId('timezone');
+    // Assert
+    const currentTempEl = screen.getByTestId('current-temp');
+    const timezoneEl = screen.getByTestId('timezone');
 
-  //   expect(currentTempEl.textContent).toBe('5');
-  //   expect(timezoneEl.textContent).toBe('Europe/London');
-  // });
+    expect(currentTempEl.textContent).toBe('5');
+    expect(timezoneEl.textContent).toBe('Europe/London');
+  });
 
-  // it('Passing in New York geocode. Returns current weather data for New York', async () => {
-  //   // Arrange / Action
-  //   await renderWithLocation(
-  //     <WeatherProvider>
-  //       <TestProviderChildComponent />
-  //     </WeatherProvider>,
-  //     {
-  //       city: 'New York',
-  //       country: 'United States',
-  //       lat: 40.7127753,
-  //       lon: -74.0059728,
-  //     },
-  //   );
+  it('Passing in New York geocode. Returns current weather data for New York', async () => {
+    // Arrange / Action
+    await renderWithLocation(
+      <WeatherProvider>
+        <TestProviderChildComponent />
+      </WeatherProvider>,
+      {
+        city: 'New York',
+        country: 'United States',
+        lat: 40.7127753,
+        lon: -74.0059728,
+      },
+    );
 
-  //   // Assert
-  //   const currentTempEl = screen.getByTestId('current-temp');
-  //   const timezoneEl = screen.getByTestId('timezone');
+    // Assert
+    const currentTempEl = screen.getByTestId('current-temp');
+    const timezoneEl = screen.getByTestId('timezone');
 
-  //   expect(currentTempEl.textContent).toBe('17.44');
-  //   expect(timezoneEl.textContent).toBe('America/New_York');
-  // });
+    expect(currentTempEl.textContent).toBe('17.44');
+    expect(timezoneEl.textContent).toBe('America/New_York');
+  });
 });

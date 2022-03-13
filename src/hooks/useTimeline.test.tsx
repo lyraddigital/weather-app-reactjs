@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { getUnixTime } from 'date-fns';
 
-import { formatTime } from 'utilities';
+import { formatTime } from 'testing';
 import { useTimeline } from 'hooks';
 import { WeatherContext } from 'context';
 import {
