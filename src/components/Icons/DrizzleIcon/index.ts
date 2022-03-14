@@ -1,0 +1,1 @@
+export { DrizzleIcon } from './DrizzleIcon';

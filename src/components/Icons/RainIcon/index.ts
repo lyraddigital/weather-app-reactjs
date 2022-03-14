@@ -1,0 +1,1 @@
+export { RainIcon } from './RainIcon';
