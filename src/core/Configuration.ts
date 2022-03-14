@@ -7,7 +7,7 @@ declare let WeatherApp: {
   };
 };
 
-export interface Configuration {
+interface Configuration {
   weatherApiKey: string;
   weatherRefreshRateInMilliseconds: number;
   weatherLocationStorageKey: string;
@@ -17,7 +17,7 @@ export interface Configuration {
 export const getConfiguration = (): Configuration => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isTest = process.env.NODE_ENV === 'test';
-
+  
   let weatherApiKey = '';
   let weatherRefreshRateInMilliseconds = 60000;
   let weatherLocationStorageKey = '';
@@ -30,27 +30,26 @@ export const getConfiguration = (): Configuration => {
     );
     weatherLocationStorageKey =
       process.env.REACT_APP_WEATHER_LOCATION_STORAGE_KEY || '';
-    isUsingInMemoryApis =
-      process.env.REACT_APP_API_USE_IN_MEMORY_APIS == 'true';
+    isUsingInMemoryApis = process.env.REACT_APP_API_USE_IN_MEMORY_APIS == 'true';
   } else if (isTest) {
     weatherApiKey = 'testWeatherApiKey';
     weatherRefreshRateInMilliseconds = 30000;
     weatherLocationStorageKey = 'test-location-key';
     isUsingInMemoryApis = true;
   } else {
-    weatherApiKey = WeatherApp.weatherConfig.WEATHER_API_KEY || '';
-    weatherRefreshRateInMilliseconds = parseInt(
-      WeatherApp.weatherConfig.WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS,
-    );
-    weatherLocationStorageKey =
-      WeatherApp.weatherConfig.WEATHER_LOCATION_STORAGE_KEY || '';
-    isUsingInMemoryApis = WeatherApp.weatherConfig.USE_INMEMORY_APIS == 'true';
+      weatherApiKey = WeatherApp.weatherConfig.WEATHER_API_KEY || '';
+      weatherRefreshRateInMilliseconds = parseInt(
+        WeatherApp.weatherConfig.WEATHER_UPDATE_FREQUENCY_IN_MILLISECONDS,
+      );
+      weatherLocationStorageKey =
+        WeatherApp.weatherConfig.WEATHER_LOCATION_STORAGE_KEY || '';
+      isUsingInMemoryApis = WeatherApp.weatherConfig.USE_INMEMORY_APIS == 'true';
   }
-
+  
   return {
     weatherApiKey,
     weatherRefreshRateInMilliseconds,
     weatherLocationStorageKey,
     isUsingInMemoryApis,
   };
-};
+}

@@ -1,1 +1,0 @@
-export { getCitiesByName } from './GoogleMockApi';

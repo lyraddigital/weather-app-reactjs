@@ -1,28 +1,17 @@
 import { geocodeByAddress } from 'react-places-autocomplete';
-import { Configuration, getConfiguration } from './Configuration';
 
 import { getLocationByAddress } from './GooglePlaces';
 
 type MockedGeocodeByAddress = jest.MockedFunction<typeof geocodeByAddress>;
-type MockedGetConfiguration = jest.MockedFunction<typeof getConfiguration>;
-
 jest.mock('react-places-autocomplete');
-jest.mock('./Configuration');
 
 describe('GooglePlaces', () => {
   it('getLocationByAddress returns a failed result if the underlying geocodeByAddress method returns an empty array', async () => {
     // Arrange
     const someAddress = '123 Some Place, Aussieland';
-
-    (getConfiguration as MockedGetConfiguration).mockImplementationOnce(
-      () =>
-        ({
-          isUsingInMemoryApis: false,
-        } as Configuration),
-    );
-
-    (geocodeByAddress as MockedGeocodeByAddress).mockImplementationOnce(() =>
-      Promise.resolve([]),
+    
+    (geocodeByAddress as MockedGeocodeByAddress).mockImplementationOnce(
+      () => Promise.resolve([])
     );
 
     // Action
@@ -35,25 +24,18 @@ describe('GooglePlaces', () => {
   it('getLocationByAddress returns a failure result, if there is an exception', async () => {
     // Arrange
     const someAddress = '123 Some Place, Aussieland';
-
+    
     // Incomplete payload for the geocodeByAddress method response
     // this will lead to the code throwing an error returning a success
     // of false
     const geocodeResult: Partial<google.maps.GeocoderResult> = {
-      address_components: [],
+      address_components: []
     };
 
-    (getConfiguration as MockedGetConfiguration).mockImplementationOnce(
-      () =>
-        ({
-          isUsingInMemoryApis: false,
-        } as Configuration),
+    (geocodeByAddress as MockedGeocodeByAddress).mockImplementationOnce(
+      () => Promise.resolve([geocodeResult as google.maps.GeocoderResult])
     );
-
-    (geocodeByAddress as MockedGeocodeByAddress).mockImplementationOnce(() =>
-      Promise.resolve([geocodeResult as google.maps.GeocoderResult]),
-    );
-
+    
     // Action
     const { success } = await getLocationByAddress(someAddress);
 
@@ -71,42 +53,34 @@ describe('GooglePlaces', () => {
     const expectedPlaceId = 'place29383';
     const cityComponent: Partial<google.maps.GeocoderAddressComponent> = {
       long_name: expectedCity,
-      types: ['locality'],
+      types: ['locality']
     };
     const countryComponent: Partial<google.maps.GeocoderAddressComponent> = {
       long_name: expectedCountry,
-      types: ['country'],
+      types: ['country']
     };
     const latLng: Partial<google.maps.LatLng> = {
       lat: () => expectedLat,
-      lng: () => expectedLng,
+      lng: () => expectedLng
     };
     const geometry: Partial<google.maps.GeocoderGeometry> = {
-      location: latLng as google.maps.LatLng,
+      location: latLng as google.maps.LatLng
     };
     const geocodeResult: Partial<google.maps.GeocoderResult> = {
       place_id: expectedPlaceId,
       address_components: [
         cityComponent as google.maps.GeocoderAddressComponent,
-        countryComponent as google.maps.GeocoderAddressComponent,
+        countryComponent as google.maps.GeocoderAddressComponent
       ],
-      geometry: geometry as google.maps.GeocoderGeometry,
+      geometry: geometry as google.maps.GeocoderGeometry
     };
 
-    (getConfiguration as MockedGetConfiguration).mockImplementationOnce(
-      () =>
-        ({
-          isUsingInMemoryApis: false,
-        } as Configuration),
+    (geocodeByAddress as MockedGeocodeByAddress).mockImplementationOnce(
+      () => Promise.resolve([geocodeResult as google.maps.GeocoderResult])
     );
-
-    (geocodeByAddress as MockedGeocodeByAddress).mockImplementationOnce(() =>
-      Promise.resolve([geocodeResult as google.maps.GeocoderResult]),
-    );
-
+    
     // Action
-    const { success, lat, lon, city, country, placeId } =
-      await getLocationByAddress(someAddress);
+    const { success, lat, lon, city, country, placeId } = await getLocationByAddress(someAddress);
 
     // Assert
     expect(success).toBeTruthy();

@@ -1,1 +1,1 @@
-export { CitiesAutocomplete } from './CitiesAutocomplete';
+export { CitiesAutocomplete } from './CitiesAutocomplete/CitiesAutocomplete';
