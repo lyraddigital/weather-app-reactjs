@@ -1,7 +1,9 @@
+import { getConfiguration } from 'core';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
 import { AutocompleteInput } from '../AutocompleteInput';
 import { AutocompleteResults } from '../AutocompleteResults';
+import { InMemoryPlacesAutocomplete } from '../InMemoryPlacesAutocomplete';
 
 import style from './CitiesAutocomplete.module.scss';
 
@@ -16,7 +18,15 @@ export const CitiesAutocomplete = ({
   setCityName,
   selectCity,
 }: CitiesAutocompleteProps): JSX.Element => {
-  return (
+  const configuration = getConfiguration();
+
+  return configuration.isUsingInMemoryApis ? (
+    <InMemoryPlacesAutocomplete
+      cityName={cityName}
+      setCityName={setCityName}
+      selectCity={selectCity}
+    />
+  ) : (
     <PlacesAutocomplete
       value={cityName}
       onChange={setCityName}
