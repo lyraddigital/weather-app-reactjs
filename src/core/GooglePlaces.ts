@@ -1,10 +1,25 @@
 import { geocodeByAddress } from 'react-places-autocomplete';
 
 import { LocationByAddressResponse } from 'models';
+import { cityGeocodes } from './apis/Google/mocks/CityGeocodes';
+
+import { getConfiguration } from './Configuration';
+
+const getLocationByAddressFromFiles = (
+  address: string,
+): LocationByAddressResponse => {
+  return cityGeocodes[address];
+};
 
 export const getLocationByAddress = async (
   address: string,
 ): Promise<LocationByAddressResponse> => {
+  const configuration = getConfiguration();
+
+  if (configuration.isUsingInMemoryApis) {
+    return getLocationByAddressFromFiles(address);
+  }
+
   try {
     const response = await geocodeByAddress(address);
 

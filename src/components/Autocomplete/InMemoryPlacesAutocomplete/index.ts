@@ -1,0 +1,1 @@
+export { InMemoryPlacesAutocomplete } from './InMemoryPlacesAutocomplete';
