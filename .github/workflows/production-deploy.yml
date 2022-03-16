@@ -78,7 +78,7 @@ jobs:
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          cdk_subcommand: 'destroy'
+          cdk_subcommand: 'deploy'
           cdk_stack: ${{ secrets.SITE_STACK_NAME }}
           cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} --require-approval never'
           working_dir: 'infrastructure-code'
