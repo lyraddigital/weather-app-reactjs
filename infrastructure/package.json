@@ -1,8 +1,8 @@
 {
-  "name": "infrastructure",
+  "name": "infrastructure2",
   "version": "0.1.0",
   "bin": {
-    "infrastructure": "bin/infrastructure.js"
+    "infrastructure2": "bin/infrastructure2.js"
   },
   "scripts": {
     "build": "tsc",
@@ -11,25 +11,17 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^2.13.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
-    "aws-cdk": "^2.13.0",
-    "jest": "^27.5.1",
-    "node-jest": "^0.2.0",
+    "jest": "^26.4.2",
     "ts-jest": "^26.2.0",
-    "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "aws-cdk": "2.16.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/aws-certificatemanager": "^1.145.0",
-    "@aws-cdk/aws-cloudfront": "^1.145.0",
-    "@aws-cdk/aws-route53": "^1.145.0",
-    "@aws-cdk/aws-route53-targets": "^1.145.0",
-    "@aws-cdk/aws-s3": "^1.145.0",
-    "@aws-cdk/aws-s3-deployment": "^1.145.0",
-    "@aws-cdk/core": "^1.145.0",
-    "node": "^17.4.0",
+    "aws-cdk-lib": "2.16.0",
+    "constructs": "^10.0.0",
     "source-map-support": "^0.5.16"
   }
 }

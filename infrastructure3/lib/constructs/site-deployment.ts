@@ -1,12 +1,12 @@
-import { Construct } from 'constructs';
-import { IBucket } from 'aws-cdk-lib/aws-s3';
-import { IDistribution } from 'aws-cdk-lib/aws-cloudfront';
-import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
+import { Construct } from '@aws-cdk/core';
+import { IBucket } from '@aws-cdk/aws-s3';
+import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
+import { CloudFrontWebDistribution } from '@aws-cdk/aws-cloudfront';
 
 export interface SiteDeploymentProps {
   bucket: IBucket;
   sourceCodeFolder: string;
-  distribution: IDistribution;
+  distribution: CloudFrontWebDistribution;
 }
 
 export class SiteDeployment extends Construct {

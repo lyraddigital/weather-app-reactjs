@@ -1,4 +1,4 @@
 export interface DomainProps {
-    rootDomain: string;
-    subDomain: string;
+  rootDomain: string;
+  subDomain: string;
 }
