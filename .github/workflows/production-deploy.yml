@@ -80,6 +80,7 @@ jobs:
         with:
           cdk_subcommand: 'bootstrap'    
           working_dir: 'infrastructure-code'
+          cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} zoneName=lyraddigital.com --require-approval never'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
