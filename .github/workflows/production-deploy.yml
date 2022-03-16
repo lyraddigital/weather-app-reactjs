@@ -80,7 +80,7 @@ jobs:
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: ${{ secrets.SITE_STACK_NAME }}
-          cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} --require-approval never'
+          cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} zoneName=lyraddigital.com --require-approval never'
           working_dir: 'infrastructure-code'
           actions_comment: false
         env:
