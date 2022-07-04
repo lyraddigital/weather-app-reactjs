@@ -15,7 +15,7 @@ export class WebsiteStack extends Stack {
     const subDomainName = new CfnParameter(this, 'subDomainName', {
       type: 'String',
       description:
-        'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront',
+        'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront.',
     });
 
     const zoneName = new CfnParameter(this, 'zoneName', {
