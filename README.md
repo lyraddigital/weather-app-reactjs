@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# React.js Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is used as a sample application for an AWS course. You are free to download the material and inspect the code however you wish.
 
 ## Available Scripts
 
