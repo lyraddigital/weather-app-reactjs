@@ -75,9 +75,6 @@ jobs:
       - name: Install Infrastructure Dependencies
         run: cd infrastructure-code && npm install
 
-      - name: What is the Site Stack name?
-        run: echo ${{ secrets.SITE_STACK_NAME }}
-
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
         with:
