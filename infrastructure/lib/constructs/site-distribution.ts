@@ -14,6 +14,7 @@ import {
   DnsValidatedCertificate,
 } from 'aws-cdk-lib/aws-certificatemanager';
 
+import { SITE_ROOT_DOMAIN } from '../constants';
 import { DomainProps } from '../props/domain-props';
 
 export interface SiteDistributionProps extends DomainProps {
@@ -27,11 +28,11 @@ export class SiteDistribution extends Construct {
     super(parent, id);
 
     const zone = HostedZone.fromLookup(this, 'Zone', {
-      domainName: props.rootDomain,
+      domainName: SITE_ROOT_DOMAIN,
     });
     const domainName = props.subDomain
-      ? `${props.subDomain}.${props.rootDomain}`
-      : props.rootDomain;
+      ? `${props.subDomain}.${SITE_ROOT_DOMAIN}`
+      : SITE_ROOT_DOMAIN;
 
     const certificate = new DnsValidatedCertificate(
       this,

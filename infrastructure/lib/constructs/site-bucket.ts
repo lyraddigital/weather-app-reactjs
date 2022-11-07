@@ -2,6 +2,7 @@ import { Construct } from 'constructs';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { BlockPublicAccess, Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
 
+import { SITE_ROOT_DOMAIN } from '../constants';
 import { DomainProps } from '../props/domain-props';
 
 export class SiteBucket extends Construct {
@@ -11,7 +12,7 @@ export class SiteBucket extends Construct {
     super(parent, id);
 
     this.instance = new Bucket(this, 'WebsiteBucket', {
-      bucketName: `${domainProps.subDomain}.${domainProps.rootDomain}`,
+      bucketName: `${domainProps.subDomain}.${SITE_ROOT_DOMAIN}`,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
