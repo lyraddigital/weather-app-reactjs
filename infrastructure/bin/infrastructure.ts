@@ -16,7 +16,7 @@ new WebsiteStack(app, 'ReactWeatherStack-Development', {
 });
 new WebsiteStack(app, 'ReactWeatherStack-Staging', {
   env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
+    account:process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
   }  
 });
