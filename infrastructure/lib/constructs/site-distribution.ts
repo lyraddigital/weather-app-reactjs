@@ -4,6 +4,7 @@ import {
   CloudFrontWebDistribution,
   IDistribution,
   OriginAccessIdentity,
+  PriceClass,
   SecurityPolicyProtocol,
   SSLMethod,
   ViewerCertificate,
@@ -40,7 +41,6 @@ export class SiteDistribution extends Construct {
       {
         domainName: domainName,
         validation: CertificateValidation.fromDns(),
-        // subjectAlternativeNames: [domainName],
         hostedZone: zone,
         region: 'us-east-1',
       },
@@ -56,6 +56,7 @@ export class SiteDistribution extends Construct {
       viewerCertificate: ViewerCertificate.fromAcmCertificate(certificate, {
         sslMethod: SSLMethod.SNI,
         securityPolicy: SecurityPolicyProtocol.TLS_V1_2_2021,
+        aliases: [domainName]
       }),
       errorConfigurations: [
         {
@@ -74,6 +75,7 @@ export class SiteDistribution extends Construct {
           behaviors: [{ isDefaultBehavior: true }],
         },
       ],
+      priceClass: PriceClass.PRICE_CLASS_ALL
     });
   }
 }
