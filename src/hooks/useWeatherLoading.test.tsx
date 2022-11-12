@@ -6,8 +6,8 @@ import { useWeatherLoading } from './useWeatherLoading';
 
 const TempLoadingChild = () => {
   const { isLoading, isFirstLoad } = useWeatherLoading();
-  const loadingEl = isLoading ? <div>Loading</div>: null;
-  const firstLoadEl = isFirstLoad ? <div>First Load</div>: null;
+  const loadingEl = isLoading ? <div>Loading</div> : null;
+  const firstLoadEl = isFirstLoad ? <div>First Load</div> : null;
 
   return (
     <>
@@ -25,9 +25,7 @@ describe('useWeatherLoading', () => {
 
     // Action
     render(
-      <WeatherContext.Provider
-        value={{ isFirstLoad, isLoading }}
-      >
+      <WeatherContext.Provider value={{ isFirstLoad, isLoading }}>
         <TempLoadingChild />
       </WeatherContext.Provider>,
     );
@@ -47,9 +45,7 @@ describe('useWeatherLoading', () => {
 
     // Action
     render(
-      <WeatherContext.Provider
-        value={{ isFirstLoad, isLoading }}
-      >
+      <WeatherContext.Provider value={{ isFirstLoad, isLoading }}>
         <TempLoadingChild />
       </WeatherContext.Provider>,
     );
@@ -69,9 +65,7 @@ describe('useWeatherLoading', () => {
 
     // Action
     render(
-      <WeatherContext.Provider
-        value={{ isFirstLoad, isLoading }}
-      >
+      <WeatherContext.Provider value={{ isFirstLoad, isLoading }}>
         <TempLoadingChild />
       </WeatherContext.Provider>,
     );
@@ -91,9 +85,7 @@ describe('useWeatherLoading', () => {
 
     // Action
     render(
-      <WeatherContext.Provider
-        value={{ isFirstLoad, isLoading }}
-      >
+      <WeatherContext.Provider value={{ isFirstLoad, isLoading }}>
         <TempLoadingChild />
       </WeatherContext.Provider>,
     );

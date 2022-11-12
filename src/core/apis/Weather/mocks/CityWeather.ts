@@ -1,4 +1,4 @@
-import { WeatherApiResponse } from "models";
+import { WeatherApiResponse } from 'models';
 
 export const cityWeather: { [key: string]: WeatherApiResponse } = {
   '-33.8688197-151.2092955': {

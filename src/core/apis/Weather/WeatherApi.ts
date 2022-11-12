@@ -28,7 +28,9 @@ export const getWeatherApiData = async (
   }
 
   const response = await axios.get<WeatherApiResponse>(
-    `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${getConfiguration().weatherApiKey}&units=metric`,
+    `${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${
+      getConfiguration().weatherApiKey
+    }&units=metric`,
   );
 
   return response.data;

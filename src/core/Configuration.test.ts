@@ -3,7 +3,7 @@ import { getConfiguration } from './Configuration';
 describe('Configuration', () => {
   it('Contains the correct configuration for test purposes', () => {
     const configuration = getConfiguration();
-    
+
     // Assert
     expect(configuration.weatherApiKey).toBe('testWeatherApiKey');
     expect(configuration.weatherRefreshRateInMilliseconds).toBe(30000);
