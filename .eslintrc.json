@@ -19,14 +19,28 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "react-hooks"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     },
     "settings": {
         "react": {
             "version": "detect"
         }
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/__tests__/**/*.[jt]s?(x)",
+                "**/?(*.)+(spec|test).[jt]s?(x)"
+            ],
+            "extends": [
+                "plugin:testing-library/react"
+            ]
+        }
+    ]
 }

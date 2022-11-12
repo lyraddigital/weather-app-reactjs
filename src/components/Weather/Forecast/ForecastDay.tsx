@@ -13,11 +13,12 @@ interface ForecastDayProps {
 }
 
 export const ForecastDay = ({ day }: ForecastDayProps): JSX.Element | null => {
+  const { isDarkMode } = useCurrentWeatherTheme();
+
   if (!day) {
     return null;
   }
 
-  const { isDarkMode } = useCurrentWeatherTheme();
   const dayName = formatDay(day.date);
   const shortDate = formatShortDate(day.date);
 
